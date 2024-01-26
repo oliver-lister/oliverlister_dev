@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Button from "./Button";
+import Icon from "./Icon";
 import { useState } from "react";
 
 export default function NavBar() {
@@ -17,7 +18,7 @@ export default function NavBar() {
         <ul
           className={
             (menuIsOpen ? "right-0" : "-right-full") +
-            " grid gap-10 absolute top-20 right-0 bg-white w-full text-center py-6 | md:w-auto md:static md:grid-flow-col"
+            " grid gap-10 absolute top-20 bg-white w-full text-center py-6 | md:text-center md:py-0 md:w-auto md:static md:grid-flow-col"
           }
         >
           <li>
@@ -43,7 +44,10 @@ export default function NavBar() {
         </ul>
       </nav>
       <div className="flex gap-4">
-        <Button>Let&apos;s talk</Button>
+        <Button className="flex gap-2 border-2 border-black p-2 rounded-lg">
+          <Icon icon="contact" />
+          <span className="hidden | sm:block">Let&apos;s talk</span>
+        </Button>
         <Button
           onClick={toggleMenu}
           className="border-2 border-black rounded-lg p-2 select-none | md:hidden"

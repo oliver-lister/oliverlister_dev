@@ -1,14 +1,26 @@
-import Link from "next/link";
+import Icon from "./Icon";
 
 export default function SocialsNav() {
   return (
-    <nav>
-      <ul className="flex gap-2">
+    <nav className="justify-self-center">
+      <ul className="flex gap-2 justify-center items-center | sm:justify-end">
         <li>
-          <Link href="">Github</Link>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/oliver-lister"
+          >
+            <Icon icon="github" size="30" />
+          </a>
         </li>
         <li>
-          <Link href="">LinkedIn</Link>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.linkedin.com/in/oliverdukemusic/"
+          >
+            <Icon icon="linkedin" size="30" />
+          </a>
         </li>
       </ul>
     </nav>

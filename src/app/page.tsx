@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Button from "@/components/Button";
+import Icon from "@/components/Icon";
 
 export default function Home() {
   return (
@@ -15,7 +16,10 @@ export default function Home() {
             </h2>
           </div>
           <div className="flex gap-4 justify-center | md:justify-start">
-            <Button>Contact Me</Button>
+            <Button className="flex gap-2 border-2 p-2 rounded-lg border-black">
+              <Icon icon="filedownload" />
+              Download CV
+            </Button>
             <Button>View Projects</Button>
           </div>
         </div>
