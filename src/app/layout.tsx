@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ThemeContextProvider from "@/context/ThemeContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,13 +19,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className + " " + " text-primary bg-secondary"}>
-        <Header />
-        <main>
-          <div className="wrapper">{children}</div>
-        </main>
-        <Footer />
-      </body>
+      <ThemeContextProvider>
+        <body
+          className={
+            inter.className +
+            " " +
+            " text-primary bg-secondary | dark:text-secondary dark:bg-primary"
+          }
+        >
+          <Header />
+          <main>
+            <div className="wrapper">{children}</div>
+          </main>
+          <Footer />
+        </body>
+      </ThemeContextProvider>
     </html>
   );
 }

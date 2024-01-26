@@ -18,7 +18,7 @@ export default function NavBar() {
         <ul
           className={
             (menuIsOpen ? "right-0 " : "-right-full") +
-            " grid gap-10 absolute top-20 w-full text-center py-6 bg-primary text-secondary rounded-lg | md:bg-secondary md:text-primary md:text-center md:py-0 md:w-auto md:static md:grid-flow-col"
+            " grid gap-10 absolute top-20 w-full text-center py-6 bg-primary text-secondary rounded-lg | md:bg-inherit md:text-inherit md:text-center md:py-0 md:w-auto md:static md:grid-flow-col"
           }
         >
           <li>
@@ -48,7 +48,7 @@ export default function NavBar() {
           <Icon icon="contact" />
           <span className="hidden | sm:block">Let&apos;s talk</span>
         </Button>
-        <Button onClick={toggleMenu} className="md:hidden">
+        <Button onClick={toggleMenu} className="md:hidden hamburger">
           <div className="grid gap-1 items-center">
             <span
               className={

@@ -7,3 +7,7 @@
   margin-inline: auto;
   @apply px-4 sm:px-8;
 }
+
+.hamburger:hover span {
+  @apply bg-secondary;
+}
