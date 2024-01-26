@@ -6,7 +6,7 @@ export default function Header() {
     <header className="overflow-hidden">
       <div className="wrapper flex justify-between items-center py-4 | md:py-6">
         <Link href="/">
-          <h1>Oliver Lister</h1>
+          <p className="italic text-2xl font-bold">O.L</p>
         </Link>
         <NavBar />
       </div>

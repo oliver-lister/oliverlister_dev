@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ThemeContextProvider from "@/context/ThemeContext";
+import ModalContextProvider from "@/context/ModalContext";
+import ModalManager from "@/components/modals/ModalManager";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,19 +22,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeContextProvider>
-        <body
-          className={
-            inter.className +
-            " " +
-            " text-primary bg-secondary | dark:text-secondary dark:bg-primary"
-          }
-        >
-          <Header />
-          <main>
-            <div className="wrapper">{children}</div>
-          </main>
-          <Footer />
-        </body>
+        <ModalContextProvider>
+          <body
+            className={
+              inter.className +
+              " " +
+              " text-primary bg-secondary | dark:text-secondary dark:bg-primary"
+            }
+          >
+            <ModalManager />
+            <Header />
+            <main>
+              <div className="wrapper">{children}</div>
+            </main>
+            <Footer />
+          </body>
+        </ModalContextProvider>
       </ThemeContextProvider>
     </html>
   );

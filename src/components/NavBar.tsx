@@ -4,9 +4,11 @@ import Link from "next/link";
 import Button from "./Button";
 import Icon from "./Icon";
 import { useState } from "react";
+import { useModal } from "@/context/ModalContext";
 
 export default function NavBar() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const { openModal } = useModal();
 
   const toggleMenu = () => {
     setMenuIsOpen(!menuIsOpen);
@@ -18,7 +20,7 @@ export default function NavBar() {
         <ul
           className={
             (menuIsOpen ? "right-0 " : "-right-full") +
-            " grid gap-10 absolute top-20 w-full text-center py-6 bg-primary text-secondary rounded-lg | md:bg-inherit md:text-inherit md:text-center md:py-0 md:w-auto md:static md:grid-flow-col"
+            " grid gap-10 absolute top-20 w-full text-center py-6 bg-primary text-secondary rounded-lg dark:bg-secondary dark:text-primary | md:bg-inherit md:text-inherit dark:md:bg-inherit dark:md:text-inherit md:text-center md:py-0 md:w-auto md:static md:grid-flow-col"
           }
         >
           <li>
@@ -44,25 +46,26 @@ export default function NavBar() {
         </ul>
       </nav>
       <div className="flex gap-4">
-        <Button className="flex gap-2">
+        <Button onClick={() => openModal("contact")} className="flex gap-2">
           <Icon icon="contact" />
           <span className="hidden | sm:block">Let&apos;s talk</span>
         </Button>
-        <Button onClick={toggleMenu} className="md:hidden hamburger">
+        <Button onClick={toggleMenu} className="md:hidden group">
           <div className="grid gap-1 items-center">
             <span
               className={
                 (menuIsOpen
                   ? "translate-y-1 rotate-45"
                   : "translate-y-0 rotate-0") +
-                "  transition h-1 w-8 rounded-full bg-primary"
+                "  transition h-1 w-8 rounded-full bg-primary dark:bg-secondary group-hover:bg-secondary dark:group-hover:bg-primary"
               }
             ></span>
             <span
               className={
                 menuIsOpen
                   ? "hidden"
-                  : "block" + " transition h-1 w-8 rounded-full bg-primary"
+                  : "block" +
+                    " transition h-1 w-8 rounded-full bg-primary dark:bg-secondary group-hover:bg-secondary dark:group-hover:bg-primary"
               }
             ></span>
             <span
@@ -70,7 +73,7 @@ export default function NavBar() {
                 (menuIsOpen
                   ? "-translate-y-1 -rotate-45"
                   : "translate-y-0 rotate-0") +
-                " transition h-1 w-8 rounded-full bg-primary"
+                " transition h-1 w-8 rounded-full bg-primary dark:bg-secondary group-hover:bg-secondary dark:group-hover:bg-primary"
               }
             ></span>
           </div>
