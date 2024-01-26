@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className + " " + " text-primary bg-secondary"}>
         <Header />
         <main>
           <div className="wrapper">{children}</div>

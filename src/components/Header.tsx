@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="bg-white">
-      <div className="wrapper flex justify-between items-center py-6">
+    <header className="overflow-hidden">
+      <div className="wrapper flex justify-between items-center py-4 | md:py-6">
         <Link href="/">
           <h1>Oliver Lister</h1>
         </Link>

@@ -17,8 +17,8 @@ export default function NavBar() {
       <nav>
         <ul
           className={
-            (menuIsOpen ? "right-0" : "-right-full") +
-            " grid gap-10 absolute top-20 bg-white w-full text-center py-6 | md:text-center md:py-0 md:w-auto md:static md:grid-flow-col"
+            (menuIsOpen ? "right-0 " : "-right-full") +
+            " grid gap-10 absolute top-20 w-full text-center py-6 bg-primary text-secondary rounded-lg | md:bg-secondary md:text-primary md:text-center md:py-0 md:w-auto md:static md:grid-flow-col"
           }
         >
           <li>
@@ -44,28 +44,25 @@ export default function NavBar() {
         </ul>
       </nav>
       <div className="flex gap-4">
-        <Button className="flex gap-2 border-2 border-black p-2 rounded-lg">
+        <Button className="flex gap-2">
           <Icon icon="contact" />
           <span className="hidden | sm:block">Let&apos;s talk</span>
         </Button>
-        <Button
-          onClick={toggleMenu}
-          className="border-2 border-black rounded-lg p-2 select-none | md:hidden"
-        >
+        <Button onClick={toggleMenu} className="md:hidden">
           <div className="grid gap-1 items-center">
             <span
               className={
                 (menuIsOpen
                   ? "translate-y-1 rotate-45"
                   : "translate-y-0 rotate-0") +
-                "  transition h-1 w-8 rounded-full bg-black"
+                "  transition h-1 w-8 rounded-full bg-primary"
               }
             ></span>
             <span
               className={
                 menuIsOpen
                   ? "hidden"
-                  : "block" + " transition h-1 w-8 rounded-full bg-black"
+                  : "block" + " transition h-1 w-8 rounded-full bg-primary"
               }
             ></span>
             <span
@@ -73,7 +70,7 @@ export default function NavBar() {
                 (menuIsOpen
                   ? "-translate-y-1 -rotate-45"
                   : "translate-y-0 rotate-0") +
-                " transition h-1 w-8 rounded-full bg-black"
+                " transition h-1 w-8 rounded-full bg-primary"
               }
             ></span>
           </div>

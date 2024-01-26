@@ -11,7 +11,10 @@ export default function Button({
 }>): JSX.Element {
   return (
     <button
-      className={className ? className : "border-2 p-2 rounded-lg border-black"}
+      className={
+        (className ? className : "") +
+        " border-2 p-2 rounded-lg select-none border-primary text-primary hover:text-secondary hover:bg-primary transition"
+      }
       onClick={onClick}
     >
       {children}
