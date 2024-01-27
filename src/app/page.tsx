@@ -10,7 +10,9 @@ export default function Home() {
         <div className="grid gap-6">
           <div className="text-center grid gap-2 | md:text-left">
             <p className="text-sm">Hi! I&apos;m</p>
-            <h1 className="text-6xl font-bold">Oliver Lister.</h1>
+            <h1 className="text-6xl font-bold text-clip-gradient">
+              Oliver Lister.
+            </h1>
             <h2>
               I&apos;m a <strong>frontend developer</strong> crafting seamless
               digital experiences with code.

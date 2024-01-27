@@ -2,20 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --gradient-accent: linear-gradient(
+    to right,
+    rgb(236, 72, 153),
+    rgb(239, 68, 68),
+    rgb(234, 106, 8)
+  );
+}
+
 .wrapper {
   @apply mx-auto max-w-screen-xl px-4 sm:px-8;
 }
 
 .hero {
+  min-height: calc(100vh - 11rem);
   @apply w-full;
-}
-
-.hero {
-  height: calc(100vh - 11rem);
 }
 
 @media (min-width: 640px) {
   .hero {
-    height: calc(100vh - 12rem);
+    min-height: calc(100vh - 12rem);
   }
+}
+
+.menu__list {
+  --underline-width: 45px;
+  --underline-offset-x: 0;
+}
+
+@media (min-width: 640px) {
+  .menu__list::before {
+    width: var(--underline-width);
+    transform: translateX(var(--underline-offset-x));
+    background: var(--gradient-accent);
+    @apply transition rounded-lg content-[''] block absolute top-full h-[1px];
+  }
+}
+
+.menu__link:hover, .text-clip-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  @apply transition;
+}
+
+.bg-gradient {
+  background: var(--gradient-accent);
 }

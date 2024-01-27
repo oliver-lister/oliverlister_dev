@@ -94,7 +94,7 @@ export default function ContactForm() {
       </div>
       <button
         type="submit"
-        className="border-2 border-primary rounded-lg p-2 bg-blue-500"
+        className="border-2 border-primary rounded-lg p-2 bg-gradient"
       >
         Submit
       </button>

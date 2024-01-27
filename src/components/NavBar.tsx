@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Button from "./Button";
 import Icon from "./Icon";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useModal } from "@/context/ModalContext";
 
 export default function NavBar() {
@@ -14,32 +14,58 @@ export default function NavBar() {
     setMenuIsOpen(!menuIsOpen);
   };
 
+  // Desktop Navbar Underline styles
+  useEffect(() => {
+    const menu = document.querySelector(".menu__list") as HTMLElement;
+
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.classList.contains("menu__link")) {
+        menu.style.setProperty("--underline-width", `${target.offsetWidth}px`);
+        menu.style.setProperty(
+          "--underline-offset-x",
+          `${target.offsetLeft}px`
+        );
+      }
+    };
+
+    if (menu !== null) {
+      menu.addEventListener("click", handleClick);
+    }
+
+    return () => {
+      if (menu !== null) {
+        menu.removeEventListener("click", handleClick);
+      }
+    };
+  });
+
   return (
     <>
       <nav>
         <ul
           className={
             (menuIsOpen ? "right-0 " : "-left-full") +
-            " grid gap-10 absolute top-20 w-full text-center py-6 bg-primary text-secondary rounded-lg dark:bg-secondary dark:text-primary | md:bg-inherit md:text-inherit dark:md:bg-inherit dark:md:text-inherit md:text-center md:py-0 md:w-auto md:static md:grid-flow-col"
+            " grid gap-10 absolute top-20 w-full text-center py-6 bg-primary text-secondary rounded-lg dark:bg-secondary dark:text-primary | menu__list md:relative md:top-0 md:left-0 md:bg-inherit md:text-inherit dark:md:bg-inherit dark:md:text-inherit md:py-0 md:w-auto md:grid-flow-col"
           }
         >
           <li>
-            <Link href="/" onClick={toggleMenu}>
+            <Link href="/" onClick={toggleMenu} className="menu__link">
               Home
             </Link>
           </li>
           <li>
-            <Link href="/about" onClick={toggleMenu}>
+            <Link href="/about" onClick={toggleMenu} className="menu__link">
               About
             </Link>
           </li>
           <li>
-            <Link href="/projects" onClick={toggleMenu}>
+            <Link href="/projects" onClick={toggleMenu} className="menu__link">
               Projects
             </Link>
           </li>
           <li>
-            <Link href="/blog" onClick={toggleMenu}>
+            <Link href="/blog" onClick={toggleMenu} className="menu__link">
               Blog
             </Link>
           </li>
