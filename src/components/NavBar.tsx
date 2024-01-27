@@ -3,42 +3,54 @@
 import Link from "next/link";
 import Button from "./Button";
 import Icon from "./Icon";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useModal } from "@/context/ModalContext";
+import { usePathname } from "next/navigation";
+
+const links = [
+  { path: "/", label: "Home", ref: "home" },
+  { path: "/about", label: "About", ref: "about" },
+  { path: "/projects", label: "Projects", ref: "projects" },
+  { path: "/blog", label: "Blog", ref: "blog" },
+];
 
 export default function NavBar() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const { openModal } = useModal();
+  const home = useRef<HTMLAnchorElement | null>(null);
+  const about = useRef<HTMLAnchorElement | null>(null);
+  const projects = useRef<HTMLAnchorElement | null>(null);
+  const blog = useRef<HTMLAnchorElement | null>(null);
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setMenuIsOpen(!menuIsOpen);
   };
 
   // Desktop Navbar Underline styles
+
   useEffect(() => {
     const menu = document.querySelector(".menu__list") as HTMLElement;
 
-    const handleClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.classList.contains("menu__link")) {
-        menu.style.setProperty("--underline-width", `${target.offsetWidth}px`);
+    const pathLookup = {
+      "/": home.current,
+      "/about": about.current,
+      "/projects": projects.current,
+      "/blog": blog.current,
+    } as { [key: string]: HTMLAnchorElement | null };
+
+    const handleChange = (pathname: string) => {
+      const active = pathLookup[pathname];
+      if (active) {
+        menu.style.setProperty("--underline-width", `${active.offsetWidth}px`);
         menu.style.setProperty(
           "--underline-offset-x",
-          `${target.offsetLeft}px`
+          `${active.offsetLeft}px`
         );
       }
     };
-
-    if (menu !== null) {
-      menu.addEventListener("click", handleClick);
-    }
-
-    return () => {
-      if (menu !== null) {
-        menu.removeEventListener("click", handleClick);
-      }
-    };
-  });
+    handleChange(pathname);
+  }, [pathname]);
 
   return (
     <>
@@ -49,26 +61,28 @@ export default function NavBar() {
             " grid gap-10 absolute top-20 w-full text-center py-6 bg-primary text-secondary rounded-lg dark:bg-secondary dark:text-primary | menu__list md:relative md:top-0 md:left-0 md:bg-inherit md:text-inherit dark:md:bg-inherit dark:md:text-inherit md:py-0 md:w-auto md:grid-flow-col"
           }
         >
-          <li>
-            <Link href="/" onClick={toggleMenu} className="menu__link">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/about" onClick={toggleMenu} className="menu__link">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link href="/projects" onClick={toggleMenu} className="menu__link">
-              Projects
-            </Link>
-          </li>
-          <li>
-            <Link href="/blog" onClick={toggleMenu} className="menu__link">
-              Blog
-            </Link>
-          </li>
+          {links.map((link) => (
+            <li key={link.path}>
+              <Link
+                ref={
+                  link.ref === "home"
+                    ? home
+                    : link.ref === "about"
+                    ? about
+                    : link.ref === "projects"
+                    ? projects
+                    : blog
+                }
+                href={link.path}
+                onClick={toggleMenu}
+                className={`menu__link select-none ${
+                  link.path === pathname ? "text-clip-gradient" : ""
+                }`}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
       <div className="flex gap-4">

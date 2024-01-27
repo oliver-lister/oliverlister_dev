@@ -29,13 +29,15 @@ export default function Home() {
           </div>
         </div>
         <div className="mx-auto">
-          <Image
-            src="/memoji-wave.png"
-            priority
-            width={300}
-            height={300}
-            alt="Avatar"
-          />
+          <div className="rounded-full border-4 border-primary dark:border-secondary overflow-hidden bg-gradient">
+            <Image
+              src="/memoji-wave.png"
+              priority
+              width={300}
+              height={300}
+              alt="Avatar"
+            />
+          </div>
         </div>
       </div>
     </section>
