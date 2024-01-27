@@ -15,7 +15,11 @@ export default function Footer() {
           © 2023 <span className="hidden | sm:inline">Oliver Lister</span>
         </p>
         <SocialsNav />
-        <Button className="flex gap-2 justify-self-end" onClick={toggleTheme}>
+        <Button
+          theme="primary"
+          className="justify-self-end"
+          onClick={toggleTheme}
+        >
           <Icon icon="theme" />
           <span className="hidden | sm:block">Change Theme</span>
         </Button>

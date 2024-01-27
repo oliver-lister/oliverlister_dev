@@ -1,5 +1,11 @@
 "use client";
 
+import Icon from "@/components/Icon";
+
 export default function Loading() {
-  return <div>Loading....</div>;
+  return (
+    <div className="hero grid items-center justify-center">
+      <Icon icon="spinner" size="100" className="animate-spin" />
+    </div>
+  );
 }

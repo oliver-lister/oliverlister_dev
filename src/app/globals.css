@@ -4,10 +4,10 @@
 
 :root {
   --gradient-accent: linear-gradient(
-    to right,
-    rgb(236, 72, 153),
-    rgb(239, 68, 68),
-    rgb(234, 106, 8)
+    to bottom right,
+    #ff8a05,
+    #ff5478,
+    #ff00c6
   );
 }
 
@@ -40,7 +40,8 @@
   }
 }
 
-.menu__link:hover, .text-clip-gradient {
+.menu__link:hover,
+.text-clip-gradient {
   background: var(--gradient-accent);
   -webkit-background-clip: text;
   background-clip: text;

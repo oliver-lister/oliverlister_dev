@@ -58,7 +58,7 @@ export default function NavBar() {
         <ul
           className={
             (menuIsOpen ? "right-0 " : "-left-full") +
-            " grid gap-10 absolute top-20 w-full text-center py-6 bg-primary text-secondary rounded-lg dark:bg-secondary dark:text-primary | menu__list md:relative md:top-0 md:left-0 md:bg-inherit md:text-inherit dark:md:bg-inherit dark:md:text-inherit md:py-0 md:w-auto md:grid-flow-col"
+            " grid gap-10 absolute z-10 top-20 w-full text-center py-6 bg-primary text-secondary rounded-lg dark:bg-secondary dark:text-primary | menu__list md:relative md:top-0 md:left-0 md:bg-inherit md:text-inherit dark:md:bg-inherit dark:md:text-inherit md:py-0 md:w-auto md:grid-flow-col"
           }
         >
           {links.map((link) => (
@@ -86,11 +86,15 @@ export default function NavBar() {
         </ul>
       </nav>
       <div className="flex gap-4">
-        <Button onClick={() => openModal("contact")} className="flex gap-2">
+        <Button onClick={() => openModal("contact")} theme="primary">
           <Icon icon="contact" />
           <span className="hidden | sm:block">Let&apos;s talk</span>
         </Button>
-        <Button onClick={toggleMenu} className="md:hidden group">
+        <Button
+          onClick={toggleMenu}
+          className="md:hidden group"
+          theme="primary"
+        >
           <div className="grid gap-1 items-center">
             <span
               className={

@@ -4,10 +4,19 @@ import {
   UilLinkedin,
   UilMessage,
   UilAdjustHalf,
+  UilAngleRightB,
+  UilFidgetSpinner,
 } from "@iconscout/react-unicons";
 
 type IconProps = {
-  icon: "linkedin" | "github" | "contact" | "filedownload" | "theme";
+  icon:
+    | "linkedin"
+    | "github"
+    | "contact"
+    | "filedownload"
+    | "theme"
+    | "arrow"
+    | "spinner";
   size?: string;
   className?: string;
 };
@@ -19,6 +28,8 @@ export default function Icon({ icon, size, className }: IconProps) {
     contact: <UilMessage size={size} className={className} />,
     filedownload: <UilFileDownloadAlt size={size} className={className} />,
     theme: <UilAdjustHalf size={size} className={className} />,
+    arrow: <UilAngleRightB size={size} className={className} />,
+    spinner: <UilFidgetSpinner size={size} className={className} />,
   };
   const selectedIcon = iconComponents[icon];
 

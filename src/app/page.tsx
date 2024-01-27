@@ -18,14 +18,18 @@ export default function Home() {
               digital experiences with code.
             </h2>
           </div>
-          <div className="flex gap-4 justify-center | md:justify-start">
-            <Button className="flex gap-2">
+          <div className="flex gap-4 justify-center items-center | md:justify-start">
+            <Button theme="accent">
               <Icon icon="filedownload" />
-              Download CV
+              <span className="hidden | md:block">Download</span> CV
             </Button>
-            <Button>
-              <Link href="/projects">View Projects</Link>
-            </Button>
+            <Link
+              href="/projects"
+              className="flex px-3 py-4 rounded-lg hover:bg-primary-900 dark:hover:bg-primary-400"
+            >
+              <span className="hidden | md:block">View&nbsp;</span>Projects
+              <Icon icon="arrow" />
+            </Link>
           </div>
         </div>
         <div className="mx-auto">
