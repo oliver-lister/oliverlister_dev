@@ -3,7 +3,19 @@
 @tailwind utilities;
 
 .wrapper {
-  max-width: 1280px;
-  margin-inline: auto;
-  @apply px-4 sm:px-8;
+  @apply mx-auto max-w-screen-xl px-4 sm:px-8;
+}
+
+.hero {
+  @apply w-full;
+}
+
+.hero {
+  height: calc(100vh - 11rem);
+}
+
+@media (min-width: 640px) {
+  .hero {
+    height: calc(100vh - 12rem);
+  }
 }

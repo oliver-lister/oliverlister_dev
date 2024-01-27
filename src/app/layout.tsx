@@ -21,13 +21,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+        ></meta>
+      </head>
       <ThemeContextProvider>
         <ModalContextProvider>
           <body
             className={
               inter.className +
               " " +
-              " text-primary bg-secondary | dark:text-secondary dark:bg-primary"
+              " text-primary bg-secondary overflow-x-hidden | dark:text-secondary dark:bg-primary"
             }
           >
             <ModalManager />

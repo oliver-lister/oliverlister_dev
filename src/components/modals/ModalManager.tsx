@@ -7,6 +7,7 @@ import { ReactElement, ReactNode, useEffect } from "react";
 type ModalComponents = {
   [key: string]: (props: {
     handleClose: (e: React.MouseEvent) => void;
+    closeModal: () => void;
   }) => ReactElement;
 };
 
@@ -18,7 +19,7 @@ const ModalManager = () => {
   const { modal, closeModal } = useModal();
 
   const handleClose = (e: React.MouseEvent) => {
-    const targetId = (e.currentTarget as HTMLElement).id;
+    const targetId = (e.target as HTMLElement).id;
     if (targetId === "modal-wrapper" || targetId === "modal-exit") {
       closeModal();
     }
@@ -27,6 +28,6 @@ const ModalManager = () => {
   if (!modal) return null; // if no Modal is open currently, show nothing.
 
   const Modal = modalLookup[modal];
-  return <Modal handleClose={handleClose} />;
+  return <Modal handleClose={handleClose} closeModal={closeModal} />;
 };
 export default ModalManager;

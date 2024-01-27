@@ -2,29 +2,23 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 
-export const ThemeContext = createContext({
-  theme: "light",
-  toggleTheme: () => {},
-});
+export const ThemeContext = createContext<null | ThemeContext>(null);
+
+type ThemeContext = {
+  theme: string | null;
+  toggleTheme: () => void;
+};
 
 const ThemeContextProvider = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState<string | null>(null);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
   };
-
-  useEffect(() => {
-    const htmlElement = document.querySelector("html");
-    if (htmlElement) {
-      htmlElement.classList.remove("dark", "light");
-      htmlElement.classList.add(theme);
-    }
-  }, [theme]);
 
   useEffect(() => {
     // Check if dark mode is preferred by the user in their browser
@@ -43,6 +37,18 @@ const ThemeContextProvider = ({
       darkMode.removeEventListener("change", handleDarkModeChange);
     };
   }, []);
+
+  useEffect(() => {
+    const htmlElement = document.querySelector("html");
+    if (htmlElement) {
+      htmlElement.classList.remove("dark", "light");
+
+      // Only add the class if theme is not null
+      if (theme !== null) {
+        htmlElement.classList.add(theme);
+      }
+    }
+  }, [theme]);
 
   return (
     <ThemeContext.Provider

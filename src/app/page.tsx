@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <section className="grid items-center justify-center">
+    <section className="hero grid items-center justify-center">
       <div className="grid gap-6 items-center | md:gap-0 md:grid-cols-2">
         <div className="grid gap-6">
           <div className="text-center grid gap-2 | md:text-left">
@@ -27,7 +27,13 @@ export default function Home() {
           </div>
         </div>
         <div className="mx-auto">
-          <Image src="/memoji-wave.png" width={300} height={300} alt="Avatar" />
+          <Image
+            src="/memoji-wave.png"
+            priority
+            width={300}
+            height={300}
+            alt="Avatar"
+          />
         </div>
       </div>
     </section>

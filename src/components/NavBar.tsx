@@ -19,7 +19,7 @@ export default function NavBar() {
       <nav>
         <ul
           className={
-            (menuIsOpen ? "right-0 " : "-right-full") +
+            (menuIsOpen ? "right-0 " : "-left-full") +
             " grid gap-10 absolute top-20 w-full text-center py-6 bg-primary text-secondary rounded-lg dark:bg-secondary dark:text-primary | md:bg-inherit md:text-inherit dark:md:bg-inherit dark:md:text-inherit md:text-center md:py-0 md:w-auto md:static md:grid-flow-col"
           }
         >
