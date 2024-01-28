@@ -21,7 +21,9 @@ export default function Home() {
           <div className="flex gap-4 justify-center items-center | md:justify-start">
             <Button theme="accent">
               <Icon icon="filedownload" />
-              <span className="hidden | md:block">Download</span> CV
+              <div className="flex">
+                <span className="hidden | md:block">Download</span>&nbsp;CV
+              </div>
             </Button>
             <Link
               href="/projects"
@@ -32,7 +34,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className="mx-auto">
+        <div className="mx-auto md-0 | md:ml-auto md:mx-0">
           <div className="rounded-full border-4 border-primary dark:border-secondary overflow-hidden bg-gradient">
             <Image
               src="/memoji-wave.png"

@@ -5,7 +5,7 @@ import {
   UilMessage,
   UilAdjustHalf,
   UilAngleRightB,
-  UilFidgetSpinner,
+  UilSpinnerAlt,
 } from "@iconscout/react-unicons";
 
 type IconProps = {
@@ -29,7 +29,7 @@ export default function Icon({ icon, size, className }: IconProps) {
     filedownload: <UilFileDownloadAlt size={size} className={className} />,
     theme: <UilAdjustHalf size={size} className={className} />,
     arrow: <UilAngleRightB size={size} className={className} />,
-    spinner: <UilFidgetSpinner size={size} className={className} />,
+    spinner: <UilSpinnerAlt size={size} className={className} />,
   };
   const selectedIcon = iconComponents[icon];
 

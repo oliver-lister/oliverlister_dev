@@ -3,6 +3,9 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Button from "./Button";
+import Icon from "./Icon";
+import { useEffect, useState } from "react";
 
 type FormData = {
   name: string;
@@ -31,11 +34,23 @@ export default function ContactForm() {
     watch,
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = (data: FormData) => {
-    console.log(data);
-    reset();
+    setIsLoading((prevLoading) => !prevLoading);
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        console.log(data);
+        setIsLoading((prevLoading) => !prevLoading);
+        reset();
+        resolve();
+      }, 2000);
+    });
   };
+
+  useEffect(() => {
+    console.log("Loading: " + isLoading);
+  }, [isLoading]);
 
   const labelStyle = (fieldName: "name" | "email" | "message") =>
     watch(fieldName)
@@ -92,12 +107,20 @@ export default function ContactForm() {
         </label>
         <p className={errorStyle}>{errors.message?.message}</p>
       </div>
-      <button
+      <Button
         type="submit"
-        className="border-2 border-primary rounded-lg p-2 bg-gradient"
+        className="disabled:pointer-events-none flex items-center justify-center gap-2 cursor-pointer p-2 rounded-lg bg-gradient border-2 border-primary hover:bg-primary hover:bg-none text-secondary"
+        disabled={isLoading}
       >
-        Submit
-      </button>
+        {isLoading ? (
+          <>
+            <Icon icon="spinner" size="30" className="animate-spin" />
+            Processing
+          </>
+        ) : (
+          "Submit"
+        )}
+      </Button>
     </form>
   );
 }
