@@ -69,11 +69,8 @@ export default function ContactForm() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       name="contact"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
       className="grid gap-2"
     >
-      <input type="hidden" name="form-name" value="Contact" />
       <div className="grid gap-1 relative">
         <input
           {...register("name")}

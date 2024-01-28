@@ -79,7 +79,7 @@ export default function NavBar() {
                   link.path === pathname ? "text-clip-gradient" : ""
                 }`}
               >
-                {link.label}
+                <a>{link.label}</a>
               </Link>
             </li>
           ))}
