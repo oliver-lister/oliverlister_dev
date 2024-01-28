@@ -86,7 +86,11 @@ export default function NavBar() {
         </ul>
       </nav>
       <div className="flex gap-4">
-        <Button onClick={() => openModal("contact")} theme="primary">
+        <Button
+          onClick={() => openModal("contact")}
+          theme="primary"
+          ariaLabel="Contact form"
+        >
           <Icon icon="contact" />
           <span className="hidden | sm:block">Let&apos;s talk</span>
         </Button>
@@ -94,6 +98,7 @@ export default function NavBar() {
           onClick={toggleMenu}
           className="md:hidden group"
           theme="primary"
+          ariaLabel="Toggle mobile navigation menu"
         >
           <div className="grid gap-1 items-center">
             <span

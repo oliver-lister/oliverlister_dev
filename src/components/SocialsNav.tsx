@@ -9,6 +9,7 @@ export default function SocialsNav() {
             target="_blank"
             rel="noopener noreferrer"
             href="https://github.com/oliver-lister"
+            aria-label="Github"
           >
             <Icon
               icon="github"
@@ -22,6 +23,7 @@ export default function SocialsNav() {
             target="_blank"
             rel="noopener noreferrer"
             href="https://www.linkedin.com/in/oliverdukemusic/"
+            aria-label="Linkedin"
           >
             <Icon
               icon="linkedin"

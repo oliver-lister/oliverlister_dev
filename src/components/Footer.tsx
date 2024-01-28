@@ -19,6 +19,7 @@ export default function Footer() {
           theme="primary"
           className="justify-self-end"
           onClick={toggleTheme}
+          ariaLabel="Toggle color theme"
         >
           <Icon icon="theme" />
           <span className="hidden | sm:block">Change Theme</span>

@@ -15,6 +15,7 @@ export default function Button({
   theme,
   type,
   disabled,
+  ariaLabel,
 }: Readonly<{
   children: React.ReactNode;
   className?: string;
@@ -23,6 +24,7 @@ export default function Button({
   theme?: keyof typeof buttonTheme;
   type?: "button" | "reset" | "submit" | undefined;
   disabled?: boolean | undefined;
+  ariaLabel?: string | undefined;
 }>): JSX.Element {
   const themeClass = theme ? buttonTheme[theme] : "";
 
@@ -34,6 +36,7 @@ export default function Button({
         onClick={onClick}
         id={id}
         disabled={disabled}
+        aria-label={ariaLabel}
       >
         <span className="w-full h-full bg-gradient group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
         <span className="relative flex gap-2 p-3 transition-all ease-out text-secondary bg-primary dark:bg-primary-400 rounded-md group-hover:bg-opacity-0 duration-400">
@@ -49,6 +52,7 @@ export default function Button({
         onClick={onClick}
         id={id}
         disabled={disabled}
+        aria-label={ariaLabel}
       >
         {children}
       </button>
