@@ -14,29 +14,34 @@ const ThemeContextProvider = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const [theme, setTheme] = useState<string | null>(null);
+  const darkMode = window.matchMedia("(prefers-color-scheme: dark)");
+  const [theme, setTheme] = useState<string | null>(() => {
+    // Retrieve theme from local storage on component mount
+    const storedTheme = localStorage.getItem("theme");
+    return storedTheme || darkMode.matches ? "dark" : "light";
+  });
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === "dark" ? "light" : "dark";
+
+      // Save the new theme to local storage
+      localStorage.setItem("theme", newTheme);
+
+      return newTheme;
+    });
   };
 
   useEffect(() => {
-    // Check if dark mode is preferred by the user in their browser
-    const darkMode = window.matchMedia("(prefers-color-scheme: dark)");
-
-    // Set the initial theme based on user preference or default to "light"
-    setTheme(darkMode.matches ? "dark" : "light");
-
-    // Add an event listener to update the theme when the user changes their preference
+    // Add an event listener to update the theme when the user changes their preference on the browser
     const handleDarkModeChange = () => {
       setTheme(darkMode.matches ? "dark" : "light");
     };
     darkMode.addEventListener("change", handleDarkModeChange);
-
     return () => {
       darkMode.removeEventListener("change", handleDarkModeChange);
     };
-  }, []);
+  }, [darkMode]);
 
   useEffect(() => {
     const htmlElement = document.querySelector("html");
