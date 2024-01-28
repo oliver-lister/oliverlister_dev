@@ -14,19 +14,24 @@ const ThemeContextProvider = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const darkMode = window.matchMedia("(prefers-color-scheme: dark)");
+  const isClient = typeof window !== "undefined"; // Check if we are on the client side
+
+  const darkMode = isClient
+    ? window.matchMedia("(prefers-color-scheme: dark)")
+    : null;
+
   const [theme, setTheme] = useState<string | null>(() => {
     // Retrieve theme from local storage on component mount
-    const storedTheme = localStorage.getItem("theme");
-    return storedTheme || darkMode.matches ? "dark" : "light";
+    const storedTheme = isClient ? localStorage.getItem("theme") : null;
+    return storedTheme || (darkMode && darkMode.matches) ? "dark" : "light";
   });
 
   const toggleTheme = () => {
     setTheme((prevTheme) => {
       const newTheme = prevTheme === "dark" ? "light" : "dark";
 
-      // Save the new theme to local storage
-      localStorage.setItem("theme", newTheme);
+      // Save the new theme to local storage (if available)
+      isClient && localStorage.setItem("theme", newTheme);
 
       return newTheme;
     });
@@ -35,16 +40,22 @@ const ThemeContextProvider = ({
   useEffect(() => {
     // Add an event listener to update the theme when the user changes their preference on the browser
     const handleDarkModeChange = () => {
-      setTheme(darkMode.matches ? "dark" : "light");
+      setTheme(darkMode?.matches ? "dark" : "light");
+      isClient &&
+        localStorage.setItem("theme", darkMode?.matches ? "dark" : "light");
     };
-    darkMode.addEventListener("change", handleDarkModeChange);
+
+    // Ensure we're on the client side before adding the event listener
+    isClient && darkMode?.addEventListener("change", handleDarkModeChange);
+
     return () => {
-      darkMode.removeEventListener("change", handleDarkModeChange);
+      // Remove the event listener when the component is unmounted
+      isClient && darkMode?.removeEventListener("change", handleDarkModeChange);
     };
-  }, [darkMode]);
+  }, [darkMode, isClient]);
 
   useEffect(() => {
-    const htmlElement = document.querySelector("html");
+    const htmlElement = isClient && document.querySelector("html");
     if (htmlElement) {
       htmlElement.classList.remove("dark", "light");
 
@@ -53,7 +64,7 @@ const ThemeContextProvider = ({
         htmlElement.classList.add(theme);
       }
     }
-  }, [theme]);
+  }, [theme, isClient]);
 
   return (
     <ThemeContext.Provider
