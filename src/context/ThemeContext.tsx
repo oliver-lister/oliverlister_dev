@@ -37,22 +37,22 @@ const ThemeContextProvider = ({
     });
   };
 
-  useEffect(() => {
-    // Add an event listener to update the theme when the user changes their preference on the browser
-    const handleDarkModeChange = () => {
-      setTheme(darkMode?.matches ? "dark" : "light");
-      isClient &&
-        localStorage.setItem("theme", darkMode?.matches ? "dark" : "light");
-    };
+  // useEffect(() => {
+  //   // Add an event listener to update the theme when the user changes their preference on the browser
+  //   const handleDarkModeChange = () => {
+  //     setTheme(darkMode?.matches ? "dark" : "light");
+  //     isClient &&
+  //       localStorage.setItem("theme", darkMode?.matches ? "dark" : "light");
+  //   };
 
-    // Ensure we're on the client side before adding the event listener
-    isClient && darkMode?.addEventListener("change", handleDarkModeChange);
+  //   // Ensure we're on the client side before adding the event listener
+  //   isClient && darkMode?.addEventListener("change", handleDarkModeChange);
 
-    return () => {
-      // Remove the event listener when the component is unmounted
-      isClient && darkMode?.removeEventListener("change", handleDarkModeChange);
-    };
-  }, [darkMode, isClient]);
+  //   return () => {
+  //     // Remove the event listener when the component is unmounted
+  //     isClient && darkMode?.removeEventListener("change", handleDarkModeChange);
+  //   };
+  // }, [darkMode, isClient]);
 
   useEffect(() => {
     const htmlElement = isClient && document.querySelector("html");

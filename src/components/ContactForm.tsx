@@ -66,11 +66,20 @@ export default function ContactForm() {
     "text-xs italic text-red-600 w-full h-4 caret-transparent";
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="grid gap-2">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      name="contact"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      className="grid gap-2"
+    >
+      <input type="hidden" name="form-name" value="Contact" />
       <div className="grid gap-1 relative">
         <input
           {...register("name")}
           id="name"
+          type="text"
+          name="name"
           aria-invalid={errors.name ? "true" : "false"}
           autoComplete="true"
           className={inputStyle("name")}
@@ -84,6 +93,8 @@ export default function ContactForm() {
         <input
           {...register("email")}
           id="email"
+          type="text"
+          name="email"
           aria-invalid={errors.email ? "true" : "false"}
           autoComplete="true"
           className={inputStyle("email")}
@@ -97,6 +108,7 @@ export default function ContactForm() {
         <textarea
           {...register("message")}
           id="message"
+          name="name"
           aria-invalid={errors.message ? "true" : "false"}
           rows={10}
           autoComplete="false"

@@ -43,6 +43,16 @@ export default function RootLayout({
             </main>
             <Footer />
           </body>
+          <form
+            name="contact"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            hidden
+          >
+            <input type="text" name="name" />
+            <input type="email" name="email" />
+            <textarea name="comment"></textarea>
+          </form>
         </ModalContextProvider>
       </ThemeContextProvider>
     </html>
