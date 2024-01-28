@@ -27,6 +27,11 @@ const technologies = [
     shadowClr: "000000",
   },
   {
+    title: "Typescript",
+    imageSrc: "/logos/typescript.svg",
+    shadowClr: "007ACC",
+  },
+  {
     title: "TailwindCSS",
     imageSrc: "/logos/tailwindcss.svg",
     shadowClr: "15C6B8",
@@ -42,9 +47,9 @@ export default function About() {
   return (
     <div className="grid gap-6">
       <section className="grid gap-6">
-        <div className="relative">
+        <div className="relative inline max-w-max">
           <h2 className="text-5xl font-bold">About Me</h2>
-          <span className="absolute bg-gradient w-[225px] h-1"></span>
+          <span className="absolute bg-gradient w-full h-1 z-[-1]"></span>
         </div>
         <div className="grid md:grid-cols-2">
           <p>
@@ -75,8 +80,11 @@ export default function About() {
         </div>
       </section>
       <section className="grid gap-6">
-        <div>
-          <h2 className="text-5xl font-bold text-center">Technologies</h2>
+        <div className="relative grid items-center justify-center">
+          <span className="absolute top-6 z-[-1] h-[1px] w-full bg-primary dark:bg-secondary"></span>
+          <h2 className="text-4xl font-semibold bg-secondary px-6 dark:bg-primary">
+            Technologies
+          </h2>
         </div>
         <div className="grid grid-cols-1 justify-items-center items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {technologies.map((tech, index) => (

@@ -39,7 +39,7 @@ export default function RootLayout({
             <ModalManager />
             <Header />
             <main>
-              <div className="wrapper">{children}</div>
+              <div className="wrapper py-6">{children}</div>
             </main>
             <Footer />
           </body>

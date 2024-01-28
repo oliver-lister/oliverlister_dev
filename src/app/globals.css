@@ -16,13 +16,13 @@
 }
 
 .hero {
-  min-height: calc(100vh - 11rem);
+  min-height: calc(100vh - 14.45rem);
   @apply w-full;
 }
 
 @media (min-width: 640px) {
   .hero {
-    min-height: calc(100vh - 12rem);
+    min-height: calc(100vh - 15.6rem);
   }
 }
 

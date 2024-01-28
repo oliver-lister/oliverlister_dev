@@ -61,9 +61,9 @@ const projects = [
 export default function Projects() {
   return (
     <section className="grid gap-6">
-      <div className="relative">
+      <div className="relative inline max-w-max">
         <h2 className="text-5xl font-bold">Projects</h2>
-        <span className="absolute bg-gradient w-[195px] h-1 z[-1]"></span>
+        <span className="absolute bg-gradient w-full h-1 z-[-1]"></span>
       </div>
       <div className="grid gap-4">
         {projects.map(
@@ -80,7 +80,7 @@ export default function Projects() {
                     {tags.map((tag, index) => (
                       <li
                         key={index}
-                        className="border-2 px-2 py-1 rounded-full text-[10px] border-primary | dark:border-secondary"
+                        className="border-2 px-2 py-1 rounded-full text-[10px] border-secondary bg-primary"
                       >
                         {tag}
                       </li>
@@ -107,7 +107,7 @@ export default function Projects() {
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-2 p-3 rounded-lg flex gap-2 items-center text-primary border-primary hover:bg-primary hover:text-secondary | dark:text-secondary dark:border-secondary dark:hover:bg-secondary dark:hover:text-primary"
+                  className="border-2 p-3 rounded-lg flex gap-2 items-center text-secondary border-secondary hover:bg-secondary hover:text-primary"
                 >
                   <Icon icon="github" />
                   Code

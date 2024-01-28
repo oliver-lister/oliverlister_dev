@@ -42,7 +42,7 @@ export default function Card({
     }
     if (theme === "project") {
       return (
-        <article className="relative grid rounded-xl h-[600px] overflow-hidden shadow-sm shadow-primary text-secondary dark:shadow-secondary">
+        <article className="relative grid rounded-xl h-[600px] overflow-hidden shadow-sm shadow-primary dark:shadow-secondary">
           <div className="absolute inset-0">
             {imageSrc ? (
               <Image
@@ -54,7 +54,7 @@ export default function Card({
               />
             ) : null}
           </div>
-          <div className="mt-auto border-t border-primary/40 p-6 backdrop-blur-md text-primary bg-secondary/40 | dark:bg-primary/40 dark:text-secondary dark:border-secondary/40">
+          <div className="mt-auto border-t p-6 backdrop-blur-md bg-primary/40 text-secondary border-secondary/40">
             {children}
           </div>
         </article>

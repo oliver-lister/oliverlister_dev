@@ -10,7 +10,11 @@ export default function SocialsNav() {
             rel="noopener noreferrer"
             href="https://github.com/oliver-lister"
           >
-            <Icon icon="github" size="30" />
+            <Icon
+              icon="github"
+              size="30"
+              className="hover:scale-110 transition"
+            />
           </a>
         </li>
         <li>
@@ -19,7 +23,11 @@ export default function SocialsNav() {
             rel="noopener noreferrer"
             href="https://www.linkedin.com/in/oliverdukemusic/"
           >
-            <Icon icon="linkedin" size="30" />
+            <Icon
+              icon="linkedin"
+              size="30"
+              className="hover:scale-110 transition"
+            />
           </a>
         </li>
       </ul>

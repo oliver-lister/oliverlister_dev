@@ -9,7 +9,7 @@ export default function Footer() {
   const { toggleTheme } = useThemeContext();
 
   return (
-    <footer>
+    <footer className="border-t shadow bg-secondary-900 dark:bg-primary-400 dark:border-primary dark:shadow-secondary/20">
       <div className="wrapper grid grid-cols-3 py-6 items-center">
         <p className="justify-self-start">
           © 2023 <span className="hidden | sm:inline">Oliver Lister</span>
