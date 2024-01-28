@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Button from "./Button";
 import Icon from "./Icon";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 import { useModal } from "@/context/ModalContext";
 import { usePathname } from "next/navigation";
 
@@ -53,7 +53,7 @@ export default function NavBar() {
   }, [pathname]);
 
   return (
-    <>
+    <Fragment>
       <nav>
         <ul
           className={
@@ -79,7 +79,7 @@ export default function NavBar() {
                   link.path === pathname ? "text-clip-gradient" : ""
                 }`}
               >
-                <a>{link.label}</a>
+                {link.label}
               </Link>
             </li>
           ))}
@@ -123,6 +123,6 @@ export default function NavBar() {
           </div>
         </Button>
       </div>
-    </>
+    </Fragment>
   );
 }

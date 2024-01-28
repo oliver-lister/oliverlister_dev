@@ -27,10 +27,6 @@ const ThemeContextProvider = ({
   });
 
   useEffect(() => {
-    console.log(theme);
-  }, [theme]);
-
-  useEffect(() => {
     // Add an event listener to update the theme when the user changes their preference on the browser
     const handleDarkModeChange = () => {
       setTheme(darkMode?.matches ? "dark" : "light");
