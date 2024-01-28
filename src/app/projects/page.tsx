@@ -65,7 +65,7 @@ export default function Projects() {
         <h2 className="text-5xl font-bold">Projects</h2>
         <span className="absolute bg-gradient w-full h-1 z-[-1]"></span>
       </div>
-      <div className="grid gap-4">
+      <div className="grid gap-6">
         {projects.map(
           ({ title, description, url, githubUrl, imageSrc, tags }) => (
             <Card
