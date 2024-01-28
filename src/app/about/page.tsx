@@ -79,19 +79,17 @@ export default function About() {
           <h2 className="text-5xl font-bold text-center">Technologies</h2>
         </div>
         <div className="grid grid-cols-1 justify-items-center items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {technologies.map((tech, index) => {
-            return (
-              <Card
-                key={tech.title}
-                theme="technology"
-                imageSrc={tech.imageSrc}
-                imageSize={100}
-                shadowClr={tech.shadowClr}
-              >
-                {tech.title}
-              </Card>
-            );
-          })}
+          {technologies.map((tech, index) => (
+            <Card
+              key={tech.title}
+              theme="technology"
+              imageSrc={tech.imageSrc}
+              imageSize={100}
+              shadowClr={tech.shadowClr}
+            >
+              {tech.title}
+            </Card>
+          ))}
         </div>
       </section>
     </div>

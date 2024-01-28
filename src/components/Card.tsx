@@ -1,9 +1,5 @@
 import Image from "next/image";
-
-const cardTheme = {
-  technology:
-    "w-full h-full p-10 rounded-lg grid justify-items-center items-center gap-2 transition hover:bg-primary-900 dark:hover:bg-primary-400 hover:scale-105",
-};
+import Link from "next/link";
 
 export default function Card({
   children,
@@ -15,30 +11,54 @@ export default function Card({
 }: {
   children: React.ReactNode;
   className?: string;
-  theme?: keyof typeof cardTheme;
+  theme?: string;
   imageSrc?: string;
   imageSize?: number;
   shadowClr?: string;
 }): JSX.Element | undefined {
   {
-    const themeClass = theme ? cardTheme[theme] : "";
     const boxShadowStyle = {
       boxShadow: shadowClr ? `1px 1px 10px 0px #${shadowClr}` : "none",
     };
 
-    return (
-      <article className={`${themeClass} ${className}`} style={boxShadowStyle}>
-        {imageSrc ? (
-          <Image
-            src={imageSrc}
-            width={imageSize}
-            height={imageSize}
-            alt=""
-            className="min-h-[100px]"
-          />
-        ) : null}
-        {children}
-      </article>
-    );
+    if (theme === "technology") {
+      return (
+        <article
+          className={`w-full h-full p-10 rounded-lg grid justify-items-center items-center gap-2 transition hover:scale-105 ${className}`}
+          style={boxShadowStyle}
+        >
+          {imageSrc ? (
+            <Image
+              src={imageSrc}
+              width={imageSize}
+              height={imageSize}
+              alt=""
+              className="min-h-[100px]"
+            />
+          ) : null}
+          {children}
+        </article>
+      );
+    }
+    if (theme === "project") {
+      return (
+        <article className="relative grid rounded-xl h-[600px] overflow-hidden shadow-sm shadow-primary text-secondary dark:shadow-secondary">
+          <div className="absolute inset-0">
+            {imageSrc ? (
+              <Image
+                src={imageSrc}
+                alt=""
+                width={imageSize}
+                height={imageSize}
+                className="object-cover w-full h-full"
+              />
+            ) : null}
+          </div>
+          <div className="mt-auto border-t border-primary/40 p-6 backdrop-blur-md text-primary bg-secondary/40 | dark:bg-primary/40 dark:text-secondary dark:border-secondary/40">
+            {children}
+          </div>
+        </article>
+      );
+    }
   }
 }

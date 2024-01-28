@@ -2,7 +2,7 @@ import { MouseEventHandler } from "react";
 
 const buttonTheme = {
   primary:
-    "flex items-center justify-center gap-2 border-2 p-2 rounded-lg select-none border-primary text-primary hover:text-secondary hover:bg-primary transition | dark:text-secondary dark:bg-primary dark:border-secondary dark:hover:text-primary dark:hover:bg-secondary",
+    "flex items-center justify-center gap-2 border-2 p-3 rounded-lg select-none border-primary text-primary hover:text-secondary hover:bg-primary transition | dark:text-secondary dark:bg-primary dark:border-secondary dark:hover:text-primary dark:hover:bg-secondary",
   accent:
     "relative p-0.5 inline-flex items-center font-bold justify-center overflow-hidden group rounded-lg select-none",
 };
