@@ -1,4 +1,8 @@
+"use client";
+
 import Card from "@/components/Card";
+import Image from "next/image";
+import { useState } from "react";
 
 const technologies = [
   {
@@ -22,6 +26,16 @@ const technologies = [
     shadowClr: "61DAFB",
   },
   {
+    title: "Node.js",
+    imageSrc: "/logos/nodejs.svg",
+    shadowClr: "60AF46",
+  },
+  {
+    title: "Express.js",
+    imageSrc: "/logos/express.svg",
+    shadowClr: "000000",
+  },
+  {
     title: "Next.js",
     imageSrc: "/logos/next-js.svg",
     shadowClr: "000000",
@@ -32,9 +46,29 @@ const technologies = [
     shadowClr: "007ACC",
   },
   {
+    title: "MongoDB",
+    imageSrc: "/logos/mongodb.svg",
+    shadowClr: "599636",
+  },
+  {
+    title: "Redux Toolkit",
+    imageSrc: "/logos/redux.svg",
+    shadowClr: "764ABC",
+  },
+  {
     title: "TailwindCSS",
     imageSrc: "/logos/tailwindcss.svg",
     shadowClr: "15C6B8",
+  },
+  {
+    title: "Mantine",
+    imageSrc: "/logos/mantine.svg",
+    shadowClr: "339AF0",
+  },
+  {
+    title: "JSON Web Token (JWT)",
+    imageSrc: "/logos/jwt.svg",
+    shadowClr: "FB015B",
   },
   {
     title: "Github",
@@ -44,6 +78,7 @@ const technologies = [
 ];
 
 export default function About() {
+  const [searchText, setSearchText] = useState("");
   return (
     <div className="grid gap-6">
       <section className="grid gap-6">
@@ -51,32 +86,40 @@ export default function About() {
           <h2 className="text-5xl font-bold">About Me</h2>
           <span className="absolute bg-gradient w-full h-1 z-[-1]"></span>
         </div>
-        <div className="grid md:grid-cols-2">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, dolor
-            cum? Maiores laudantium quidem quos cum unde alias architecto libero
-            optio. Explicabo facere iure labore cum ullam nulla, odit, beatae
-            dolorem distinctio aperiam pariatur. Nam totam at placeat odio alias
-            cumque, est voluptatibus adipisci laboriosam ratione voluptate
-            doloribus, eius ipsa iure dolores eveniet atque minima pariatur
-            illum ad? Mollitia nemo inventore modi et doloremque ducimus
-            necessitatibus, facere iusto quibusdam consequuntur assumenda
-            pariatur tempore dolore? Pariatur maiores consequatur sapiente nobis
-            veniam quis fugiat praesentium, ea voluptate cumque totam delectus
-            at quas mollitia ipsa voluptatem voluptates necessitatibus ab!
-            Dolore explicabo impedit sapiente voluptatibus esse quis accusamus,
-            eum dolorem. Explicabo recusandae illo vero possimus facere sunt
-            error enim quam aut excepturi, hic unde, repellendus iusto
-            consectetur assumenda architecto eum corporis at, et quis delectus.
-            Velit, nisi. Voluptas, eius iure. Maiores et porro quae sit,
-            voluptatum quibusdam, facere, illum tenetur eum reprehenderit
-            cumque. Ab earum, veritatis voluptas aliquam explicabo id a
-            aspernatur numquam illo nisi quaerat cumque totam voluptates ipsum
-            assumenda! Consectetur iste dicta vel ut optio tempora ab alias
-            porro dolore corrupti. Voluptates excepturi aspernatur nemo
-            perferendis inventore unde labore provident quas amet corrupti,
-            praesentium ad tenetur sequi ullam quidem deserunt quos impedit.
-          </p>
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid gap-4">
+            <p>
+              Hey there, I&apos;m <strong>Oliver Lister</strong>, a Sydney-based
+              frontend web developer with a unique backstory in music and sound.
+              While I&apos;ve always had a passion for creativity, I found
+              myself missing the technical challenges and problem solving that
+              come with software development. That&apos;s why I&apos;ve made the
+              exciting leap into the world of coding!
+            </p>
+            <p>
+              With a plethora of knowledge in music and sound production and
+              management, I bring a fresh perspective and a keen eye for detail
+              to every project. From producing music compositions to overseeing
+              projects end-to-end, I&apos;ve honed my skills in managing complex
+              processes and delivering top-notch results.
+            </p>
+            <p>
+              Using my experience and creativity as fuel, I&apos;m diving
+              headfirst into web development. Whether it&apos;s crafting sleek
+              interfaces or building dynamic applications, I&apos;m eager to
+              learn, grow, and make connections.
+            </p>
+          </div>
+          <div className="flex items-center justify-center">
+            <div className="rounded-lg border-4 border-primary dark:border-secondary overflow-hidden bg-gradient">
+              <Image
+                src="/OL_Photo.jpeg"
+                alt="Oliver Lister"
+                width={300}
+                height={300}
+              />
+            </div>
+          </div>
         </div>
       </section>
       <section className="grid gap-6">
@@ -86,18 +129,30 @@ export default function About() {
             Technologies
           </h2>
         </div>
+        <div>
+          <input
+            type="text"
+            onChange={(e) => setSearchText(e.currentTarget.value)}
+            placeholder="Search technologies..."
+            className="w-full p-2 border-2 border-primary/40 bg-secondary rounded-sm dark:bg-primary dark:border-secondary/40"
+          />
+        </div>
         <div className="grid grid-cols-1 justify-items-center items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {technologies.map((tech, index) => (
-            <Card
-              key={tech.title}
-              theme="technology"
-              imageSrc={tech.imageSrc}
-              imageSize={100}
-              shadowClr={tech.shadowClr}
-            >
-              {tech.title}
-            </Card>
-          ))}
+          {technologies
+            .filter((tech) =>
+              tech.title.toLowerCase().includes(searchText.toLowerCase())
+            )
+            .map((tech, index) => (
+              <Card
+                key={tech.title}
+                theme="technology"
+                imageSrc={tech.imageSrc}
+                imageSize={100}
+                shadowClr={tech.shadowClr}
+              >
+                {tech.title}
+              </Card>
+            ))}
         </div>
       </section>
     </div>

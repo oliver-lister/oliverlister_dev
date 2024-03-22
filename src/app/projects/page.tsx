@@ -80,7 +80,7 @@ export default function Projects() {
                     {tags.map((tag, index) => (
                       <li
                         key={index}
-                        className="border-2 px-2 py-1 rounded-full text-[10px] border-secondary bg-primary"
+                        className="px-2 py-1 rounded-full text-[10px] bg-primary"
                       >
                         {tag}
                       </li>
