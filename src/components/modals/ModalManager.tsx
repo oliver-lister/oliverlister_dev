@@ -1,7 +1,7 @@
 "use client";
 
 import { useModal } from "@/context/ModalContext";
-import ContactModal from "@/components/modals/ContactModal";
+import ContactModal from "@/components/modals/ContactModal/ContactModal";
 import { ReactElement, ReactNode, useEffect } from "react";
 
 type ModalComponents = {

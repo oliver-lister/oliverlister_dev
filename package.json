@@ -1,5 +1,5 @@
 {
-  "name": "next_portfolio_website",
+  "name": "oliverlister_dev",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@iconscout/react-unicons": "^2.0.2",
+    "embla-carousel-react": "^8.0.4",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",

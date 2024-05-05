@@ -1,4 +1,4 @@
-import ContactForm from "@/components/ContactForm";
+import ContactForm from "@/components/modals/ContactModal/ContactForm";
 
 const ContactModal = ({
   handleClose,

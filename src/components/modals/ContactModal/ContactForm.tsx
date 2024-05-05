@@ -3,8 +3,8 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Button from "./Button";
-import Icon from "./Icon";
+import Button from "../../Button";
+import Icon from "../../Icon";
 import { useEffect, useState } from "react";
 
 type FormData = {

@@ -1,7 +1,7 @@
 "use client";
 
-import Button from "./Button";
-import Icon from "./Icon";
+import Button from "../Button";
+import Icon from "../Icon";
 import SocialsNav from "./SocialsNav";
 import { useThemeContext } from "@/context/ThemeContext";
 

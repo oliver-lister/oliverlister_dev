@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Button from "./Button";
-import Icon from "./Icon";
+import Button from "../Button";
+import Icon from "../Icon";
 import { useState, useEffect, useRef, Fragment } from "react";
 import { useModal } from "@/context/ModalContext";
 import { usePathname } from "next/navigation";
