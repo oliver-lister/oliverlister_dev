@@ -2,7 +2,7 @@
 
 import { useModal } from "@/context/ModalContext";
 import ContactModal from "@/components/modals/ContactModal/ContactModal";
-import { ReactElement, ReactNode, useEffect } from "react";
+import { ReactElement } from "react";
 
 type ModalComponents = {
   [key: string]: (props: {

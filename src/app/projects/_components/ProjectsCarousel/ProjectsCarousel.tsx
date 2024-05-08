@@ -4,7 +4,7 @@ import useEmblaCarousel, { UseEmblaCarouselType } from "embla-carousel-react";
 import { Project } from "../../page";
 import { useCallback, useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
-import { UilAngleLeftB, UilAngleRightB } from "@iconscout/react-unicons";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { EmblaCarouselType } from "embla-carousel";
 
 export default function ProjectsCarousel({
@@ -55,7 +55,7 @@ export default function ProjectsCarousel({
           className="embla__prev absolute top-[50%] left-[-1rem] rounded-full p-1 bg-primary text-secondary dark:bg-secondary dark:text-primary"
           onClick={onPrevButtonClick}
         >
-          <UilAngleLeftB />
+          <IconChevronLeft />
         </button>
       ) : null}
       {!nextBtnDisabled ? (
@@ -63,7 +63,7 @@ export default function ProjectsCarousel({
           className="embla__next absolute top-[50%] right-[-1rem] rounded-full p-1 bg-primary text-secondary dark:bg-secondary dark:text-primary"
           onClick={onNextButtonClick}
         >
-          <UilAngleRightB />
+          <IconChevronRight />
         </button>
       ) : null}
     </div>

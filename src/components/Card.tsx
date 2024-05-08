@@ -42,7 +42,7 @@ export default function Card({
     }
     if (theme === "project") {
       return (
-        <article className="relative grid rounded-xl h-[60vh] overflow-hidden shadow-sm shadow-primary dark:shadow-secondary">
+        <article className="relative grid rounded-xl min-h-[70vh] overflow-hidden shadow-sm shadow-primary dark:shadow-secondary">
           <div className="absolute inset-0">
             {imageSrc ? (
               <Image

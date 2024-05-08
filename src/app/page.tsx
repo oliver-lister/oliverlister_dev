@@ -1,5 +1,5 @@
+import { IconArrowRight, IconFileDownload } from "@tabler/icons-react";
 import Image from "next/image";
-import Icon from "@/components/Icon";
 import Link from "next/link";
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
             >
               <span className="w-full h-full bg-gradient group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
               <span className="relative flex gap-2 p-3 transition-all ease-out text-secondary bg-primary dark:bg-primary-400 rounded-md group-hover:bg-opacity-0 duration-400">
-                <Icon icon="filedownload" />
+                <IconFileDownload />
                 <div className="flex">
                   <span className="hidden | md:block">Download</span>
                   &nbsp;Resume
@@ -34,10 +34,10 @@ export default function Home() {
             </a>
             <Link
               href="/projects"
-              className="flex px-3 py-4 rounded-lg hover:bg-primary-900 dark:hover:bg-primary-400"
+              className="flex gap-1 px-3 py-4 rounded-lg hover:bg-primary-900 dark:hover:bg-primary-400"
             >
-              <span className="hidden | md:block">View&nbsp;</span>Projects
-              <Icon icon="arrow" />
+              <span className="hidden | md:block">View</span> Projects
+              <IconArrowRight />
             </Link>
           </div>
         </div>

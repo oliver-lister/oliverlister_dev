@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Button from "../../Button";
-import Icon from "../../Icon";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { IconLoader2 } from "@tabler/icons-react";
 
 type FormData = {
   name: string;
@@ -47,10 +47,6 @@ export default function ContactForm() {
       }, 2000);
     });
   };
-
-  useEffect(() => {
-    console.log("Loading: " + isLoading);
-  }, [isLoading]);
 
   const labelStyle = (fieldName: "name" | "email" | "message") =>
     watch(fieldName)
@@ -123,7 +119,7 @@ export default function ContactForm() {
       >
         {isLoading ? (
           <>
-            <Icon icon="spinner" size="30" className="animate-spin" />
+            <IconLoader2 size={30} className="animate-spin" />
             Processing
           </>
         ) : (

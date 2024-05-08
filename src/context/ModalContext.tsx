@@ -24,6 +24,7 @@ const ModalContextProvider = ({
   const closeModal = () => {
     setModal(null);
   };
+
   return (
     <ModalContext.Provider value={{ modal, openModal, closeModal }}>
       {children}

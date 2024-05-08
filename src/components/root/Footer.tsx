@@ -1,7 +1,7 @@
 "use client";
 
+import { IconContrast } from "@tabler/icons-react";
 import Button from "../Button";
-import Icon from "../Icon";
 import SocialsNav from "./SocialsNav";
 import { useThemeContext } from "@/context/ThemeContext";
 
@@ -21,7 +21,7 @@ export default function Footer() {
           onClick={toggleTheme}
           ariaLabel="Toggle color theme"
         >
-          <Icon icon="theme" />
+          <IconContrast />
           <span className="hidden | sm:block">Change Theme</span>
         </Button>
       </div>

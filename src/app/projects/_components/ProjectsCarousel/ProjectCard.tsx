@@ -1,6 +1,6 @@
 import Card from "@/components/Card";
 import { Project } from "../../page";
-import Icon from "@/components/Icon";
+import { IconBrowser, IconBrandGithub } from "@tabler/icons-react";
 
 export default function ProjectCard({
   title,
@@ -37,7 +37,7 @@ export default function ProjectCard({
         >
           <span className="w-full h-full bg-gradient group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
           <span className="relative flex gap-2 p-3 transition-all ease-out text-secondary bg-primary dark:bg-primary-400 rounded-md group-hover:bg-opacity-0 duration-400">
-            <Icon icon="browser" />
+            <IconBrowser />
             Live Demo
           </span>
         </a>
@@ -47,7 +47,7 @@ export default function ProjectCard({
           rel="noopener noreferrer"
           className="border-2 p-3 rounded-lg flex gap-2 items-center text-secondary border-secondary hover:bg-secondary hover:text-primary"
         >
-          <Icon icon="github" />
+          <IconBrandGithub />
           Code
         </a>
       </div>

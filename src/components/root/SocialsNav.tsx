@@ -1,4 +1,4 @@
-import Icon from "../Icon";
+import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
 
 export default function SocialsNav() {
   return (
@@ -11,11 +11,7 @@ export default function SocialsNav() {
             href="https://github.com/oliver-lister"
             aria-label="Github"
           >
-            <Icon
-              icon="github"
-              size="30"
-              className="hover:scale-110 transition"
-            />
+            <IconBrandGithub size={30} className="hover:scale-110 transition" />
           </a>
         </li>
         <li>
@@ -25,9 +21,8 @@ export default function SocialsNav() {
             href="https://www.linkedin.com/in/oliverdukemusic/"
             aria-label="Linkedin"
           >
-            <Icon
-              icon="linkedin"
-              size="30"
+            <IconBrandLinkedin
+              size={30}
               className="hover:scale-110 transition"
             />
           </a>

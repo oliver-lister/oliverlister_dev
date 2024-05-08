@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import Button from "../Button";
-import Icon from "../Icon";
 import { useState, useEffect, useRef, Fragment } from "react";
 import { useModal } from "@/context/ModalContext";
 import { usePathname } from "next/navigation";
+import { IconMail } from "@tabler/icons-react";
 
 const links = [
   { path: "/", label: "Home", ref: "home" },
@@ -91,7 +91,7 @@ export default function NavBar() {
           theme="primary"
           ariaLabel="Contact form"
         >
-          <Icon icon="contact" />
+          <IconMail />
           <span className="hidden | sm:block">Let&apos;s talk</span>
         </Button>
         <Button

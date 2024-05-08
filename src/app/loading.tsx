@@ -1,11 +1,11 @@
 "use client";
 
-import Icon from "@/components/Icon";
+import { IconLoader } from "@tabler/icons-react";
 
 export default function Loading() {
   return (
     <div className="hero grid items-center justify-center">
-      <Icon icon="spinner" size="50" className="animate-spin" />
+      <IconLoader size={50} className="animate-spin" />
     </div>
   );
 }
