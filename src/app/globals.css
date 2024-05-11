@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 :root {
+  --breakpoint-sm: 650px;
+  --layout-padding-y: 1rem;
   --gradient-accent: linear-gradient(
     to bottom right,
     #ff8a05,
@@ -11,20 +13,37 @@
   );
 }
 
+@media (min-width: 640px) {
+  :root {
+    --layout-padding-y: 2rem;
+  }
+}
+
 .wrapper {
-  @apply mx-auto max-w-screen-xl px-4 sm:px-8;
+  padding-block: var(--layout-padding-y);
+  margin-inline: auto;
+  max-width: 1280px;
+  padding-inline: 1rem;
+}
+
+@media (min-width: var(--breakpoint-sm)) {
+  .wrapper {
+    padding-inline: 2rem;
+  }
 }
 
 .hero {
-  min-height: calc(100vh - 14.45rem);
-  @apply w-full;
+  min-height: calc(100vh - 52px - 48px - var(--layout-padding-y));
+  width: 100%;
 }
 
 @media (min-width: 640px) {
   .hero {
-    min-height: calc(100vh - 15.6rem);
+    min-height: calc(100vh - 100px - 48px);
   }
 }
+
+/* NavBar */
 
 .menu__list {
   --underline-width: 45px;
@@ -36,7 +55,16 @@
     width: var(--underline-width);
     transform: translateX(var(--underline-offset-x));
     background: var(--gradient-accent);
-    @apply transition rounded-lg content-[''] block absolute top-full h-[1px];
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    border-radius: 0.5rem;
+    --tw-content: "";
+    content: var(--tw-content);
+    display: block;
+    position: absolute;
+    top: 100%;
+    height: 1px;
   }
 }
 
@@ -46,7 +74,11 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  @apply transition;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 .bg-gradient {

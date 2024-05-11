@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Button from "../Button";
-import { useState, useEffect, useRef, Fragment } from "react";
+import Button from "../../components/Button";
+import { useState, useEffect, useRef } from "react";
 import { useModal } from "@/context/ModalContext";
 import { usePathname } from "next/navigation";
 import { IconMail } from "@tabler/icons-react";
@@ -53,7 +53,7 @@ export default function NavBar() {
   }, [pathname]);
 
   return (
-    <Fragment>
+    <>
       <nav>
         <ul
           className={
@@ -128,6 +128,6 @@ export default function NavBar() {
           </div>
         </Button>
       </div>
-    </Fragment>
+    </>
   );
 }

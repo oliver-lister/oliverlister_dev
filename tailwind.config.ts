@@ -34,6 +34,9 @@ const config: Config = {
           800: "#fbfbfb",
           900: "#fdfdfd",
         },
+        accent: {
+          DEFAULT: "#FF5F66",
+        },
       },
     },
     plugins: [],
