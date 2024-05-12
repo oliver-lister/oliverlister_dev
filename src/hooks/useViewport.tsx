@@ -9,6 +9,8 @@ const getWindowDimensions = () => {
       width,
       height,
     };
+  } else {
+    return { width: 0, height: 0 };
   }
 };
 
