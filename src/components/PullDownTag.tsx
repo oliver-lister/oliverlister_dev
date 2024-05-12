@@ -1,17 +1,13 @@
 "use client";
+import useScroll from "@/hooks/useScroll";
 import { IconChevronDown } from "@tabler/icons-react";
 
 function PullDownTag({ section }: { section: string }) {
-  const scrollToSection = (sectionId: string) => {
-    const sectionElement = document.getElementById(section);
-    if (sectionElement) {
-      sectionElement.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const { scrollTo } = useScroll();
 
   return (
     <button
-      onClick={() => scrollToSection(section)}
+      onClick={() => scrollTo(section)}
       className="animate-bounce hover:text-accent"
     >
       <IconChevronDown size="3rem" />
