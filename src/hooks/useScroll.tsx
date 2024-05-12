@@ -49,14 +49,6 @@ const useScroll = () => {
     }
   };
 
-  useEffect(() => {
-    document.body.style.overflow = scroll.allowScroll ? "auto" : "hidden";
-
-    return () => {
-      document.body.style.overflow = "auto"; // Reset body style when component unmounts
-    };
-  }, [scroll.allowScroll]);
-
   const toggleAllowScroll = () => {
     setScroll((prevScroll) => ({
       ...prevScroll,

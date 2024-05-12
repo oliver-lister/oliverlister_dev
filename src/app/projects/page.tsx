@@ -34,12 +34,14 @@ const projects: Project[] = [
 
 export default function Projects() {
   return (
-    <section className="grid gap-6">
-      <GradientUnderline>
-        <h2 className="text-5xl font-bold">Projects</h2>
-      </GradientUnderline>
-      <div>
-        <ProjectsCarousel projects={projects} />
+    <section id="projects">
+      <div className="wrapper mt-header grid gap-6">
+        <GradientUnderline>
+          <h1 className="text-5xl font-bold">Projects</h1>
+        </GradientUnderline>
+        <div>
+          <ProjectsCarousel projects={projects} />
+        </div>
       </div>
     </section>
   );

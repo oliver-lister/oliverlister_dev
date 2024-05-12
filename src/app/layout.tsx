@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/app/_components/Header";
-import Footer from "@/app/_components/Footer";
+import Header from "@/app/_components/Layout/Header/Header";
+import Footer from "@/app/_components/Layout/Footer/Footer";
 import ThemeContextProvider from "@/context/ThemeContext";
 import ModalContextProvider from "@/context/ModalContext";
 import ModalManager from "@/components/modals/ModalManager";
@@ -35,9 +35,7 @@ export default function RootLayout({
           >
             <ModalManager />
             <Header />
-            <main>
-              <div className="wrapper">{children}</div>
-            </main>
+            <main>{children}</main>
             <Footer />
           </body>
         </ModalContextProvider>

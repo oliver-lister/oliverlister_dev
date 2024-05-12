@@ -35,7 +35,7 @@ const config: Config = {
           900: "#fdfdfd",
         },
         accent: {
-          DEFAULT: "#FF5F66",
+          DEFAULT: "#FF3C92",
         },
       },
     },

@@ -14,7 +14,7 @@ function ChangeThemeButton() {
       onClick={toggleTheme}
       ariaLabel="Toggle color theme"
     >
-      {theme === "dark" ? <IconMoonStars /> : <IconSun />}
+      {theme === "light" ? <IconMoonStars /> : <IconSun />}
       <span className="hidden | sm:block">Change Theme</span>
     </Button>
   );
