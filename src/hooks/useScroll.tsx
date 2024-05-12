@@ -10,7 +10,7 @@ type ScrollData = {
 const useScroll = () => {
   const [scroll, setScroll] = useState<ScrollData>({
     scrollYPosition: 0,
-    scrollYDirection: "down",
+    scrollYDirection: "up",
     isScrolling: false,
     allowScroll: true,
   });

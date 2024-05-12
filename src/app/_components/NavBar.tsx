@@ -1,13 +1,21 @@
 "use client";
 
-import Link from "next/link";
 import Button from "../../components/Button";
-import { useState, useEffect, useRef } from "react";
 import { useModal } from "@/context/ModalContext";
-import { usePathname } from "next/navigation";
 import { IconMail } from "@tabler/icons-react";
+import DesktopNav from "./DesktopNav";
+import { useEffect, useState } from "react";
+import MobileNav from "./MobileNav";
+import useScroll from "@/hooks/useScroll";
+import Hamburger from "@/components/Hamburger";
 
-const links = [
+export type NavLink = {
+  path: string;
+  label: string;
+  ref: string;
+};
+
+const links: NavLink[] = [
   { path: "/", label: "Home", ref: "home" },
   { path: "/about", label: "About", ref: "about" },
   { path: "/projects", label: "Projects", ref: "projects" },
@@ -15,76 +23,52 @@ const links = [
 ];
 
 export default function NavBar() {
-  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const { openModal } = useModal();
-  const home = useRef<HTMLAnchorElement | null>(null);
-  const about = useRef<HTMLAnchorElement | null>(null);
-  const projects = useRef<HTMLAnchorElement | null>(null);
-  const blog = useRef<HTMLAnchorElement | null>(null);
-  const pathname = usePathname();
+  const { toggleAllowScroll } = useScroll();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(true);
 
-  const toggleMenu = () => {
-    setMenuIsOpen(!menuIsOpen);
+  const toggleMobileMenu = () => {
+    toggleAllowScroll();
+    setIsMobileMenuOpen((prev) => !prev);
   };
 
-  // Desktop Navbar Underline styles
-
+  // access window API to find viewport width on mount
   useEffect(() => {
-    const menu = document.querySelector(".menu__list") as HTMLElement;
+    if (window.innerWidth > 768) {
+      setShowMobileMenu(false);
+    } else {
+      setShowMobileMenu(true);
+    }
+  }, []);
 
-    const pathLookup = {
-      "/": home.current,
-      "/about": about.current,
-      "/projects": projects.current,
-      "/blog": blog.current,
-    } as { [key: string]: HTMLAnchorElement | null };
-
-    const handleChange = (pathname: string) => {
-      const active = pathLookup[pathname];
-      if (active) {
-        menu.style.setProperty("--underline-width", `${active.offsetWidth}px`);
-        menu.style.setProperty(
-          "--underline-offset-x",
-          `${active.offsetLeft}px`
-        );
+  // handle resize events
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setShowMobileMenu(false);
+        setIsMobileMenuOpen(false);
+      } else {
+        setShowMobileMenu(true);
       }
     };
-    handleChange(pathname);
-  }, [pathname]);
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const NavMenu = showMobileMenu ? (
+    isMobileMenuOpen ? (
+      <MobileNav links={links} toggleMobileMenu={toggleMobileMenu} />
+    ) : null
+  ) : (
+    <DesktopNav links={links} />
+  );
 
   return (
     <>
-      <nav>
-        <ul
-          className={
-            (menuIsOpen ? "right-0 " : "-left-full") +
-            " grid gap-10 absolute z-10 top-20 w-full text-center py-6 bg-primary text-secondary rounded-lg dark:bg-secondary dark:text-primary | menu__list md:z-0 md:relative md:top-0 md:left-0 md:bg-inherit md:text-inherit dark:md:bg-inherit dark:md:text-inherit md:py-0 md:w-auto md:grid-flow-col"
-          }
-        >
-          {links.map((link) => (
-            <li key={link.path}>
-              <Link
-                ref={
-                  link.ref === "home"
-                    ? home
-                    : link.ref === "about"
-                    ? about
-                    : link.ref === "projects"
-                    ? projects
-                    : blog
-                }
-                href={link.path}
-                onClick={toggleMenu}
-                className={`menu__link select-none ${
-                  link.path === pathname ? "text-clip-gradient" : ""
-                }`}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      {NavMenu}
       <div className="flex gap-4">
         <Button
           onClick={() => openModal("contact")}
@@ -95,37 +79,12 @@ export default function NavBar() {
           <span className="hidden | sm:block">Let&apos;s talk</span>
         </Button>
         <Button
-          onClick={toggleMenu}
-          className="md:hidden group"
+          onClick={toggleMobileMenu}
+          className="md:hidden group z-10"
           theme="primary"
           ariaLabel="Toggle mobile navigation menu"
         >
-          <div className="grid gap-1 items-center">
-            <span
-              className={
-                (menuIsOpen
-                  ? "translate-y-1 rotate-45"
-                  : "translate-y-0 rotate-0") +
-                "  transition h-1 w-8 rounded-full bg-primary dark:bg-secondary group-hover:bg-secondary dark:group-hover:bg-primary"
-              }
-            ></span>
-            <span
-              className={
-                menuIsOpen
-                  ? "hidden"
-                  : "block" +
-                    " transition h-1 w-8 rounded-full bg-primary dark:bg-secondary group-hover:bg-secondary dark:group-hover:bg-primary"
-              }
-            ></span>
-            <span
-              className={
-                (menuIsOpen
-                  ? "-translate-y-1 -rotate-45"
-                  : "translate-y-0 rotate-0") +
-                " transition h-1 w-8 rounded-full bg-primary dark:bg-secondary group-hover:bg-secondary dark:group-hover:bg-primary"
-              }
-            ></span>
-          </div>
+          <Hamburger isMobileMenuOpen={isMobileMenuOpen} />
         </Button>
       </div>
     </>

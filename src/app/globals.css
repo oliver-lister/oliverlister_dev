@@ -4,7 +4,7 @@
 
 :root {
   --breakpoint-sm: 650px;
-  --layout-padding-y: 1rem;
+  --layout-padding-y: 1.5rem;
   --gradient-accent: linear-gradient(
     to bottom right,
     #ff8a05,
@@ -15,7 +15,7 @@
 
 @media (min-width: 640px) {
   :root {
-    --layout-padding-y: 2rem;
+    --layout-padding-y: 2em;
   }
 }
 
@@ -39,7 +39,7 @@
 
 @media (min-width: 640px) {
   .hero {
-    min-height: calc(100vh - 100px - 48px);
+    min-height: calc(100vh - 52px - 48px - var(--layout-padding-y));
   }
 }
 
