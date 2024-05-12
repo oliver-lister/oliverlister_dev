@@ -5,10 +5,7 @@ import ContactModal from "@/components/modals/ContactModal/ContactModal";
 import { ReactElement } from "react";
 
 type ModalComponents = {
-  [key: string]: (props: {
-    handleClose: (e: React.MouseEvent) => void;
-    closeModal: () => void;
-  }) => ReactElement;
+  [key: string]: (props: { closeModal: () => void }) => ReactElement;
 };
 
 const modalLookup: ModalComponents = {
@@ -18,16 +15,9 @@ const modalLookup: ModalComponents = {
 const ModalManager = () => {
   const { modal, closeModal } = useModal();
 
-  const handleClose = (e: React.MouseEvent) => {
-    const targetId = (e.target as HTMLElement).id;
-    if (targetId === "modal-wrapper" || targetId === "modal-exit") {
-      closeModal();
-    }
-  };
-
   if (!modal) return null; // if no Modal is open currently, show nothing.
 
   const Modal = modalLookup[modal];
-  return <Modal handleClose={handleClose} closeModal={closeModal} />;
+  return <Modal closeModal={closeModal} />;
 };
 export default ModalManager;

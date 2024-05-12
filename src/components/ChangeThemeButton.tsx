@@ -1,11 +1,16 @@
 "use client";
 
 import Button from "./Button";
-import { useThemeContext } from "@/context/ThemeContext";
+import { useTheme } from "next-themes";
 import { IconMoonStars, IconSun } from "@tabler/icons-react";
 
 function ChangeThemeButton() {
-  const { theme, toggleTheme } = useThemeContext();
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    if (theme === "dark") setTheme("light");
+    else setTheme("dark");
+  };
 
   return (
     <Button

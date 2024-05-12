@@ -3,8 +3,7 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Button from "../../Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconLoader2 } from "@tabler/icons-react";
 
 type FormData = {
@@ -15,26 +14,36 @@ type FormData = {
 
 // yup schema
 const schema = yup.object().shape({
-  name: yup.string().required("Name is a required field"),
+  name: yup.string().trim().required("Name is a required field"),
   email: yup
     .string()
+    .trim()
     .email("Please enter a valid email address")
     .required("Email is a required field"),
   message: yup
     .string()
+    .trim()
     .required("Message is a required field")
     .min(25, "Please enter at least 25 characters"),
 });
 
+const labelStyle = "text-sm";
+const errorStyle = "text-xs italic text-red-600 w-full h-4 caret-transparent";
+
 export default function ContactForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
     reset,
-    watch,
+    setFocus,
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
-  const [isLoading, setIsLoading] = useState(false);
+
+  // set focus on component mount
+  useEffect(() => {
+    setFocus("name");
+  }, [setFocus]);
 
   const onSubmit = (data: FormData) => {
     setIsLoading((prevLoading) => !prevLoading);
@@ -48,18 +57,10 @@ export default function ContactForm() {
     });
   };
 
-  const labelStyle = (fieldName: "name" | "email" | "message") =>
-    watch(fieldName)
-      ? "absolute cursor-text text-sm bg-secondary px-[1px] transition-all text-primary -top-[9px] left-3"
-      : "absolute cursor-text text-md peer-focus:bg-secondary px-[1px] transition-all text-gray-600 peer-focus:text-primary peer-focus:text-sm top-2 left-2 peer-focus:-top-[9px] peer-focus:left-3";
-
   const inputStyle = (fieldName: "name" | "email" | "message") =>
     errors[fieldName]
-      ? "border-2 border-red-600 focus:border-red-600 py-2 px-3 text-md rounded-lg bg-secondary peer"
-      : "border-2 border-primary py-2 px-3 text-md rounded-lg bg-secondary peer";
-
-  const errorStyle: string =
-    "text-xs italic text-red-600 w-full h-4 caret-transparent";
+      ? "border-2 border-red-600 focus:border-red-600 py-2 px-3 text-md rounded-lg bg-secondary-900 text-primary | dark:bg-primary-900"
+      : "border-2 py-2 px-3 text-md rounded-lg border-primary bg-secondary-900 text-primary | dark:border-secondary dark:bg-primary-900";
 
   return (
     <form
@@ -67,7 +68,10 @@ export default function ContactForm() {
       name="contact"
       className="grid gap-2"
     >
-      <div className="grid gap-1 relative">
+      <div className="grid gap-1">
+        <label htmlFor="name" className={labelStyle}>
+          Name
+        </label>
         <input
           {...register("name")}
           id="name"
@@ -77,12 +81,12 @@ export default function ContactForm() {
           autoComplete="true"
           className={inputStyle("name")}
         />
-        <label htmlFor="name" className={labelStyle("name")}>
-          Name
-        </label>
         <p className={errorStyle}>{errors.name?.message}</p>
       </div>
-      <div className="grid gap-1 relative">
+      <div className="grid gap-1">
+        <label htmlFor="email" className={labelStyle}>
+          Email
+        </label>
         <input
           {...register("email")}
           id="email"
@@ -92,29 +96,26 @@ export default function ContactForm() {
           autoComplete="true"
           className={inputStyle("email")}
         />
-        <label htmlFor="email" className={labelStyle("email")}>
-          Email
-        </label>
         <p className={errorStyle}>{errors.email?.message}</p>
       </div>
-      <div className="grid gap-1 relative">
+      <div className="grid gap-1">
+        <label htmlFor="message" className={labelStyle}>
+          Message
+        </label>
         <textarea
           {...register("message")}
           id="message"
-          name="name"
+          name="message"
           aria-invalid={errors.message ? "true" : "false"}
           rows={10}
           autoComplete="false"
           className={inputStyle("message")}
         />
-        <label htmlFor="message" className={labelStyle("message")}>
-          Message
-        </label>
         <p className={errorStyle}>{errors.message?.message}</p>
       </div>
-      <Button
+      <button
         type="submit"
-        className="disabled:pointer-events-none flex items-center justify-center gap-2 cursor-pointer p-2 rounded-lg bg-gradient border-2 border-primary hover:bg-primary hover:bg-none text-secondary"
+        className="disabled:pointer-events-none flex items-center justify-center gap-2 cursor-pointer p-2 rounded-lg bg-accent border-2 border-primary dark:border-secondary hover:bg-accent/80"
         disabled={isLoading}
       >
         {isLoading ? (
@@ -125,7 +126,7 @@ export default function ContactForm() {
         ) : (
           "Submit"
         )}
-      </Button>
+      </button>
     </form>
   );
 }
