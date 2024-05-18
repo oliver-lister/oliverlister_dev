@@ -32,6 +32,10 @@
   padding-inline: 1rem;
 }
 
+.text-responsive {
+  font-size: clamp(1.25rem, 4vw + 1rem, 3.75rem);
+}
+
 @media (min-width: var(--breakpoint-sm)) {
   .wrapper {
     padding-inline: 2rem;

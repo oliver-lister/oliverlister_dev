@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { IconLoader2 } from "@tabler/icons-react";
+import Button from "@/components/Button";
 
 type FormData = {
   name: string;
@@ -113,20 +114,20 @@ export default function ContactForm() {
         />
         <p className={errorStyle}>{errors.message?.message}</p>
       </div>
-      <button
+      <Button
         type="submit"
         className="disabled:pointer-events-none flex items-center justify-center gap-2 cursor-pointer p-2 rounded-lg bg-accent border-2 border-primary dark:border-secondary hover:bg-accent/80"
         disabled={isLoading}
       >
         {isLoading ? (
           <>
-            <IconLoader2 size={30} className="animate-spin" />
+            <IconLoader2 size={20} className="animate-spin" />
             Processing
           </>
         ) : (
           "Submit"
         )}
-      </button>
+      </Button>
     </form>
   );
 }

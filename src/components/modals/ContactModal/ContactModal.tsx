@@ -15,12 +15,12 @@ const ContactModal = ({ closeModal }: { closeModal: () => void }) => {
 
   const dialogClass = `${
     isMounted ? "translate-y-0" : "translate-y-[-100vh]"
-  } transition-transform duration-300 ease-in-out rounded-xl relative overflow-y-auto max-h-[80vh] max-w-screen-sm w-11/12 p-6 top-10 bg-secondary dark:bg-primary | md:w-10/12`;
+  } transition-transform duration-300 ease-in-out rounded-xl relative max-w-screen-sm w-11/12 p-6 bg-secondary dark:bg-primary | md:w-10/12`;
 
   return (
     <div
       id="modal-wrapper"
-      className="fixed z-[1] inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex"
+      className="fixed z-20 inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex"
     >
       <dialog open className={dialogClass}>
         <div className="col-span-2 flex justify-between items-center">

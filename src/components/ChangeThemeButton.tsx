@@ -14,10 +14,10 @@ function ChangeThemeButton() {
 
   return (
     <Button
-      theme="primary"
+      variant="primary"
       className="justify-self-end"
       onClick={toggleTheme}
-      ariaLabel="Toggle color theme"
+      aria-label="Toggle color theme"
     >
       {theme === "light" ? <IconMoonStars /> : <IconSun />}
       <span className="hidden | sm:block">Change Theme</span>
