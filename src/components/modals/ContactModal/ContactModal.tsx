@@ -15,7 +15,7 @@ const ContactModal = ({ closeModal }: { closeModal: () => void }) => {
 
   const dialogClass = `${
     isMounted ? "translate-y-0" : "translate-y-[-100vh]"
-  } transition-transform duration-300 ease-in-out rounded-xl relative max-w-screen-sm w-11/12 p-6 bg-secondary dark:bg-primary | md:w-10/12`;
+  } transition-transform duration-300 ease-in-out rounded-xl relative max-w-screen-sm w-11/12 min-h-[60vh] p-6 bg-secondary dark:bg-primary | md:w-10/12`;
 
   return (
     <div
@@ -35,9 +35,7 @@ const ContactModal = ({ closeModal }: { closeModal: () => void }) => {
             Please reach out, I&apos;d love to hear from you!
           </h3>
         </div>
-        <div className="mt-4">
-          <ContactForm />
-        </div>
+        <ContactForm />
       </dialog>
     </div>
   );

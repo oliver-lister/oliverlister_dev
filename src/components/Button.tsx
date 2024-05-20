@@ -3,6 +3,8 @@ import React from "react";
 
 const variantStyles = {
   primary:
+    "flex items-center justify-center gap-2 border-2 p-3 rounded-lg select-none text-secondary border-none bg-primary hover:bg-primary/80 transition active:scale-95 | dark:text-primary dark:bg-secondary-800 dark:hover:bg-secondary-800/80",
+  outline:
     "flex items-center justify-center gap-2 border-2 p-3 rounded-lg select-none border-primary text-primary hover:text-secondary hover:bg-primary transition active:scale-95 | dark:text-secondary dark:bg-primary dark:border-secondary dark:hover:text-primary dark:hover:bg-secondary",
   "gradient-outline":
     "relative p-0.5 inline-flex items-center font-bold justify-center overflow-hidden group rounded-lg select-none",

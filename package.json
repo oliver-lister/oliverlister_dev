@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formspree/react": "^2.5.1",
     "@hookform/resolvers": "^3.3.4",
     "@tabler/icons-react": "^3.3.0",
     "embla-carousel-react": "^8.0.4",

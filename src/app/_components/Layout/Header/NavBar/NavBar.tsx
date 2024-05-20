@@ -56,7 +56,7 @@ export default function NavBar({
       <div className="flex gap-4">
         <Button
           onClick={() => openModal("contact")}
-          variant="primary"
+          variant="outline"
           aria-label="Contact form"
         >
           <IconMail />
@@ -65,7 +65,7 @@ export default function NavBar({
         <Button
           onClick={toggleMobileMenu}
           className="md:hidden group z-10"
-          variant="primary"
+          variant="outline"
           aria-label="Toggle mobile navigation menu"
         >
           <Hamburger isMobileMenuOpen={isMobileMenuOpen} />

@@ -14,7 +14,7 @@ function ChangeThemeButton() {
 
   return (
     <Button
-      variant="primary"
+      variant="outline"
       className="justify-self-end"
       onClick={toggleTheme}
       aria-label="Toggle color theme"

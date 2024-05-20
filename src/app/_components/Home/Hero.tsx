@@ -5,7 +5,7 @@ import Image from "next/image";
 
 function Hero() {
   return (
-    <section id="hero" className="mt-header">
+    <section id="hero">
       <div className="wrapper">
         <div className="hero relative grid justify-center items-center">
           <div className="grid gap-6 justify-center items-center | md:gap-0 md:grid-cols-2">

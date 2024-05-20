@@ -1,10 +1,14 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import {
+  useForm as useFormspree,
+  ValidationError as ServerError,
+} from "@formspree/react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
-import { IconLoader2 } from "@tabler/icons-react";
+import { IconCheck, IconLoader2 } from "@tabler/icons-react";
 import Button from "@/components/Button";
 
 type FormData = {
@@ -31,12 +35,27 @@ const schema = yup.object().shape({
 const labelStyle = "text-sm";
 const errorStyle = "text-xs italic text-red-600 w-full h-4 caret-transparent";
 
+function mergeErrors(formspreeErrors, otherErrors = {}) {
+  // merge server side errors into react-hook-form errors
+  return {
+    ...formspreeErrors.reduce(
+      (acc, cur) => ({
+        [cur.field || "form"]: {
+          message: (cur.field ? "This " : "") + cur.message,
+        },
+        ...acc,
+      }),
+      {}
+    ),
+    ...otherErrors,
+  };
+}
+
 export default function ContactForm() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [serverState, sendToFormspree] = useFormspree("xgegbwdo");
   const {
     register,
     handleSubmit,
-    reset,
     setFocus,
     formState: { errors },
   } = useForm<FormData>({ resolver: yupResolver(schema) });
@@ -46,17 +65,19 @@ export default function ContactForm() {
     setFocus("name");
   }, [setFocus]);
 
-  const onSubmit = (data: FormData) => {
-    setIsLoading((prevLoading) => !prevLoading);
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        console.log(data);
-        setIsLoading((prevLoading) => !prevLoading);
-        reset();
-        resolve();
-      }, 2000);
-    });
-  };
+  if (serverState.succeeded) {
+    return (
+      <div className="grid items-center h-full">
+        <div className="text-center grid place-items-center gap-2">
+          <IconCheck
+            size={75}
+            className="bg-primary text-secondary rounded-full p-2 | dark:bg-secondary dark:text-primary"
+          />
+          <p className="font-bold">Sent! I&apos;ll be in touch soon.</p>
+        </div>
+      </div>
+    );
+  }
 
   const inputStyle = (fieldName: "name" | "email" | "message") =>
     errors[fieldName]
@@ -65,10 +86,11 @@ export default function ContactForm() {
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(sendToFormspree)}
       name="contact"
-      className="grid gap-2"
+      className="grid gap-2 mt-4"
     >
+      {/* {serverState.errors?.getFormErrors.message} */}
       <div className="grid gap-1">
         <label htmlFor="name" className={labelStyle}>
           Name
@@ -115,11 +137,12 @@ export default function ContactForm() {
         <p className={errorStyle}>{errors.message?.message}</p>
       </div>
       <Button
+        variant="primary"
         type="submit"
-        className="disabled:pointer-events-none flex items-center justify-center gap-2 cursor-pointer p-2 rounded-lg bg-accent border-2 border-primary dark:border-secondary hover:bg-accent/80"
-        disabled={isLoading}
+        className="disabled:pointer-events-none dark:bg-salmon-300"
+        disabled={!!Object.keys(errors).length || serverState.submitting}
       >
-        {isLoading ? (
+        {serverState.submitting ? (
           <>
             <IconLoader2 size={20} className="animate-spin" />
             Processing
