@@ -1,5 +1,4 @@
 import { createClient } from "@/utils/supabase/server";
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
@@ -13,6 +12,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   }
 
   const supabase = createClient();
+  // Need to find a way around Role based auth for this!
 
   const { statusText, error } = await supabase
     .from("mailingList")
