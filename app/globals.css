@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --breakpoint-sm: 650px;
+  --layout-padding-y: 1.5rem;
+  --header-height: 100px;
+  --gradient-accent: linear-gradient(
+    to bottom right,
+    #ff8a05,
+    #ff5478,
+    #ff00c6
+  );
+}
+
+@media (min-width: 640px) {
+  :root {
+    --layout-padding-y: 2em;
+    --header-height: 116px;
+  }
+}
+
+.mt-header {
+  margin-top: var(--header-height);
+}
+
+.wrapper {
+  padding-block: var(--layout-padding-y);
+  margin-inline: auto;
+  max-width: 1280px;
+  padding-inline: 1rem;
+}
+
+.text-responsive {
+  font-size: clamp(1.25rem, 4vw + 1rem, 3.75rem);
+}
+
+@media (min-width: var(--breakpoint-sm)) {
+  .wrapper {
+    padding-inline: 2rem;
+  }
+}
+
+.hero {
+  min-height: calc(100dvh - var(--layout-padding-y) * 2);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .hero {
+    min-height: calc(100dvh - var(--layout-padding-y) * 2);
+  }
+}
+
+.animate-in {
+  animation: animateIn 0.3s ease 0.15s both;
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* NavBar */
+
+.menu__list {
+  --underline-width: 45px;
+  --underline-offset-x: 0;
+}
+
+@media (min-width: 640px) {
+  .menu__list::before {
+    width: var(--underline-width);
+    transform: translateX(var(--underline-offset-x));
+    background: var(--gradient-accent);
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    border-radius: 0.5rem;
+    --tw-content: "";
+    content: var(--tw-content);
+    display: block;
+    position: absolute;
+    top: 100%;
+    height: 1px;
+  }
+}
+
+.menu__link:hover,
+.text-clip-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.bg-gradient {
+  background: var(--gradient-accent);
+}
