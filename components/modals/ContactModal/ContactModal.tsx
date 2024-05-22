@@ -12,12 +12,28 @@ const ContactModal = ({ closeModal }: { closeModal: () => void }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
 
-  const onSubmit = (formData: ContactFormData) => {
+  const onSubmit = async (formData: ContactFormData) => {
+    console.log({ email: formData.email, name: formData.name });
     try {
       setIsLoading(true);
-      console.log(formData);
-      setIsLoading(false);
-      setSubmitted(true);
+      if (formData.mailingList) {
+        const res = await fetch("/api/addToMailingList", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: formData.email, name: formData.name }),
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) {
+          throw new Error(result.error);
+        }
+
+        setIsLoading(false);
+        setSubmitted(true);
+      }
     } catch (err) {
       if (err instanceof Error)
         console.error(`Error submitting form: ${err.message}`);
