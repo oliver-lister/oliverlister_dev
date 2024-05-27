@@ -43,7 +43,7 @@ const ContactModal = ({ closeModal }: { closeModal: () => void }) => {
 
   const dialogClass = `${
     isMounted ? "translate-y-0" : "translate-y-[-100vh]"
-  } transition-transform duration-300 ease-in-out rounded-xl max-w-screen-sm w-11/12 md:w-10/12 max-h-screen overflow-y-scroll p-6 bg-secondary dark:bg-primary`;
+  } transition-transform duration-300 ease-in-out rounded-xl max-w-screen-sm w-11/12 md:w-10/12 max-h-screen overflow-y-auto p-6 bg-secondary dark:bg-primary`;
 
   return (
     <div
