@@ -21,7 +21,10 @@ const FormField: React.FC<FormFieldProps> = ({
           {label}
         </label>
         {errorMessage && (
-          <p className="text-xs italic text-red-600 w-full h-4 caret-transparent">
+          <p
+            data-testid="error-message"
+            className="text-xs italic text-red-600 w-full h-4 caret-transparent"
+          >
             {errorMessage}
           </p>
         )}
@@ -36,7 +39,10 @@ const FormField: React.FC<FormFieldProps> = ({
       </label>
       {children}
       {errorMessage && (
-        <p className="text-xs italic text-red-600 w-full h-4 caret-transparent">
+        <p
+          data-testid="error-message"
+          className="text-xs italic text-red-600 w-full h-4 caret-transparent"
+        >
           {errorMessage}
         </p>
       )}
