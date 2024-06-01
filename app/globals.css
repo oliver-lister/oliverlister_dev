@@ -8,9 +8,9 @@
   --header-height: 100px;
   --gradient-accent: linear-gradient(
     to bottom right,
-    #ff8a05,
-    #ff5478,
-    #ff00c6
+    #ae64fe,
+    #d166f5,
+    #e85ff1
   );
 }
 
@@ -67,7 +67,6 @@
     transform: translateY(0);
   }
 }
-
 
 /* NavBar */
 

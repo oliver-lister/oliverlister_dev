@@ -13,7 +13,6 @@ const ContactModal = ({ closeModal }: { closeModal: () => void }) => {
   const [submitted, setSubmitted] = useState<boolean>(false);
 
   const onSubmit = async (formData: ContactFormData) => {
-    console.log({ email: formData.email, name: formData.name });
     try {
       setIsLoading(true);
       if (formData.mailingList) {
@@ -22,7 +21,7 @@ const ContactModal = ({ closeModal }: { closeModal: () => void }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email: formData.email, name: formData.name }),
+          body: JSON.stringify({ email: formData.email }),
         });
 
         const result = await res.json();
