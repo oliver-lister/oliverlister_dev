@@ -21,25 +21,20 @@ function Hero() {
                 </h2>
               </div>
               <div className="flex gap-4 justify-center items-center | md:justify-start">
-                <a
-                  className="relative p-0.5 inline-flex items-center font-bold justify-center overflow-hidden group rounded-lg select-none"
+                <Button
+                  variant="gradient-outline"
                   href="/OLister_Resume.pdf"
                   download="OLister_Resume.pdf"
                 >
-                  <span className="w-full h-full bg-gradient group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
-                  <span className="relative flex gap-2 p-3 transition-all ease-out text-secondary bg-primary dark:bg-primary-400 rounded-md group-hover:bg-opacity-0 duration-400">
-                    <IconFileDownload />
-                    <div className="flex">
-                      <span className="hidden | md:block">Download</span>
-                      &nbsp;Resume
-                    </div>
-                  </span>
-                </a>
-                <Button
-                  href="/projects"
-                  className="flex gap-1 px-3 py-4 rounded-lg hover:bg-primary-900 dark:hover:bg-primary-400"
-                >
-                  <span className="hidden | md:block">View</span> Projects
+                  <IconFileDownload size={18} />
+                  <div>
+                    <span className="hidden | md:inline">Download</span> Resume
+                  </div>
+                </Button>
+                <Button variant="outline" href="/projects">
+                  <div>
+                    <span className="hidden | md:inline">View</span> Projects
+                  </div>
                   <IconArrowRight />
                 </Button>
               </div>

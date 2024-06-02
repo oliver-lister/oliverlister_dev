@@ -1,3 +1,4 @@
+import Button from "@/components/Button";
 import Card from "../../../../components/Card";
 import { Project } from "../../page";
 import { IconBrowser, IconBrandGithub } from "@tabler/icons-react";
@@ -29,19 +30,17 @@ export default function ProjectCard({
         <p className="text-xs opacity-90">{description}</p>
       </div>
       <div className="mt-4 flex gap-6 items-center">
-        <a
+        <Button
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative p-0.5 inline-flex items-center font-bold justify-center overflow-hidden group rounded-lg"
+          variant="gradient-outline"
         >
-          <span className="w-full h-full bg-gradient group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
-          <span className="relative flex gap-2 p-3 transition-all ease-out text-secondary bg-primary dark:bg-primary-400 rounded-md group-hover:bg-opacity-0 duration-400">
-            <IconBrowser />
-            Live Demo
-          </span>
-        </a>
-        <a
+          <IconBrowser />
+          Live Demo
+        </Button>
+        <Button
+          variant="outline"
           href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
@@ -49,7 +48,7 @@ export default function ProjectCard({
         >
           <IconBrandGithub />
           Code
-        </a>
+        </Button>
       </div>
     </Card>
   );

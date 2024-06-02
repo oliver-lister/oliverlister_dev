@@ -51,7 +51,7 @@ const MailingListForm: React.FC<MailingListFormProps> = ({ onSubmit }) => {
           />
           <Button
             type="submit"
-            variant="primary"
+            variant="accent"
             className="text-xs rounded-none rounded-r-lg"
           >
             Submit

@@ -125,9 +125,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
           />
         </FormField>
         <Button
-          variant="primary"
+          variant="accent"
           type="submit"
-          className="disabled:pointer-events-none mt-4 dark:bg-salmon-300"
+          className="disabled:pointer-events-none mt-4"
           disabled={!!Object.keys(errors).length || isLoading}
         >
           {isLoading ? (
