@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import * as yup from "yup";
 import Button from "@/components/Button";
+import { IconLoader2 } from "@tabler/icons-react";
 
 export type MailingListFormData = {
   email: string;
@@ -21,9 +22,13 @@ const schema = yup.object().shape({
 
 type MailingListFormProps = {
   onSubmit: SubmitHandler<MailingListFormData>;
+  isLoading: boolean;
 };
 
-const MailingListForm: React.FC<MailingListFormProps> = ({ onSubmit }) => {
+const MailingListForm: React.FC<MailingListFormProps> = ({
+  onSubmit,
+  isLoading,
+}) => {
   const {
     register,
     handleSubmit,
@@ -53,8 +58,13 @@ const MailingListForm: React.FC<MailingListFormProps> = ({ onSubmit }) => {
             type="submit"
             variant="accent"
             className="text-xs rounded-none rounded-r-lg"
+            disabled={isLoading}
           >
-            Submit
+            {isLoading ? (
+              <IconLoader2 size={16} className="animate-spin" />
+            ) : (
+              "Submit"
+            )}
           </Button>
         </div>
         {errors.email && (

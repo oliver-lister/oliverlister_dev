@@ -7,7 +7,9 @@ function BlogTeaser() {
       className="bg-zinc-300 dark:bg-zinc-700 text-primary dark:text-secondary"
     >
       <div className="wrapper grid md:grid-cols-3">
-        <div className="md:col-span-2">Tester</div>
+        <div className="md:col-span-2">
+          Construction Zone: Project in the Works!
+        </div>
         <MailingList />
       </div>
     </section>
