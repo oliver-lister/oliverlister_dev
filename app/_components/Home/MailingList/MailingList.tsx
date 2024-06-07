@@ -38,7 +38,7 @@ const MailingList: React.FC = () => {
   };
 
   return (
-    <div className="md:col-span-1 grid gap-2">
+    <div className="md:col-span-1 grid gap-2 justify-center">
       <div className="flex gap-2 items-center">
         <div className="grid gap-1">
           <div className="flex items-center gap-2 text-accent-700 dark:text-accent-500">

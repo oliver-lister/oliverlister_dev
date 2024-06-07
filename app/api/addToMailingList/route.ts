@@ -9,7 +9,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
   }
 
   const supabase = createClient();
-  // Need to find a way around Role based auth for this!
 
   const { statusText, error } = await supabase
     .from("mailingList")

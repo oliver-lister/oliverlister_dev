@@ -11,12 +11,10 @@ function AboutMe() {
       <div className="grid md:grid-cols-2 gap-10">
         <div className="grid gap-4">
           <p>
-            Hey there, I&apos;m <strong>Oliver Lister</strong>, a Sydney-based
-            frontend web developer with a backstory in music and sound. While
-            I&apos;ve always had a passion for creativity, I found myself
-            missing the technical challenges and problem solving that come with
-            software development. That&apos;s why I&apos;ve decided to jump into
-            the world of <strong className="text-accent">{"<code />"}</strong>.
+            Hi there, I&apos;m <strong>Oliver Lister</strong>, a Sydney-based
+            frontend web developer and music and sound professional. While
+            I&apos;ve always had a passion for creativity, I love the technical
+            challenges and problem solving that come with software development.
           </p>
           <p>
             With a plethora of knowledge in music and sound production and
@@ -26,10 +24,8 @@ function AboutMe() {
             processes and delivering consistent results.
           </p>
           <p>
-            Using my hunger for technical challenges as fuel, I&apos;m diving
-            headfirst into software development. Whether it&apos;s crafting
-            sleek interfaces or building dynamic applications, I&apos;m eager to
-            learn, grow, and make connections.
+            Whether it&apos;s crafting sleek interfaces or building dynamic
+            applications, I&apos;m eager to learn, grow, and make connections.
           </p>
         </div>
         <div className="flex items-center justify-center">

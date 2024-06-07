@@ -6,6 +6,7 @@ import ModalExitButton from "../components/ModalExitButton";
 import { IconMail } from "@tabler/icons-react";
 import ContactFormSubmission from "./ContactForm/ContactFormSubmission";
 import useIsMounted from "../../../hooks/useIsMounted";
+import handleContactFormSubmit from "./handleContactFormSubmit";
 
 const ContactModal = ({ closeModal }: { closeModal: () => void }) => {
   const isMounted = useIsMounted();
@@ -15,24 +16,9 @@ const ContactModal = ({ closeModal }: { closeModal: () => void }) => {
   const onSubmit = async (formData: ContactFormData) => {
     try {
       setIsLoading(true);
-      if (formData.mailingList) {
-        const res = await fetch("/api/addToMailingList", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: formData.email }),
-        });
-
-        const result = await res.json();
-
-        if (!res.ok) {
-          throw new Error(result.error);
-        }
-
-        setIsLoading(false);
-        setSubmitted(true);
-      }
+      await handleContactFormSubmit(formData);
+      setIsLoading(false);
+      setSubmitted(true);
     } catch (err) {
       if (err instanceof Error)
         console.error(`Error submitting form: ${err.message}`);
