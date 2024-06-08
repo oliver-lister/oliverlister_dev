@@ -16,20 +16,13 @@ const handleContactFormSubmit = async (formData: ContactFormData) => {
       throw new Error(data.error);
     }
   }
-  const RESEND_API_KEY = process.env.NEXT_RESEND_API_KEY;
 
-  const res = await fetch("https://api.resend.com/emails", {
+  const res = await fetch("/api/send", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${RESEND_API_KEY}`,
     },
-    body: JSON.stringify({
-      from: `${formData.name} <${formData.email}>`,
-      to: [process.env.NEXT_EMAIL],
-      subject: "Website Enquiry | oliverlister.dev",
-      html: `<h1>oliverlister.dev website enquiry:</h1><p>${formData.message}</p>`,
-    }),
+    body: JSON.stringify(formData),
   });
 
   const data = await res.json();
