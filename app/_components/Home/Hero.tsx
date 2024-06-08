@@ -15,7 +15,7 @@ function Hero() {
                 <h1 className="text-responsive font-bold text-clip-gradient">
                   Oliver Lister.
                 </h1>
-                <h2>
+                <h2 className="text-sm md:text-md">
                   I&apos;m a <strong>frontend developer</strong> crafting
                   seamless digital experiences with code.
                 </h2>
@@ -39,8 +39,8 @@ function Hero() {
                 </Button>
               </div>
             </div>
-            <div className="mx-auto md-0 | md:ml-auto md:mx-0">
-              <div className="max-w-[60vw] rounded-full border-4 border-primary dark:border-secondary overflow-hidden">
+            <div className="relative mx-auto md-0 | md:ml-auto md:mx-0">
+              <div className="hero-img border-wobble rounded-full border-4 border-primary dark:border-secondary overflow-hidden">
                 <Image
                   src="/OL_Photo.jpeg"
                   priority

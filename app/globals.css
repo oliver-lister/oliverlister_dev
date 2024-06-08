@@ -21,9 +21,7 @@
   }
 }
 
-.mt-header {
-  margin-top: var(--header-height);
-}
+/* Utility Classes */
 
 .wrapper {
   padding-block: var(--layout-padding-y);
@@ -32,14 +30,22 @@
   padding-inline: 1rem;
 }
 
-.text-responsive {
-  font-size: clamp(1.25rem, 4vw + 1rem, 3.75rem);
-}
-
 @media (min-width: var(--breakpoint-sm)) {
   .wrapper {
     padding-inline: 2rem;
   }
+}
+
+.mt-header {
+  margin-top: var(--header-height);
+}
+
+.text-responsive {
+  font-size: clamp(1.25rem, 4vw + 1rem, 3.75rem);
+}
+
+.bg-gradient {
+  background: var(--gradient-accent);
 }
 
 .hero {
@@ -47,24 +53,13 @@
   width: 100%;
 }
 
+.hero-img {
+  width: clamp(12.5rem, 30vw, 20rem);
+}
+
 @media (min-width: 640px) {
   .hero {
     min-height: calc(100dvh - var(--layout-padding-y) * 2);
-  }
-}
-
-.animate-in {
-  animation: animateIn 0.3s ease 0.15s both;
-}
-
-@keyframes animateIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -106,6 +101,60 @@
   transition-duration: 150ms;
 }
 
-.bg-gradient {
-  background: var(--gradient-accent);
+/* Animations */
+
+.animate-in {
+  animation: animateIn 0.3s ease 0.15s both;
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Image Border Wobble */
+
+.border-wobble::before {
+  border: 2px solid #fff;
+  border-radius: 58% 42% 48% 53% / 47% 60% 36% 53%;
+  width: 100%;
+  height: 100%;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: rotate 16s linear infinite;
+}
+
+.border-wobble::after {
+  border: 2px solid #fff;
+  border-radius: 48% 42% 48% 53% / 47% 60% 36% 53%;
+  width: 100%;
+  height: 100%;
+  background: rgba(244, 166, 166, 0.1);
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: rotate 6s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+    border-color: #ae64fe;
+  }
+  50% {
+    border-color: #d166f5;
+  }
+  100% {
+    transform: rotate(360deg);
+    border-color: #e85ff1;
+  }
 }
