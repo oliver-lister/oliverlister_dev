@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import GradientOutline from "./GradientOutline";
 
 const variantStyles = {
   primary:
@@ -19,6 +20,7 @@ type ButtonProps = {
   children: React.ReactNode;
 } & (
   | React.ComponentPropsWithoutRef<"button">
+  | (React.ComponentPropsWithoutRef<"a"> & { href: string })
   | (React.ComponentPropsWithoutRef<typeof Link> & { href: string })
 );
 
@@ -32,30 +34,40 @@ const Button: React.FC<ButtonProps> = ({
 
   if ("href" in props) {
     const { href, ...rest } = props;
-    return (
-      <Link href={href} className={`${variantClass} ${className}`} {...rest}>
-        {variant === "gradient-outline" ? (
-          <>
-            <span className="w-full h-full bg-gradient group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
-            <span className="relative flex items-center gap-2 py-2 px-3 transition-all ease-out text-secondary bg-primary dark:bg-primary-400 rounded-md group-hover:bg-opacity-0 duration-400">
-              {children}
-            </span>
-          </>
-        ) : (
-          children
-        )}
-      </Link>
-    );
+    const isExternal = href.startsWith("http");
+
+    if (isExternal) {
+      return (
+        <a
+          href={href}
+          rel="noopener noreferrer"
+          target="_blank"
+          className={`${variantClass} ${className}`}
+          {...rest}
+        >
+          {variant === "gradient-outline" ? (
+            <GradientOutline>{children}</GradientOutline>
+          ) : (
+            children
+          )}
+        </a>
+      );
+    } else {
+      return (
+        <Link href={href} className={`${variantClass} ${className}`} {...rest}>
+          {variant === "gradient-outline" ? (
+            <GradientOutline>{children}</GradientOutline>
+          ) : (
+            children
+          )}
+        </Link>
+      );
+    }
   } else {
     return (
       <button className={`${variantClass} ${className}`} {...props}>
         {variant === "gradient-outline" ? (
-          <>
-            <span className="w-full h-full bg-gradient group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
-            <span className="relative flex items-center gap-2 py-2 px-3 transition-all ease-out text-secondary bg-primary dark:bg-primary-400 rounded-md group-hover:bg-opacity-0 duration-400">
-              {children}
-            </span>
-          </>
+          <GradientOutline>{children}</GradientOutline>
         ) : (
           children
         )}

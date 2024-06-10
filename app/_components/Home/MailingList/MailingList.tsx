@@ -38,12 +38,12 @@ const MailingList: React.FC = () => {
   };
 
   return (
-    <div className="md:col-span-1 grid gap-2 justify-center">
+    <div className="grid gap-2 shadow-md bg-zinc-200 dark:bg-zinc-600 p-4 rounded-lg">
       <div className="flex gap-2 items-center">
         <div className="grid gap-1">
-          <div className="flex items-center gap-2 text-accent-700 dark:text-accent-500">
+          <div className="flex items-center gap-2 text-accent">
             <IconMail />
-            <h2 className="font-bold text-md text-accent-700 dark:text-accent-500 uppercase">
+            <h2 className="font-bold text-md text-accent uppercase">
               Join my mailing list
             </h2>
           </div>

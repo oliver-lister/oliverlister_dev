@@ -111,21 +111,20 @@ export default function Technologies() {
   const [searchText, setSearchText] = useState<string>("");
 
   return (
-    <section id="technlogies">
+    <section id="technlogies" className="bg-zinc-300 dark:bg-zinc-700">
       <div className="wrapper grid gap-6">
-        <div className="relative grid items-center justify-center">
-          <span className="absolute top-6 z-[-1] h-[1px] w-full bg-primary dark:bg-secondary"></span>
-          <h2 className="text-4xl font-semibold bg-secondary px-6 dark:bg-primary">
-            Technologies
-          </h2>
+        <div className="grid items-center justify-center">
+          <h2 className="text-4xl font-semibold text-accent">Technologies</h2>
         </div>
-        <div>
+        <div className="grid gap-1">
+          <label htmlFor="search-technologies" className="text-sm">
+            Search Technologies
+          </label>
           <input
+            id="search-technologies"
             type="text"
             onChange={(e) => setSearchText(e.currentTarget.value)}
-            placeholder="Search technologies..."
-            aria-label="Search Technologies"
-            className="w-full p-2 border-2 border-primary/40 bg-secondary rounded-lg dark:bg-primary dark:border-secondary/40"
+            className="border-2 py-2 px-3 text-md rounded-lg border-primary bg-zinc-100 text-primary | dark:border-secondary dark:bg-zinc-400"
           />
         </div>
         <div className="grid grid-cols-1 justify-items-center items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
