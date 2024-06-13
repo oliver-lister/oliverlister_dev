@@ -9,7 +9,7 @@ import React from "react";
 const LoginButton = () => {
   const pathname = usePathname();
 
-  const handleLoginWithGithub = () => {
+  const handleLogin = () => {
     const supabase = createClient();
     supabase.auth.signInWithOAuth({
       provider: "github",
@@ -20,7 +20,7 @@ const LoginButton = () => {
   };
 
   return (
-    <Button onClick={handleLoginWithGithub} variant="accent">
+    <Button onClick={handleLogin} variant="accent">
       <IconBrandGithub />
       Login with Github
     </Button>

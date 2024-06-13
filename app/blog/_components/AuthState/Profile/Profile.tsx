@@ -1,31 +1,53 @@
 "use client";
 
 import Button from "@/components/Button";
+import Popover from "@/components/Popover";
+import { createClient } from "@/libs/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
-import { IconDashboard } from "@tabler/icons-react";
+import { IconLayoutDashboard, IconLogout } from "@tabler/icons-react";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
-import { createPortal } from "react-dom";
-import { usePopper } from "react-popper";
 
 type ProfileProps = {
   user: User;
+  setUser: (user: User | undefined) => void;
 };
 
-const Profile: React.FC<ProfileProps> = ({ user }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+const Profile: React.FC<ProfileProps> = ({ user, setUser }) => {
+  const handleLogout = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    setUser(undefined);
+  };
 
-  let [referenceElement, setReferenceElement] =
-    useState<HTMLButtonElement | null>(null);
-  let [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
-  let { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement: "bottom-start",
-  });
+  const popup = (
+    <div className="divide-y divide-primary-900 p-4 rounded-md text-sm bg-zinc-200 text-primary">
+      <div className="px-4 mb-2">
+        <p className="font-semibold">{user.user_metadata.user_name}</p>
+        <p className="text-primary-700">{user.user_metadata.email}</p>
+      </div>
+      <Button
+        href="/blog/dashboard"
+        variant="ghost"
+        className="block w-full justify-between"
+      >
+        Dashboard
+        <IconLayoutDashboard size={18} />
+      </Button>
+      <Button
+        onClick={handleLogout}
+        variant="ghost"
+        className="block w-full justify-between"
+      >
+        Logout
+        <IconLogout size={18} />
+      </Button>
+    </div>
+  );
 
   return (
     <>
-      <button ref={setReferenceElement} onClick={() => setIsOpen(!isOpen)}>
+      <Popover content={popup}>
         <Image
           src={user.user_metadata.avatar_url}
           alt={user.user_metadata.user_name}
@@ -33,34 +55,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
           height={50}
           className="rounded-full border-2 border-primary dark:border-secondary hover:border-accent"
         />
-      </button>
-      {isOpen
-        ? createPortal(
-            <div
-              ref={setPopperElement}
-              style={styles.popper}
-              {...attributes.popper}
-              className="space-y-3 p-4 rounded-md text-sm bg-zinc-200 text-primary "
-            >
-              <div className="px-4">
-                <p className="font-semibold">{user.user_metadata.user_name}</p>
-                <p className="text-primary-700">{user.user_metadata.email}</p>
-              </div>
-              <div>
-                <Button
-                  href="/blog/dashboard"
-                  variant="ghost"
-                  className="block w-full"
-                >
-                  <IconDashboard />
-                  Dashboard
-                </Button>
-              </div>
-              <div>hi</div>
-            </div>,
-            document.body
-          )
-        : null}
+      </Popover>
     </>
   );
 };
