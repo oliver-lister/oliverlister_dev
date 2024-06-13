@@ -6,6 +6,7 @@ import Footer from "./_components/Layout/Footer/Footer";
 import { ThemeProvider } from "next-themes";
 import ModalContextProvider from "../context/ModalContext";
 import ModalManager from "../components/modals/ModalManager";
+import SessionProvider from "@/components/SessionProvider";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -38,6 +39,7 @@ export default function RootLayout({
             <Footer />
           </ModalContextProvider>
         </ThemeProvider>
+        <SessionProvider />
       </body>
     </html>
   );

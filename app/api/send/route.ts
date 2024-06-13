@@ -13,7 +13,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       });
 
     const { data, error } = await resend.emails.send({
-      from: `Portfolio Website Enquries <noreply@email.oliverlister.dev>`,
+      from: `Portfolio Website Enquries <noreply@emails.oliverlister.dev>`,
       to: [`${process.env.EMAIL}`],
       subject: `New Website Enquiry from ${name}`,
       react: EmailTemplate({
