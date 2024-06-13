@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.2",
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
     "@tabler/icons-react": "^3.5.0",
@@ -24,9 +26,11 @@
     "resend": "^3.2.0",
     "tailwindcss": "3.4.1",
     "typescript": "5.3.3",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@next/mdx": "^14.2.4",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.7",
     "@types/jest": "^29.5.12",
