@@ -14,7 +14,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const { data, error } = await resend.emails.send({
       from: `Portfolio Website Enquries <noreply@emails.oliverlister.dev>`,
-      to: [`${process.env.EMAIL}`],
+      to: [`${process.env.NEXT_EMAIL}`],
       subject: `New Website Enquiry from ${name}`,
       react: EmailTemplate({
         name: name,
