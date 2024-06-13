@@ -13,6 +13,8 @@ const variantStyles = {
     "flex items-center justify-center gap-2 py-2 px-3 rounded-lg select-none bg-accent text-secondary hover:bg-accent-400 active:",
   minimal:
     "flex items-center justify-center gap-1 py-2 px-3 rounded-lg select-none border-2 border-zinc-300 dark:border-zinc-500 text-primary dark:text-secondary hover:bg-zinc-300 dark:hover:bg-zinc-500 transition active:scale-95",
+  ghost:
+    "flex items-center justify-center gap-1 py-2 px-3 rounded-lg select-none font-bold hover:bg-zinc-300",
 };
 
 type ButtonProps = {
