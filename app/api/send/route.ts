@@ -16,6 +16,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       from: `Portfolio Website Enquries <noreply@emails.oliverlister.dev>`,
       to: [`${process.env.NEXT_EMAIL}`],
       subject: `New Website Enquiry from ${name}`,
+      reply_to: email,
       react: EmailTemplate({
         name: name,
         email: email,
