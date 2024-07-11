@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Card from "../../../components/Card";
+import TechnologyCard from "./TechnologyCard";
 
 const technologies = [
   {
@@ -101,7 +101,7 @@ const technologies = [
   },
 ];
 
-type Technology = {
+export type Technology = {
   title: string;
   imageSrc: string;
   shadowClr: string;
@@ -114,7 +114,9 @@ export default function Technologies() {
     <section id="technlogies" className="bg-zinc-300 dark:bg-zinc-700">
       <div className="wrapper grid gap-6">
         <div className="grid items-center justify-center">
-          <h2 className="text-4xl font-semibold text-accent">Technologies</h2>
+          <h2 className="text-4xl font-semibold text-primary dark:text-secondary">
+            Technologies
+          </h2>
         </div>
         <div className="grid gap-1">
           <label htmlFor="search-technologies" className="text-sm">
@@ -133,16 +135,12 @@ export default function Technologies() {
               tech.title.toLowerCase().includes(searchText.toLowerCase())
             )
             .map((tech) => (
-              <Card
+              <TechnologyCard
                 key={tech.title}
-                theme="technology"
                 imageSrc={tech.imageSrc}
-                imageSize={100}
                 shadowClr={tech.shadowClr}
                 title={tech.title}
-              >
-                {tech.title}
-              </Card>
+              />
             ))}
         </div>
       </div>
