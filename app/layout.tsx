@@ -5,7 +5,7 @@ import Header from "./_components/Layout/Header/Header";
 import Footer from "./_components/Layout/Footer/Footer";
 import { ThemeProvider } from "next-themes";
 import ModalContextProvider from "../context/ModalContext";
-import ModalManager from "../components/modals/ModalManager";
+import ModalManager from "../components/Modal/ModalManager";
 import SessionProvider from "@/components/SessionProvider";
 
 const defaultUrl = process.env.NEXT_URL

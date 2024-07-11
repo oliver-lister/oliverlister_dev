@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "../../../../../components/Button";
+import Button from "@/components/Button/Button";
 import { useModal } from "../../../../../context/ModalContext";
 import { IconMail } from "@tabler/icons-react";
 import DesktopNav from "./DesktopNav";

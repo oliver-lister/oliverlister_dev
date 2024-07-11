@@ -1,12 +1,12 @@
 "use client";
 
-import Button from "@/components/Button";
 import Popover from "@/components/Popover";
 import { createClient } from "@/libs/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
-import { IconLayoutDashboard, IconLogout } from "@tabler/icons-react";
+import Button from "@/components/Button/Button";
 import Image from "next/image";
 import React, { useState } from "react";
+import { IconLayoutDashboard, IconLogout } from "@tabler/icons-react";
 
 type ProfileProps = {
   user: User;

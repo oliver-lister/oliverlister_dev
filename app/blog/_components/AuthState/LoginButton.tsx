@@ -1,10 +1,9 @@
 "use client";
 
-import Button from "@/components/Button";
 import { createClient } from "@/libs/utils/supabase/client";
 import { IconBrandGithub } from "@tabler/icons-react";
 import { usePathname } from "next/navigation";
-import React from "react";
+import Button from "@/components/Button/Button";
 
 const LoginButton = () => {
   const pathname = usePathname();

@@ -15,7 +15,7 @@ const FormField: React.FC<FormFieldProps> = ({
 }) => {
   if (checkbox) {
     return (
-      <div className="mt-2 flex justify-center gap-2">
+      <div className="flex gap-2 items-center">
         {children}
         <label htmlFor={htmlFor} className="text-sm">
           {label}

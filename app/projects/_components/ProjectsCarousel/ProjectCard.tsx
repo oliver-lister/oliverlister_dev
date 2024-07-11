@@ -4,7 +4,7 @@ import { IconBrowser, IconBrandGithub } from "@tabler/icons-react";
 import Image from "next/image";
 
 export default function ProjectCard({
-  title,
+import Button from "@/components/Button/Button";
   imageSrc,
   description,
   url,

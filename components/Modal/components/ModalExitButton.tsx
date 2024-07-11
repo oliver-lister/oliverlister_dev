@@ -1,4 +1,4 @@
-import Button from "../../Button";
+import Button from "@/components/Button/Button";
 
 const spanClasses =
   "absolute bg-primary group-hover:bg-secondary dark:bg-secondary group-hover:dark:bg-primary";

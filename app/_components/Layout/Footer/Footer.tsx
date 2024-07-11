@@ -1,5 +1,5 @@
 import SocialsNav from "./SocialsNav";
-import ChangeThemeButton from "../../../../components/ChangeThemeButton";
+import ChangeThemeButton from "../../../../components/Button/ChangeThemeButton";
 
 export default function Footer() {
   return (

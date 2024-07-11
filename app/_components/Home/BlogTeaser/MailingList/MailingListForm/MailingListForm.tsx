@@ -4,8 +4,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import * as yup from "yup";
-import Button from "@/components/Button";
+import Button from "@/components/Button/Button";
 import { IconLoader2 } from "@tabler/icons-react";
+import Input from "@/components/Input/Input";
 
 export type MailingListFormData = {
   email: string;
@@ -25,8 +26,7 @@ type MailingListFormProps = {
   isLoading: boolean;
 };
 
-const defaultInputStyle =
-  "border-2 py-2 px-3 text-xs w-full rounded-l-lg bg-zinc-100 text-primary border-accent dark:border-accent dark:text-secondary dark:bg-zinc-400 focus:outline-none focus:ring-0 ";
+const defaultInputStyle = "text-xs rounded-r-none rounded-l-lg";
 
 const MailingListForm: React.FC<MailingListFormProps> = ({
   onSubmit,
@@ -43,7 +43,7 @@ const MailingListForm: React.FC<MailingListFormProps> = ({
   const inputStyle = `${defaultInputStyle} ${
     errors.email
       ? "border-red-600 focus:border-red-600 dark:focus:border-red-600"
-      : "focus:border-primary dark:focus:border-secondary"
+      : ""
   }`;
 
   return (
@@ -53,11 +53,12 @@ const MailingListForm: React.FC<MailingListFormProps> = ({
           Email
         </label>
         <div className="flex">
-          <input
+          <Input
             id="email"
             type="text"
+            isError={errors.email}
             className={inputStyle}
-            {...register("email")}
+            reactHookFormProps={register("email")}
           />
           <Button
             type="submit"

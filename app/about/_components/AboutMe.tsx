@@ -4,7 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
 
-function AboutMe() {
+import Button from "@/components/Button/Button";
   return (
     <section id="about" className="wrapper mt-header grid gap-6">
       <div className="grid md:grid-cols-2 gap-10">

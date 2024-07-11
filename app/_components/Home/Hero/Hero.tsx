@@ -1,5 +1,5 @@
-import Button from "../../../components/Button";
-import PullDownTag from "../../../components/PullDownTag";
+import Button from "@/components/Button/Button";
+import PullDownTag from "@/components/PullDownTag";
 import { IconArrowRight, IconFileDownload } from "@tabler/icons-react";
 import Image from "next/image";
 

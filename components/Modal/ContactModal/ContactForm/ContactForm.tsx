@@ -5,8 +5,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { IconLoader2 } from "@tabler/icons-react";
-import Button from "../../../Button";
+import Button from "@/components/Button/Button";
 import FormField from "./FormField";
+import Input from "@/components/Input/Input";
 
 export type ContactFormData = {
   name: string;
@@ -51,11 +52,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
     setFocus("name");
   }, [setFocus]);
 
-  const inputStyle = (fieldName: "name" | "email" | "message") =>
-    errors[fieldName]
-      ? "border-2 border-red-600 focus:border-red-600 py-2 px-3 text-md rounded-lg bg-secondary-900 text-primary | dark:bg-primary-900"
-      : "border-2 py-2 px-3 text-md rounded-lg border-primary bg-secondary-900 text-primary | dark:border-secondary dark:bg-primary-900";
-
   return (
     <>
       <h3 className="text-sm opacity-80">
@@ -71,14 +67,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
           htmlFor="name"
           errorMessage={errors.name && errors.name.message}
         >
-          <input
-            {...register("name")}
+          <Input
             id="name"
             type="text"
-            name="name"
-            aria-invalid={errors.name ? "true" : "false"}
-            autoComplete="true"
-            className={inputStyle("name")}
+            isError={errors.name}
+            reactHookFormProps={register("name")}
           />
         </FormField>
         <FormField
@@ -86,14 +79,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
           htmlFor="email"
           errorMessage={errors.email && errors.email.message}
         >
-          <input
-            {...register("email")}
+          <Input
             id="email"
             type="text"
-            name="email"
-            aria-invalid={errors.email ? "true" : "false"}
-            autoComplete="true"
-            className={inputStyle("email")}
+            isError={errors.email}
+            reactHookFormProps={register("email")}
           />
         </FormField>
         <FormField
@@ -101,29 +91,28 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
           htmlFor="message"
           errorMessage={errors.message && errors.message.message}
         >
-          <textarea
-            {...register("message")}
+          <Input
             id="message"
-            name="message"
-            aria-invalid={errors.message ? "true" : "false"}
             rows={10}
-            autoComplete="false"
-            className={inputStyle("message")}
+            isError={errors.message}
+            reactHookFormProps={register("message")}
           />
         </FormField>
-        <FormField
-          label="Would you like to join my mailing list?"
-          htmlFor="mailingList"
-          errorMessage={errors.mailingList && errors.mailingList.message}
-          checkbox={true}
-        >
-          <input
-            {...register("mailingList")}
-            type="checkbox"
-            id="mailingList"
-            className="w-8"
-          />
-        </FormField>
+        <div className="mt-2 flex justify-center">
+          <FormField
+            label="Would you like to join my mailing list?"
+            htmlFor="mailingList"
+            errorMessage={errors.mailingList && errors.mailingList.message}
+            checkbox={true}
+          >
+            <Input
+              type="checkbox"
+              id="mailingList"
+              isError={errors.mailingList}
+              reactHookFormProps={register("mailingList")}
+            />
+          </FormField>
+        </div>
         <Button
           variant="accent"
           type="submit"
