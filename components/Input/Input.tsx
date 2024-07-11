@@ -4,13 +4,14 @@ export interface InputProps {
   type?: string;
   id: string;
   className?: string;
-  reactHookFormProps: {
+  reactHookFormProps?: {
     onChange: ChangeHandler;
     onBlur: ChangeHandler;
     name: string;
     ref: RefCallBack;
   };
-  isError: FieldError | undefined;
+  onChange: (e: any) => void;
+  isError?: FieldError | undefined;
   rows?: number;
 }
 
@@ -50,7 +51,7 @@ const Input: React.FC<InputProps> = ({
           className="rounded-sm peer shrink-0 appearance-none mt-[0.5px] w-4 h-4 border-2 focus:outline-none focus:ring-0 focus:border-accent dark:focus-border-accent checked:border-0 border-primary bg-secondary checked:bg-accent | dark:border-secondary dark:bg-zinc-400 dark:checked:bg-accent dark:focus:border-accent"
         />
         <svg
-          className="absolute w-4 h-4 mt-[0.5px] hidden peer-checked:block pointer-events-none"
+          className="absolute w-4 h-4 mt-[0.5px] hidden peer-checked:block pointer-events-none text-secondary"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"
