@@ -25,6 +25,9 @@ type MailingListFormProps = {
   isLoading: boolean;
 };
 
+const defaultInputStyle =
+  "border-2 py-2 px-3 text-xs w-full rounded-l-lg bg-zinc-100 text-primary border-accent dark:border-accent dark:text-secondary dark:bg-zinc-400 focus:outline-none focus:ring-0 ";
+
 const MailingListForm: React.FC<MailingListFormProps> = ({
   onSubmit,
   isLoading,
@@ -37,9 +40,11 @@ const MailingListForm: React.FC<MailingListFormProps> = ({
     resolver: yupResolver(schema),
   });
 
-  const inputStyle = errors.email
-    ? "border-2 border-red-600 focus:border-red-600 py-2 px-3 w-full text-xs rounded-l-lg bg-zinc-100 text-primary | dark:bg-zinc-400"
-    : "border-2 py-2 px-3 text-xs w-full rounded-l-lg border-primary bg-zinc-100 text-primary | dark:border-secondary dark:bg-zinc-400";
+  const inputStyle = `${defaultInputStyle} ${
+    errors.email
+      ? "border-red-600 focus:border-red-600 dark:focus:border-red-600"
+      : "focus:border-primary dark:focus:border-secondary"
+  }`;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} name="mailing-list">
