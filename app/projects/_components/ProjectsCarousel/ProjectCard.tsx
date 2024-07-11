@@ -1,10 +1,10 @@
-import Button from "@/components/Button";
+import Button from "@/components/Button/Button";
 import { Project } from "../../page";
 import { IconBrowser, IconBrandGithub } from "@tabler/icons-react";
 import Image from "next/image";
 
 export default function ProjectCard({
-import Button from "@/components/Button/Button";
+  title,
   imageSrc,
   description,
   url,

@@ -1,10 +1,10 @@
-import Button from "@/components/Button";
+import Button from "@/components/Button/Button";
 import GradientUnderline from "../../../components/GradientUnderline";
 import Image from "next/image";
 import React from "react";
 import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
 
-import Button from "@/components/Button/Button";
+const AboutMe = () => {
   return (
     <section id="about" className="wrapper mt-header grid gap-6">
       <div className="grid md:grid-cols-2 gap-10">
@@ -59,6 +59,6 @@ import Button from "@/components/Button/Button";
       </div>
     </section>
   );
-}
+};
 
 export default AboutMe;
