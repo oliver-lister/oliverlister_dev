@@ -10,7 +10,7 @@ export interface InputProps {
     name: string;
     ref: RefCallBack;
   };
-  onChange: (e: any) => void;
+  onChange?: (e: any) => void;
   isError?: FieldError | undefined;
   rows?: number;
 }
