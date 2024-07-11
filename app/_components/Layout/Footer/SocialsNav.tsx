@@ -18,7 +18,7 @@ export default function SocialsNav() {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.linkedin.com/in/oliverdukemusic/"
+            href="https://www.linkedin.com/in/oliver-lister/"
             aria-label="Linkedin"
           >
             <IconBrandLinkedin

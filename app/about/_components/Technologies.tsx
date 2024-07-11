@@ -132,13 +132,14 @@ export default function Technologies() {
             .filter((tech) =>
               tech.title.toLowerCase().includes(searchText.toLowerCase())
             )
-            .map((tech, index) => (
+            .map((tech) => (
               <Card
                 key={tech.title}
                 theme="technology"
                 imageSrc={tech.imageSrc}
                 imageSize={100}
                 shadowClr={tech.shadowClr}
+                title={tech.title}
               >
                 {tech.title}
               </Card>

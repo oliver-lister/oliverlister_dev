@@ -9,6 +9,7 @@ function PullDownTag({ section }: { section: string }) {
     <button
       onClick={() => scrollTo(section)}
       className="animate-bounce hover:text-accent"
+      aria-label="Pull down tag"
     >
       <IconChevronDown size="3rem" />
     </button>

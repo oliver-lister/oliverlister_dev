@@ -11,6 +11,7 @@ const LoginButton = () => {
 
   const handleLogin = () => {
     const supabase = createClient();
+    console.log(location.origin);
     supabase.auth.signInWithOAuth({
       provider: "github",
       options: {

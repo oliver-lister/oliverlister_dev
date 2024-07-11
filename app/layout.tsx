@@ -8,8 +8,8 @@ import ModalContextProvider from "../context/ModalContext";
 import ModalManager from "../components/modals/ModalManager";
 import SessionProvider from "@/components/SessionProvider";
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
+const defaultUrl = process.env.NEXT_URL
+  ? `https://${process.env.NEXT_URL}`
   : "http://localhost:3000";
 
 const inter = Inter({ subsets: ["latin"] });

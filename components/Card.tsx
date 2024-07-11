@@ -8,6 +8,7 @@ export default function Card({
   imageSrc,
   imageSize,
   shadowClr,
+  title,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -15,6 +16,7 @@ export default function Card({
   imageSrc?: string;
   imageSize?: number;
   shadowClr?: string;
+  title?: string;
 }): JSX.Element | undefined {
   {
     const boxShadowStyle = {
@@ -32,7 +34,7 @@ export default function Card({
               src={imageSrc}
               width={imageSize}
               height={imageSize}
-              alt=""
+              alt={title ? title : "Technology icon"}
               className="min-h-[100px]"
             />
           ) : null}
