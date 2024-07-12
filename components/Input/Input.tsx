@@ -16,7 +16,7 @@ export interface InputProps {
 }
 
 const defaultStyles =
-  "py-2 px-3 text-md w-full rounded-lg text-primary border-2 border-primary bg-secondary-900 focus:outline-none focus:ring-0 focus:border-accent | dark:text-secondary dark:bg-zinc-400 dark:border-secondary dark:focus:border-accent";
+  "py-2 px-3 text-md w-full rounded-lg text-primary border-2  bg-secondary-900 focus:outline-none focus:ring-0 focus:border-accent | dark:text-secondary dark:bg-zinc-400 dark:focus:border-accent";
 
 const Input: React.FC<InputProps> = ({
   type,
@@ -27,7 +27,9 @@ const Input: React.FC<InputProps> = ({
   rows,
   ...rest
 }) => {
-  const errorStyles = !!isError ? "border-red-600 dark:border-red-600" : "";
+  const errorStyles = !!isError
+    ? "border-red-600 dark:border-red-600"
+    : "border-primary dark:border-secondary";
 
   if (rows && !type) {
     return (

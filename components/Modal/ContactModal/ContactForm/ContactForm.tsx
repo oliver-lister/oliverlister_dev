@@ -116,7 +116,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
         <Button
           variant="accent"
           type="submit"
-          className="disabled:pointer-events-none mt-4"
+          className="disabled:cursor-not-allowed mt-4"
           disabled={!!Object.keys(errors).length || isLoading}
         >
           {isLoading ? (

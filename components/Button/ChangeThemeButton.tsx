@@ -3,14 +3,21 @@
 import Button from "./Button";
 import { useTheme } from "next-themes";
 import { IconMoonStars, IconSun } from "@tabler/icons-react";
+import useIsMounted from "@/hooks/useIsMounted";
 
 function ChangeThemeButton() {
   const { theme, setTheme } = useTheme();
+  const isMounted = useIsMounted();
 
   const toggleTheme = () => {
     if (theme === "dark") setTheme("light");
     else setTheme("dark");
   };
+
+  // to avoid hydration error as theme is not ready when page is rendered, its only ready when component mounts
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <Button
