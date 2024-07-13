@@ -1,5 +1,3 @@
-"use client";
-
 import { useUser } from "@/libs/store/user";
 import LoginButton from "./LoginButton";
 import Profile from "./Profile/Profile";

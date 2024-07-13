@@ -1,5 +1,3 @@
-"use client";
-
 import Popover from "@/components/Popover";
 import { createClient } from "@/libs/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
@@ -20,20 +18,24 @@ const Profile: React.FC<ProfileProps> = ({ user, setUser }) => {
     setUser(undefined);
   };
 
+  const isAdmin = (user.user_metadata.role = "admin");
+
   const popup = (
     <div className="divide-y divide-primary-900 p-4 rounded-md text-sm bg-zinc-200 text-primary">
       <div className="px-4 mb-2">
         <p className="font-semibold">{user.user_metadata.user_name}</p>
         <p className="text-primary-700">{user.user_metadata.email}</p>
       </div>
-      <Button
-        href="/blog/dashboard"
-        variant="ghost"
-        className="block w-full justify-between"
-      >
-        Dashboard
-        <IconLayoutDashboard size={18} />
-      </Button>
+      {isAdmin ? (
+        <Button
+          href="/blog/dashboard"
+          variant="ghost"
+          className="block w-full justify-between"
+        >
+          Dashboard
+          <IconLayoutDashboard size={18} />
+        </Button>
+      ) : null}
       <Button
         onClick={handleLogout}
         variant="ghost"
