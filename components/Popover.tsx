@@ -35,6 +35,7 @@ const Popover = ({
                 ref={setPopperElement}
                 style={styles.popper}
                 {...attributes.popper}
+                className="z-20"
               >
                 {content}
               </div>,

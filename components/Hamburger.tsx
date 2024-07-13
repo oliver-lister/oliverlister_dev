@@ -3,7 +3,7 @@ const spanClasses =
 
 function Hamburger({ isMobileMenuOpen }: { isMobileMenuOpen: boolean }) {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center h-6">
       <span
         className={`${spanClasses} ${
           isMobileMenuOpen ? "rotate-45 translate-y-1" : "-translate-y-0.5"

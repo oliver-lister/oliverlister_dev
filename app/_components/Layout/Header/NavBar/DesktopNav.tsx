@@ -22,7 +22,13 @@ function DesktopNav({ links }: { links: NavLink[] }) {
 
     // Hovering line under Desktop Links
     const handleChange = (pathname: string) => {
-      const active = pathLookup[pathname];
+      let active = pathLookup[pathname];
+
+      // Check for nested /blog paths
+      if (!active && pathname.startsWith("/blog")) {
+        active = pathLookup["/blog"];
+      }
+
       if (active) {
         menu.style.setProperty("--underline-width", `${active.offsetWidth}px`);
         menu.style.setProperty(
@@ -35,7 +41,7 @@ function DesktopNav({ links }: { links: NavLink[] }) {
   }, [pathname]);
 
   return (
-    <nav id="navigation">
+    <nav id="navigation" className="justify-self-center">
       <ul className="menu__list relative grid gap-10 grid-flow-col">
         {links.map((link) => (
           <li key={link.path}>
@@ -51,7 +57,11 @@ function DesktopNav({ links }: { links: NavLink[] }) {
               }
               href={link.path}
               className={`menu__link select-none ${
-                link.path === pathname ? "text-clip-gradient" : ""
+                link.path === pathname
+                  ? "text-clip-gradient"
+                  : pathname.includes(link.path) && link.path !== "/"
+                  ? "text-clip-gradient"
+                  : ""
               }`}
             >
               {link.label}

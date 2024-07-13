@@ -10,7 +10,6 @@ const LoginButton = () => {
 
   const handleLogin = () => {
     const supabase = createClient();
-    console.log(location.origin);
     supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
@@ -22,7 +21,7 @@ const LoginButton = () => {
   return (
     <Button onClick={handleLogin} variant="accent">
       <IconBrandGithub />
-      Login with Github
+      Login
     </Button>
   );
 };

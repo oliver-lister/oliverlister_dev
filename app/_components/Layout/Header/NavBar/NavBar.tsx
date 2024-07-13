@@ -1,13 +1,8 @@
 "use client";
 
-import Button from "@/components/Button/Button";
-import { useModal } from "../../../../../context/ModalContext";
-import { IconMail } from "@tabler/icons-react";
 import DesktopNav from "./DesktopNav";
 import { useEffect, useState } from "react";
 import MobileNav from "./MobileNav";
-import useScroll from "../../../../../hooks/useScroll";
-import Hamburger from "../../../../../components/Hamburger";
 import useViewport from "../../../../../hooks/useViewport";
 
 export type NavLink = {
@@ -30,7 +25,6 @@ export default function NavBar({
   isMobileMenuOpen: boolean;
   toggleMobileMenu: () => void;
 }) {
-  const { openModal } = useModal();
   const viewport = useViewport();
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(true);
 
@@ -50,27 +44,5 @@ export default function NavBar({
     }
   }, [viewport]);
 
-  return (
-    <>
-      {NavMenu}
-      <div className="flex gap-4">
-        <Button
-          onClick={() => openModal("contact")}
-          variant="outline"
-          aria-label="Contact form"
-        >
-          <IconMail />
-          <span className="hidden | sm:block">Let&apos;s talk</span>
-        </Button>
-        <Button
-          onClick={toggleMobileMenu}
-          className="md:hidden group z-10"
-          variant="outline"
-          aria-label="Toggle mobile navigation menu"
-        >
-          <Hamburger isMobileMenuOpen={isMobileMenuOpen} />
-        </Button>
-      </div>
-    </>
-  );
+  return <>{NavMenu}</>;
 }
