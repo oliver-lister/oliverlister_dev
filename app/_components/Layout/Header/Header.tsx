@@ -53,7 +53,7 @@ export default function Header() {
           isMobileMenuOpen={isMobileMenuOpen}
           toggleMobileMenu={toggleMobileMenu}
         />
-        <div className="flex gap-4 justify-self-end">
+        <div className="flex gap-4 justify-self-end col-start-3 col-end-3">
           <Button
             onClick={() => openModal("contact")}
             variant="outline"
