@@ -55,7 +55,7 @@ const Profile: React.FC<ProfileProps> = ({ user, setUser }) => {
           alt={user.user_metadata.user_name}
           width={50}
           height={50}
-          className="rounded-full border-2 border-primary dark:border-secondary hover:border-accent"
+          className="rounded-full border-2 border-primary dark:border-secondary hover:border-accent dark:hover:border-accent"
         />
       </Popover>
     </>

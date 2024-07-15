@@ -1,18 +1,17 @@
-import { createClient } from "@/libs/utils/supabase/server";
-import { redirect } from "next/navigation";
+import Button from "@/components/Button/Button";
+import { IconPlus } from "@tabler/icons-react";
 
 const Dashboard = async () => {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user || user.user_metadata.role !== "admin") {
-    return redirect("/login");
-  }
-
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      <div className="flex items-center justify-between">
+        <h2 className="text-4xl font-semibold">Blog Posts</h2>
+        <Button variant="accent">
+          Create <IconPlus />
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;
