@@ -19,15 +19,19 @@ const Popover = ({
   let [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
   let { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: "bottom-end",
+    modifiers: [
+      {
+        name: "offset",
+        options: {
+          offset: [0, 8],
+        },
+      },
+    ],
   });
 
   return (
     <>
-      <div
-        ref={setReferenceElement}
-        onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => setIsOpen(false)}
-      >
+      <div ref={setReferenceElement} onClick={() => setIsOpen((prev) => !prev)}>
         {children}
         {isOpen
           ? createPortal(

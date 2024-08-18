@@ -20,31 +20,44 @@ const Profile: React.FC<ProfileProps> = ({ user, setUser }) => {
 
   const isAdmin = (user.user_metadata.role = "admin");
 
+  const arrow = (
+    <div
+      id="arrow"
+      className="relative invisible select-none"
+      data-popper-arrow
+    >
+      <div className="absolute w-2 h-2 bg-zinc-200 visible transform rotate-45 top-[-4px] right-[20px]"></div>
+    </div>
+  );
+
   const popup = (
-    <div className="divide-y divide-primary-900 p-4 rounded-md text-sm bg-zinc-200 text-primary">
-      <div className="px-4 mb-2">
-        <p className="font-semibold">{user.user_metadata.user_name}</p>
-        <p className="text-primary-700">{user.user_metadata.email}</p>
-      </div>
-      {isAdmin ? (
+    <>
+      {arrow}
+      <div className="divide-y divide-primary-900 p-4 rounded-md text-sm bg-zinc-200 text-primary">
+        <div className="px-4 mb-2">
+          <p className="font-semibold">{user.user_metadata.user_name}</p>
+          <p className="text-primary-700">{user.user_metadata.email}</p>
+        </div>
+        {isAdmin ? (
+          <Button
+            href="/blog/dashboard"
+            variant="ghost"
+            className="block w-full justify-between"
+          >
+            Dashboard
+            <IconLayoutDashboard size={18} />
+          </Button>
+        ) : null}
         <Button
-          href="/blog/dashboard"
+          onClick={handleLogout}
           variant="ghost"
           className="block w-full justify-between"
         >
-          Dashboard
-          <IconLayoutDashboard size={18} />
+          Logout
+          <IconLogout size={18} />
         </Button>
-      ) : null}
-      <Button
-        onClick={handleLogout}
-        variant="ghost"
-        className="block w-full justify-between"
-      >
-        Logout
-        <IconLogout size={18} />
-      </Button>
-    </div>
+      </div>
+    </>
   );
 
   return (
@@ -55,7 +68,7 @@ const Profile: React.FC<ProfileProps> = ({ user, setUser }) => {
           alt={user.user_metadata.user_name}
           width={50}
           height={50}
-          className="rounded-full border-2 border-primary dark:border-secondary hover:border-accent dark:hover:border-accent"
+          className="rounded-full border-2 border-primary dark:border-secondary hover:border-accent dark:hover:border-accent cursor-pointer"
         />
       </Popover>
     </>

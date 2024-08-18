@@ -20,7 +20,7 @@ const links = [
 const Navlinks = () => {
   const pathname = usePathname();
   return (
-    <nav className="flex items-center gap-2 divide divide-x-2">
+    <nav className="flex items-center justify-start gap-2 divide divide-x-[1px]">
       {links.map(({ href, label, icon }) => (
         <Button
           key={label}

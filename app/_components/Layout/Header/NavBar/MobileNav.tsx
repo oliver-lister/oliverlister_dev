@@ -9,10 +9,7 @@ function MobileNav({
   toggleMobileMenu: () => void;
 }) {
   return (
-    <nav
-      id="navigation"
-      className="w-full h-screen fixed inset-0"
-    >
+    <nav id="navigation" className="w-full h-screen fixed inset-0">
       <ul className="h-full text-center grid place-content-center gap-20 text-3xl bg-secondary text-primary | dark:bg-primary dark:text-secondary">
         {links.map((link) => (
           <li
