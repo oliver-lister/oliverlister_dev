@@ -49,7 +49,7 @@ const AboutMe = () => {
         <div className="flex items-center justify-center">
           <div className="rounded-lg border-4 border-primary dark:border-secondary overflow-hidden">
             <Image
-              src="/ol2.jpg"
+              src="/ol2.webp"
               alt="Oliver Lister"
               width={300}
               height={300}

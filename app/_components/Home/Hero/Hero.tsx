@@ -42,10 +42,10 @@ function Hero() {
             <div className="relative mx-auto md-0 | md:ml-auto md:mx-0">
               <div className="hero-img border-wobble rounded-full border-4 border-primary dark:border-secondary overflow-hidden">
                 <Image
-                  src="/OL_Photo.jpeg"
+                  src="/ol_headshot.webp"
                   priority
-                  width={300}
-                  height={300}
+                  width={1000}
+                  height={1000}
                   alt="Avatar"
                 />
               </div>

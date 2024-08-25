@@ -9,7 +9,7 @@ function Logo() {
       <div className="mx-auto md-0">
         <div className="transition-colors rounded-full border-2 border-primary dark:border-secondary overflow-hidden group-hover:bg-primary | dark:group-hover:bg-secondary">
           <Image
-            src="/memoji-wave.png"
+            src="/memoji-wave.webp"
             priority
             width={50}
             height={50}
