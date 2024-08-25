@@ -24,6 +24,8 @@ function Hero() {
                 <Button
                   variant="gradient-outline"
                   href="/OLister_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   download="OLister_Resume.pdf"
                 >
                   <IconFileDownload size={18} />
