@@ -1,14 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import ActionButtons from "./ActionButtons";
 import Switch from "@/components/Switch/Switch";
 
 const BlogTable = () => {
-  const [checked, setChecked] = useState(true);
+  // Switch state
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  const toggleChecked = () => {
-    setChecked((prev) => !prev);
+  const toggleSwitch = () => {
+    setIsChecked(!isChecked);
   };
 
   return (
@@ -20,8 +21,8 @@ const BlogTable = () => {
       </div>
       <div className="grid grid-cols-5 py-2 px-3 items-center">
         <p className="col-span-2">Blog title</p>
-        <Switch checked={checked} onChange={toggleChecked} />
-        <p>Blog title</p>
+        <Switch id="premium" isChecked={isChecked} onToggle={toggleSwitch} />
+        <Switch id="publish" isChecked={isChecked} onToggle={toggleSwitch} />
         <ActionButtons />
       </div>
     </div>
