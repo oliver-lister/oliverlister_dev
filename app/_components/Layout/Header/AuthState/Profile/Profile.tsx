@@ -20,49 +20,36 @@ const Profile: React.FC<ProfileProps> = ({ user, setUser }) => {
 
   const isAdmin = (user.user_metadata.role = "admin");
 
-  const arrow = (
-    <div
-      id="arrow"
-      className="relative invisible select-none"
-      data-popper-arrow
-    >
-      <div className="absolute w-2 h-2 bg-zinc-200 visible transform rotate-45 top-[-4px] right-[20px]"></div>
-    </div>
-  );
-
   const popup = (
-    <>
-      {arrow}
-      <div className="divide-y divide-primary-900 p-4 rounded-md text-sm bg-zinc-200 text-primary">
-        <div className="px-4 mb-2">
-          <p className="font-semibold">{user.user_metadata.user_name}</p>
-          <p className="text-primary-700">{user.user_metadata.email}</p>
-        </div>
-        {isAdmin ? (
-          <Button
-            href="/blog/dashboard"
-            variant="ghost"
-            className="block w-full justify-between"
-          >
-            Dashboard
-            <IconLayoutDashboard size={18} />
-          </Button>
-        ) : null}
+    <div className="divide-y divide-primary-900 p-4 rounded-md text-sm bg-zinc-200 text-primary">
+      <div className="px-4 mb-2">
+        <p className="font-semibold">{user.user_metadata.user_name}</p>
+        <p className="text-primary-700">{user.user_metadata.email}</p>
+      </div>
+      {isAdmin ? (
         <Button
-          onClick={handleLogout}
+          href="/blog/dashboard"
           variant="ghost"
           className="block w-full justify-between"
         >
-          Logout
-          <IconLogout size={18} />
+          Dashboard
+          <IconLayoutDashboard size={18} />
         </Button>
-      </div>
-    </>
+      ) : null}
+      <Button
+        onClick={handleLogout}
+        variant="ghost"
+        className="block w-full justify-between"
+      >
+        Logout
+        <IconLogout size={18} />
+      </Button>
+    </div>
   );
 
   return (
     <>
-      <Popover content={popup}>
+      <Popover content={popup} arrow={true}>
         <Image
           src={user.user_metadata.avatar_url}
           alt={user.user_metadata.user_name}

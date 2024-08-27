@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import ActionButtons from "./ActionButtons";
 import Switch from "@/components/Switch/Switch";
+import { IconChevronDown } from "@tabler/icons-react";
+import Dropdown from "@/components/Dropdown/Dropdown";
 
 const BlogTable = () => {
   // Switch state
@@ -19,11 +20,11 @@ const BlogTable = () => {
         <p>Premium</p>
         <p>Publish</p>
       </div>
-      <div className="grid grid-cols-5 py-2 px-3 items-center">
+      <div className="grid grid-cols-5 py-2 px-3 items-center overflow-x-scroll h-screen">
         <p className="col-span-2">Blog title</p>
         <Switch id="premium" isChecked={isChecked} onToggle={toggleSwitch} />
         <Switch id="publish" isChecked={isChecked} onToggle={toggleSwitch} />
-        <ActionButtons />
+        <Dropdown>Action</Dropdown>
       </div>
     </div>
   );

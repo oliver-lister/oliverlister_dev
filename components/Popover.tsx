@@ -7,9 +7,11 @@ import { usePopper } from "react-popper";
 const Popover = ({
   children,
   content,
+  arrow,
 }: {
   children: React.ReactNode;
   content: React.ReactNode;
+  arrow?: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -23,7 +25,7 @@ const Popover = ({
       {
         name: "offset",
         options: {
-          offset: [0, 8],
+          offset: [0, arrow ? 8 : 0],
         },
       },
     ],
@@ -41,6 +43,15 @@ const Popover = ({
                 {...attributes.popper}
                 className="z-20"
               >
+                {arrow ? (
+                  <div
+                    id="arrow"
+                    className="relative invisible select-none"
+                    data-popper-arrow
+                  >
+                    <div className="absolute w-2 h-2 bg-zinc-200 visible transform rotate-45 top-[-4px] right-[20px]"></div>
+                  </div>
+                ) : null}
                 {content}
               </div>,
               document.body

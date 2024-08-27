@@ -51,6 +51,16 @@ module.exports = {
         "gradient-light":
           "radial-gradient(76.33% 76.59% at 50.15% 6.06%, #f5f5f5 0%, rgba(26, 26, 26, 0.38) 100%)",
       },
+      keyframes: {
+        appear: {
+          "0%": {
+            opacity: "0",
+          },
+          "100%": {
+            opacity: "1",
+          },
+        },
+      },
     },
     plugins: [],
   },
