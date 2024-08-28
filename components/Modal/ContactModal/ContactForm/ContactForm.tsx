@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { IconLoader2 } from "@tabler/icons-react";
 import Button from "@/components/Button/Button";
-import FormField from "./FormField";
+import FormField from "../../../FormField/FormField";
 import Input from "@/components/Input/Input";
 
 export type ContactFormData = {

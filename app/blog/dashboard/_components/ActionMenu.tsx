@@ -22,6 +22,7 @@ const ActionMenu = () => {
       <Button
         variant="ghost"
         className="w-full grid grid-cols-2 justify-start gap-0"
+        onClick={toggleMenu}
       >
         <IconEye size={15} />
         <span className="flex justify-start">View</span>
@@ -29,6 +30,7 @@ const ActionMenu = () => {
       <Button
         variant="ghost"
         className="w-full grid grid-cols-2 justify-start gap-0"
+        onClick={toggleMenu}
       >
         <IconEdit size={15} />
         <span className="flex justify-start">Edit</span>
@@ -36,6 +38,7 @@ const ActionMenu = () => {
       <Button
         variant="ghost"
         className="w-full grid grid-cols-2 justify-start gap-0 text-red-500 hover:!bg-red-500 hover:text-secondary"
+        onClick={toggleMenu}
       >
         <IconTrash size={15} />
         <span className="flex justify-start">Delete</span>

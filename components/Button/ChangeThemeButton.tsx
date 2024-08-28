@@ -14,7 +14,7 @@ function ChangeThemeButton() {
     else setTheme("dark");
   };
 
-  // to avoid hydration error as theme is not ready when page is rendered, its only ready when component mounts
+  // to avoid hydration error as theme is not ready when page is rendered server-side, its only ready when component mounts on the client
   if (!isMounted) {
     return null;
   }

@@ -16,8 +16,8 @@ const BlogTableRow = () => {
   return (
     <>
       <p className="col-span-2">Blog title</p>
-      <Switch id="premium" isChecked={isChecked} onToggle={toggleSwitch} />
-      <Switch id="publish" isChecked={isChecked} onToggle={toggleSwitch} />
+      <Switch id="premium" />
+      <Switch id="publish" />
       <ActionMenu />
     </>
   );
