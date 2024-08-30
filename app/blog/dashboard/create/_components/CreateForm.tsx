@@ -53,7 +53,7 @@ const CreateForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
+    watch,
   } = useForm<ContactFormData>({
     mode: "onChange",
     reValidateMode: "onChange",
@@ -72,7 +72,7 @@ const CreateForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         name="contact"
-        className="grid gap-2 mt-4"
+        className={`${isPreview ? "hidden lg:block" : ""} grid gap-2 mt-4`}
       >
         <div className="flex items-center justify-between">
           <div className="flex gap-2 flex-wrap">
@@ -178,7 +178,7 @@ const CreateForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
         </FormField>
       </form>
       <div className="lg:block hidden">
-        <p>{getValues().title}</p>
+        <p>{watch().title}</p>
       </div>
     </div>
   );
