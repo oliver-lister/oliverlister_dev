@@ -1,8 +1,7 @@
 "use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   IconEye,
   IconLoader2,
@@ -16,37 +15,25 @@ import FormField from "@/components/FormField/FormField";
 import Input from "@/components/Input/Input";
 import Switch from "@/components/Switch/Switch";
 import { useState } from "react";
-
-export type ContactFormData = {
-  title: string;
-  image_url: string;
-  content: string;
-  isPublished: boolean;
-  isPremium: boolean;
-};
+import { z } from "zod";
 
 // yup schema
-const schema = yup.object().shape({
-  title: yup
-    .string()
-    .min(2, "Title must be at least 2 characters in length")
-    .trim()
-    .required("Title is a required field"),
-  image_url: yup
-    .string()
-    .url("Invalid url")
-    .required("Image URL is a required field"),
-  content: yup.string().required("Content is a required field"),
-  isPublished: yup.bool().required(),
-  isPremium: yup.bool().required(),
+const createPostSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  image: z.any(),
+  description: z.string().min(1, "Description is required"),
+  isPublished: z.boolean(),
+  isPremium: z.boolean(),
 });
 
-type ContactFormProps = {
-  onSubmit: SubmitHandler<ContactFormData>;
+export type CreatePostFormData = z.infer<typeof createPostSchema>;
+
+type CreateFormProps = {
+  onSubmit: SubmitHandler<CreatePostFormData>;
   isLoading: boolean;
 };
 
-const CreateForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
+const CreateForm: React.FC<CreateFormProps> = ({ onSubmit, isLoading }) => {
   const [isPreview, setIsPreview] = useState<boolean>(false);
 
   const {
@@ -54,14 +41,14 @@ const CreateForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm<ContactFormData>({
+  } = useForm<CreatePostFormData>({
     mode: "onChange",
     reValidateMode: "onChange",
-    resolver: yupResolver(schema),
+    resolver: zodResolver(createPostSchema),
     defaultValues: {
       title: "",
-      content: "",
-      image_url: "",
+      description: "",
+      image: undefined,
       isPublished: false,
       isPremium: false,
     },
@@ -72,7 +59,7 @@ const CreateForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         name="contact"
-        className={`${isPreview ? "hidden lg:block" : ""} grid gap-2 mt-4`}
+        className={`${isPreview ? "hidden lg:grid" : ""} grid gap-2 mt-4`}
       >
         <div className="flex items-center justify-between">
           <div className="flex gap-2 flex-wrap">
@@ -141,7 +128,7 @@ const CreateForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
           </Button>
         </div>
         <FormField
-          label="Title"
+          label="Post Title"
           htmlFor="title"
           errorMessage={errors.title && errors.title.message}
         >
@@ -153,29 +140,28 @@ const CreateForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
           />
         </FormField>
         <FormField
-          label="Image URL"
-          htmlFor="image_url"
-          errorMessage={errors.image_url && errors.image_url.message}
+          label="Description"
+          htmlFor="description"
+          errorMessage={errors.description && errors.description.message}
         >
           <Input
-            id="image_url"
-            type="text"
-            isError={errors.image_url}
-            reactHookFormProps={register("image_url")}
-          />
-        </FormField>
-        <FormField
-          label="Content"
-          htmlFor="content"
-          errorMessage={errors.content && errors.content.message}
-        >
-          <Input
-            id="content"
+            id="description"
             rows={10}
-            isError={errors.content}
-            reactHookFormProps={register("content")}
+            isError={errors.description}
+            reactHookFormProps={register("description")}
           />
         </FormField>
+        <label
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          htmlFor="file_input"
+        >
+          Upload file
+        </label>
+        <input
+          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+          id="file_input"
+          type="file"
+        ></input>
       </form>
       <div className="lg:block hidden">
         <p>{watch().title}</p>

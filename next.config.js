@@ -2,7 +2,7 @@ const withMDX = require("@next/mdx")({
   extension: /\.(md|mdx)/,
   // Optionally provide remark and rehype plugins
   options: {
-    remarkPlugins: [require("./scripts/remark-static-props")],
+    remarkPlugins: [],
     rehypePlugins: [],
     // If you use `MDXProvider`, uncomment the following line.
     // providerImportSource: "@mdx-js/react",

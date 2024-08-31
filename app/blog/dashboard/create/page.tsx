@@ -1,14 +1,13 @@
 "use client";
 
-import CreateForm from "./_components/CreateForm";
+import CreateForm, { CreatePostFormData } from "./_components/CreateForm";
 
 const Create = () => {
+  const handleSubmit = (values: CreatePostFormData) => {};
+
   return (
     <div>
-      <CreateForm
-        onSubmit={(values) => console.log(values)}
-        isLoading={false}
-      />
+      <CreateForm onSubmit={handleSubmit} isLoading={false} />
     </div>
   );
 };
