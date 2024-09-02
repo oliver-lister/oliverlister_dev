@@ -1,13 +1,14 @@
 "use server";
 
-import { createServerActionProcedure } from "zsa";
+import { createServerAction, createServerActionProcedure } from "zsa";
 import { z } from "zod";
 import { Resend } from "resend";
 import { EmailTemplate } from "@/components/EmailTemplate";
+import { createClient } from "@/libs/utils/supabase/server";
 
 const resend = new Resend(process.env.NEXT_RESEND_API_KEY);
 
-export const sendEmailProcedure = createServerActionProcedure()
+export const sendEmail = createServerAction()
   .input(
     z.object({
       name: z.string(),
@@ -40,4 +41,26 @@ export const sendEmailProcedure = createServerActionProcedure()
       if (error instanceof Error)
         throw new Error("Failed to send email: " + error.message);
     }
+  });
+
+export const addToMailingList = createServerAction()
+  .input(
+    z.object({
+      email: z.string().email(),
+    })
+  )
+  .handler(async ({ input }) => {
+    const { email } = input;
+
+    const supabase = createClient();
+
+    const { statusText, error } = await supabase
+      .from("mailingList")
+      .insert({ email: email });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return { statusText };
   });

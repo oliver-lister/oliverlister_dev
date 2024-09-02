@@ -4,8 +4,8 @@ import ContactForm, { ContactFormData } from "./ContactForm/ContactForm";
 import { useState } from "react";
 import { IconMail } from "@tabler/icons-react";
 import ContactFormSubmission from "./ContactForm/ContactFormSubmission";
-import handleContactFormSubmit from "./handleContactFormSubmit";
 import Modal from "../Modal";
+import { addToMailingList, sendEmail } from "@/server/actions/mail.actions";
 
 const ContactModal = ({ closeModal }: { closeModal: () => void }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -13,8 +13,23 @@ const ContactModal = ({ closeModal }: { closeModal: () => void }) => {
 
   const onSubmit = async (formData: ContactFormData) => {
     try {
+      const { email, message, name } = formData;
       setIsLoading(true);
-      await handleContactFormSubmit(formData);
+      if (formData.mailingList) {
+        const [data, error] = await addToMailingList({
+          email,
+        });
+        if (error) throw error;
+      }
+
+      const [data, error] = await sendEmail({
+        message,
+        email,
+        name,
+      });
+
+      if (error) throw error;
+
       setIsLoading(false);
       setSubmitted(true);
     } catch (err) {

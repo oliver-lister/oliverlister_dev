@@ -6,6 +6,7 @@ import MailingListForm, {
 } from "./MailingListForm/MailingListForm";
 import { IconMail } from "@tabler/icons-react";
 import MailingListFormSubmitted from "./MailingListForm/MailingListFormSubmitted";
+import { addToMailingList } from "@/server/actions/mail.actions";
 
 const MailingList: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -14,20 +15,11 @@ const MailingList: React.FC = () => {
   const onSubmit = async (values: MailingListFormData) => {
     try {
       setIsLoading(true);
-      const res = await fetch("/api/addToMailingList", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: values.email }),
+      const { email } = values;
+      const [data, error] = await addToMailingList({
+        email,
       });
-
-      const result = await res.json();
-
-      if (!res.ok) {
-        throw new Error(result.error);
-      }
-
+      if (error) throw error;
       setIsLoading(false);
       setSubmitted(true);
     } catch (err) {

@@ -4,8 +4,8 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { z } from "zod";
 import { isAdminProcedure, ownsPostProcedure } from "./procedures";
-import { S3 } from "@/libs/utils/cloudflare/s3";
 import { createClient } from "@/libs/utils/supabase/server";
+import { S3 } from "@/libs/utils/cloudflare/s3";
 
 export const savePostMetadataToDatabase = isAdminProcedure
   .createServerAction()
@@ -24,6 +24,7 @@ export const savePostMetadataToDatabase = isAdminProcedure
           title: input.title,
           description: input.description,
           author_id: ctx.user.id,
+          mdx_file_name: input.title.toLowerCase().split(" ").join("-"),
         },
       ])
       .select("id")
@@ -56,13 +57,13 @@ export const getPresignedUrl = ownsPostProcedure
     const objectKey = `${input.post_id}/${fileName}`;
 
     const cmd = new PutObjectCommand({
-      Bucket: process.env.NEXT_PUBLIC_CLOUDFLARE_R2_BUCKET_NAME,
+      Bucket: process.env.CLOUDFLARE_R2_BUCKET_NAME,
       Key: objectKey,
       ContentLength: fileSize,
       ContentType: fileType,
     });
 
-    const imageUrl = `${process.env.NEXT_PUBLIC_CLOUDFLARE_R2_BASE_IMAGE_PATH}/${objectKey}`;
+    const imageUrl = `${process.env.CLOUDFLARE_R2_BASE_IMAGE_PATH}/${objectKey}`;
 
     const presignedUrl = await getSignedUrl(S3, cmd, { expiresIn: 3600 });
 
