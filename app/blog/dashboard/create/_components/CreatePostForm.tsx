@@ -11,7 +11,7 @@ import { z } from "zod";
 // zod schema
 export const createPostSchema = z.object({
   title: z.string().min(1, "Title is required"),
-  image: z.any(),
+  files: z.any(),
   description: z.string().min(1, "Description is required"),
 });
 
@@ -37,7 +37,7 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({
     defaultValues: {
       title: "",
       description: "",
-      image: undefined,
+      files: undefined,
     },
   });
 
@@ -80,7 +80,7 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({
       <input
         className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
         type="file"
-        {...register("image")}
+        {...register("files")}
       ></input>
       <Button
         variant="accent"
