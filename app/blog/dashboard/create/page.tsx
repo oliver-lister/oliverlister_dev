@@ -37,12 +37,11 @@ const Create = () => {
       data: { user },
     } = await supabase.auth.getUser();
 
-    console.log(user);
     if (!user) throw new Error();
 
     const { post_id } = await savePostToDatabase(title, description, user.id);
 
-    const img = image[0];
+    const img = image[0]; // only grab 1st file from file input array
 
     const [data, error] = await handleUploadFile({
       name: img.name,
@@ -50,8 +49,6 @@ const Create = () => {
       type: img.type,
       post_id: post_id,
     });
-
-    console.log(data, error);
 
     const updateImageUrl = async (imageUrl: string, postId: string) => {
       const { data, error } = await supabase

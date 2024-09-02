@@ -1,31 +1,21 @@
+"use server";
+
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { z } from "zod";
-import { createServerAction } from "zsa";
-import { S3Client } from "@aws-sdk/client-s3";
+import { ownsPostProcedure } from "./procedures";
+import { S3 } from "@/libs/utils/cloudflare/s3";
 
-const account_id = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_ACCOUNT_ID!;
-const access_id = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_ACCESS_ID!;
-const access_key = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_ACCESS_KEY!;
-
-export const S3 = new S3Client({
-  region: "auto",
-  endpoint: `https://${account_id}.r2.cloudflarestorage.com`,
-  credentials: {
-    accessKeyId: `${access_id}`,
-    secretAccessKey: `${access_key}`,
-  },
-});
-
-const fileSchema = z.object({
-  name: z.string(),
-  size: z.number(),
-  type: z.string(),
-  post_id: z.number(),
-});
-
-export const handleUploadFile = createServerAction()
-  .input(fileSchema)
+export const handleUploadFile = ownsPostProcedure
+  .createServerAction()
+  .input(
+    z.object({
+      name: z.string(),
+      size: z.number(),
+      type: z.string(),
+      post_id: z.number(),
+    })
+  )
   .handler(async ({ input }) => {
     const fileName = input.name;
 
@@ -39,8 +29,6 @@ export const handleUploadFile = createServerAction()
     const fileType = input.type;
 
     const objectKey = `${input.post_id}/${fileName}`;
-
-    console.log(objectKey);
 
     const cmd = new PutObjectCommand({
       Bucket: process.env.NEXT_PUBLIC_CLOUDFLARE_R2_BUCKET_NAME,

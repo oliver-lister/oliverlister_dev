@@ -2,21 +2,21 @@ import { createServerActionProcedure } from "zsa";
 import { createClient } from "../../libs/utils/supabase/server";
 import { z } from "zod";
 
-const supabase = createClient();
-
 export const authedProcedure = createServerActionProcedure().handler(
   async () => {
     try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      const supabase = createClient();
+      const { data: userData, error: userError } =
+        await supabase.auth.getUser();
 
-      if (!user) throw new Error();
-
-      const { id } = user;
+      if (userError) throw userError;
+      const user = userData.user;
 
       return {
-        userId: id,
+        user: {
+          role: user?.user_metadata.role,
+          id: user?.id,
+        },
       };
     } catch {
       throw new Error("User not authenticated");
@@ -27,35 +27,32 @@ export const authedProcedure = createServerActionProcedure().handler(
 export const isAdminProcedure = createServerActionProcedure(
   authedProcedure
 ).handler(async ({ ctx }) => {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { role } = ctx.user;
 
-  if (!user) throw new Error();
-
-  const { role } = user;
-
-  if (role !== "admin") {
+  if (!role || role !== "admin") {
     throw new Error("User is not an admin");
   }
 
   return {
     user: {
-      id: ctx.userId,
+      id: ctx.user.id,
       role: role,
     },
   };
 });
 
 export const ownsPostProcedure = createServerActionProcedure(isAdminProcedure)
-  .input(z.object({ post_id: z.string() }))
+  .input(z.object({ post_id: z.number() }))
   .handler(async ({ input, ctx }) => {
+    const supabase = createClient();
     // Validate post ownership
     const { data, error } = await supabase
       .from("posts")
-      .select("*") // Select all columns (or specify columns if needed)
+      .select("*")
       .eq("id", input.post_id)
-      .single(); // Expecting one result
+      .single();
+
+    if (error) throw error;
 
     const { author_id } = data;
 
