@@ -7,6 +7,7 @@ import Button from "@/components/Button/Button";
 import FormField from "@/components/FormField/FormField";
 import Input from "@/components/Input/Input";
 import { z } from "zod";
+import { useUser } from "@/libs/store/user";
 
 // zod schema
 export const createPostSchema = z.object({

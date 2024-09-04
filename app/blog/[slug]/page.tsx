@@ -8,16 +8,14 @@ type BlogPostProps = {
 };
 
 const BlogPost: React.FC<BlogPostProps> = async ({ params }) => {
-  const mdx_file_name = params.slug;
+  const slug = params.slug;
 
   // Fetch metadata from Supabase
   const supabase = createClient();
   const { data: postMetadata, error } = await supabase
     .from("posts")
-    .select(
-      "title, description, created_at, author_id, image_url, mdx_file_name"
-    )
-    .eq("mdx_file_name", mdx_file_name)
+    .select("title, description, created_at, author_id, image_url, slug")
+    .eq("slug", slug)
     .single();
 
   if (error) {
@@ -25,11 +23,7 @@ const BlogPost: React.FC<BlogPostProps> = async ({ params }) => {
   }
 
   // Load the corresponding MDX file
-  const postFilePath = path.join(
-    process.cwd(),
-    "posts",
-    `${mdx_file_name}.mdx`
-  );
+  const postFilePath = path.join(process.cwd(), "posts", `${slug}.mdx`);
   const fileContent = fs.readFileSync(postFilePath, "utf-8");
 
   return (

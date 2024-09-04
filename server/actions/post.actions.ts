@@ -1,6 +1,6 @@
 "use server";
 
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { DeleteObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { z } from "zod";
 import { isAdminProcedure, ownsPostProcedure } from "./procedures";
@@ -24,7 +24,7 @@ export const savePostMetadataToDatabase = isAdminProcedure
           title: input.title,
           description: input.description,
           author_id: ctx.user.id,
-          mdx_file_name: input.title.toLowerCase().split(" ").join("-"),
+          slug: input.title.toLowerCase().split(" ").join("-"),
         },
       ])
       .select("id")
@@ -84,4 +84,27 @@ export const updateImageUrl = ownsPostProcedure
       .from("posts")
       .update({ image_url: input.image_url })
       .eq("id", input.post_id);
+  });
+
+export const deletePost = ownsPostProcedure
+  .createServerAction()
+  .input(z.object({ post_id: z.number() }))
+  .handler(async ({ input }) => {
+    const { post_id } = input;
+
+    // delete post metadata on supabase
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("posts")
+      .delete()
+      .eq("id", post_id);
+
+    // const objectKey = `${input.post_id}/${fileName}`;
+
+    // const cmd = await new DeleteObjectCommand({
+    //   Bucket: process.env.CLOUDFLARE_R2_BUCKET_NAME,
+    //   Key: objectKey, // key of the file to delete
+    // });
+
+    // const presignedUrl = await getSignedUrl(S3, cmd, { expiresIn: 3600 });
   });

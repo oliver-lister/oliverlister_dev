@@ -1,3 +1,5 @@
+"use client";
+
 import {
   IconEdit,
   IconEye,
@@ -8,13 +10,26 @@ import {
 import Button from "@/components/Button/Button";
 import Popover from "@/components/Popover";
 import { useState } from "react";
+import { createClient } from "@/libs/utils/supabase/client";
 
-const ActionMenu = () => {
-  // Action menu state
+type ActionMenuProps = {
+  id: string;
+  slug: string;
+};
+
+const ActionMenu: React.FC<ActionMenuProps> = ({ id, slug }) => {
+  const supabase = createClient();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleDelete = async () => {
+    const { data, error } = await supabase.from("posts").delete().eq("id", id);
+    // insert r2 bucket delete function
+    // insert fs mdx file delete function
+    toggleMenu();
   };
 
   const actionMenu = (
@@ -38,7 +53,7 @@ const ActionMenu = () => {
       <Button
         variant="ghost"
         className="w-full grid grid-cols-2 justify-start gap-0 text-red-500 hover:!bg-red-500 hover:text-secondary"
-        onClick={toggleMenu}
+        onClick={handleDelete}
       >
         <IconTrash size={15} />
         <span className="flex justify-start">Delete</span>

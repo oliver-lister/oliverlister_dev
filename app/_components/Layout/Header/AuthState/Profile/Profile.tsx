@@ -4,7 +4,7 @@ import { User } from "@supabase/supabase-js";
 import Button from "@/components/Button/Button";
 import Image from "next/image";
 import React, { useState } from "react";
-import { IconLayoutDashboard, IconLogout } from "@tabler/icons-react";
+import { IconLayoutDashboard, IconLogout, IconUser } from "@tabler/icons-react";
 
 type ProfileProps = {
   user: User;
@@ -27,14 +27,24 @@ const Profile: React.FC<ProfileProps> = ({ user, setUser }) => {
         <p className="text-primary-700">{user.user_metadata.email}</p>
       </div>
       {isAdmin ? (
-        <Button
-          href="/blog/dashboard"
-          variant="ghost"
-          className="block w-full justify-between"
-        >
-          Dashboard
-          <IconLayoutDashboard size={18} />
-        </Button>
+        <>
+          <Button
+            href="/blog/dashboard"
+            variant="ghost"
+            className="block w-full justify-between"
+          >
+            Dashboard
+            <IconLayoutDashboard size={18} />
+          </Button>
+          <Button
+            href="/blog/dashboard/user"
+            variant="ghost"
+            className="block w-full justify-between"
+          >
+            User
+            <IconUser size={18} />
+          </Button>
+        </>
       ) : null}
       <Button
         onClick={handleLogout}

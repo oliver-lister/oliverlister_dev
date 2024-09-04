@@ -1,5 +1,4 @@
 import React from "react";
-import Navlinks from "./_components/Navlinks";
 import { createClient } from "@/libs/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -13,12 +12,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
   if (!user || user.user_metadata.role !== "admin") {
     return redirect("/login");
   }
-  return (
-    <div className="grid gap-5">
-      <Navlinks />
-      {children}
-    </div>
-  );
+  return <div className="grid gap-5">{children}</div>;
 };
 
 export default layout;

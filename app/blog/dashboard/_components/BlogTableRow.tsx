@@ -1,16 +1,21 @@
-"use client";
-
-import { useState } from "react";
 import Switch from "@/components/Switch/Switch";
-
 import ActionMenu from "./ActionMenu";
 
-const BlogTableRow = () => {
+export type BlogTableRowProps = {
+  post: {
+    id: string;
+    title: string;
+    slug: string;
+    is_published: boolean;
+  };
+};
+
+const BlogTableRow: React.FC<BlogTableRowProps> = ({ post }) => {
   return (
     <>
-      <p className="col-span-2">Blog title</p>
+      <p className="col-span-2">{post.title}</p>
       <Switch id="publish" />
-      <ActionMenu />
+      <ActionMenu id={post.id} slug={post.slug} />
     </>
   );
 };
