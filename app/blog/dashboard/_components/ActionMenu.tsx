@@ -11,9 +11,10 @@ import Button from "@/components/Button/Button";
 import Popover from "@/components/Popover";
 import { useState } from "react";
 import { createClient } from "@/libs/utils/supabase/client";
+import { deletePost } from "@/server/actions/post.actions";
 
 type ActionMenuProps = {
-  id: string;
+  id: number;
   slug: string;
 };
 
@@ -26,8 +27,10 @@ const ActionMenu: React.FC<ActionMenuProps> = ({ id, slug }) => {
   };
 
   const handleDelete = async () => {
-    const { data, error } = await supabase.from("posts").delete().eq("id", id);
-    // insert r2 bucket delete function
+    await deletePost({
+      post_id: id,
+    });
+
     // insert fs mdx file delete function
     toggleMenu();
   };

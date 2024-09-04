@@ -6,6 +6,8 @@ import { z } from "zod";
 import { isAdminProcedure, ownsPostProcedure } from "./procedures";
 import { createClient } from "@/libs/utils/supabase/server";
 import { S3 } from "@/libs/utils/cloudflare/s3";
+import fs from "fs";
+import path from "path";
 
 export const savePostMetadataToDatabase = isAdminProcedure
   .createServerAction()
@@ -27,11 +29,12 @@ export const savePostMetadataToDatabase = isAdminProcedure
           slug: input.title.toLowerCase().split(" ").join("-"),
         },
       ])
-      .select("id")
+      .select("id, slug")
       .single();
 
     return {
       post_id: data?.id as number,
+      slug: data?.slug as string,
     };
   });
 
@@ -70,6 +73,23 @@ export const getPresignedUrl = ownsPostProcedure
     return { presignedUrl, imageUrl };
   });
 
+export const createMDXFile = ownsPostProcedure
+  .createServerAction()
+  .input(z.object({ slug: z.string() }))
+  .handler(async ({ input }) => {
+    const directoryPath = path.join(process.cwd(), "posts");
+    const filePath = path.join(directoryPath, `${input.slug}.mdx`);
+    const fileContent = "This is the content of the file";
+
+    fs.writeFile(filePath, fileContent, "utf-8", (err) => {
+      if (err) {
+        console.error("Error writing file:", err);
+      } else {
+        console.log("File written successfully");
+      }
+    });
+  });
+
 export const updateImageUrl = ownsPostProcedure
   .createServerAction()
   .input(
@@ -90,21 +110,38 @@ export const deletePost = ownsPostProcedure
   .createServerAction()
   .input(z.object({ post_id: z.number() }))
   .handler(async ({ input }) => {
+    const supabase = createClient();
     const { post_id } = input;
 
-    // delete post metadata on supabase
-    const supabase = createClient();
-    const { data, error } = await supabase
+    // delete img from R2 bucket
+    const { data: postData, error: postError } = await supabase
       .from("posts")
-      .delete()
-      .eq("id", post_id);
+      .select("image_url, slug")
+      .eq("id", post_id)
+      .single();
 
-    // const objectKey = `${input.post_id}/${fileName}`;
+    const imageUrl = postData?.image_url;
+    const objectKey = imageUrl?.split("/").slice(-2).join("/"); // extract the object key from the URL
 
-    // const cmd = await new DeleteObjectCommand({
-    //   Bucket: process.env.CLOUDFLARE_R2_BUCKET_NAME,
-    //   Key: objectKey, // key of the file to delete
-    // });
+    const bucketParams = {
+      Bucket: process.env.CLOUDFLARE_R2_BUCKET_NAME,
+      Key: objectKey,
+    };
 
-    // const presignedUrl = await getSignedUrl(S3, cmd, { expiresIn: 3600 });
+    const s3Data = await S3.send(new DeleteObjectCommand(bucketParams));
+
+    // delete mdx file from posts folder
+    const directoryPath = path.join(process.cwd(), "posts");
+    const filePath = path.join(directoryPath, `${postData?.slug}.mdx`);
+
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error(`Error removing file: ${err}`);
+        return;
+      }
+      console.log(`File ${filePath} has been successfully removed.`);
+    });
+
+    // delete post metadata on supabase
+    await supabase.from("posts").delete().eq("id", post_id);
   });

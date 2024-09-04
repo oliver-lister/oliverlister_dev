@@ -3,7 +3,7 @@ import ActionMenu from "./ActionMenu";
 
 export type BlogTableRowProps = {
   post: {
-    id: string;
+    id: number;
     title: string;
     slug: string;
     is_published: boolean;

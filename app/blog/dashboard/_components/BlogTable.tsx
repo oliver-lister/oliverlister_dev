@@ -1,5 +1,4 @@
 import { createClient } from "@/libs/utils/supabase/server";
-import BlogTableRow from "./BlogTableRow";
 import BlogTableRows from "./BlogTableRows";
 
 export const revalidate = 0;

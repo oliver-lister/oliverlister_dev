@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  createMDXFile,
   getPresignedUrl,
   savePostMetadataToDatabase,
   updateImageUrl,
@@ -8,7 +9,6 @@ import {
 import CreatePostForm, { CreatePostFormData } from "./CreatePostForm";
 import axios from "axios";
 import { useUser } from "@/libs/store/user";
-import GradientUnderline from "@/components/GradientUnderline";
 
 const CreatePost = () => {
   const user = useUser((state) => state.user);
@@ -47,6 +47,13 @@ const CreatePost = () => {
     const [updateData, updateError] = await updateImageUrl({
       post_id: post_id,
       image_url: urlData.imageUrl,
+    });
+
+    // server action to create MDX file
+    const slug = dbData.slug;
+    const [mdxData, mdxError] = await createMDXFile({
+      slug,
+      post_id,
     });
 
     if (updateError) throw updateError;
