@@ -23,6 +23,12 @@ const nextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   // Optionally, add any other Next.js config below
   reactStrictMode: true,
+  experimental: {
+    serverComponentsExternalPackages: [
+      "@aws-sdk/client-s3",
+      "@aws-sdk/s3-request-presigner",
+    ],
+  },
 };
 
 // Merge MDX config with Next.js config
