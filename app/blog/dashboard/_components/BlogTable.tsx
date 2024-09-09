@@ -15,7 +15,13 @@ const BlogTable = async () => {
         <p className="justify-self-center">Action</p>
       </div>
       <div className="grid grid-cols-4 gap-y-4 py-2 px-3 items-center">
-        <BlogTableRows serverPosts={posts} />
+        {posts && posts.length > 0 ? (
+          <BlogTableRows serverPosts={posts} />
+        ) : (
+          <p className="font-bold border-2 border-red-500 bg-red-200 text-red-500 p-2 rounded-lg">
+            No posts found in the database
+          </p>
+        )}
       </div>
     </div>
   );

@@ -40,18 +40,11 @@ const ActionMenu: React.FC<ActionMenuProps> = ({ id, slug }) => {
       <Button
         variant="ghost"
         className="w-full grid grid-cols-2 justify-start gap-0"
+        href={`/blog/${slug}`}
         onClick={toggleMenu}
       >
         <IconEye size={15} />
         <span className="flex justify-start">View</span>
-      </Button>
-      <Button
-        variant="ghost"
-        className="w-full grid grid-cols-2 justify-start gap-0"
-        onClick={toggleMenu}
-      >
-        <IconEdit size={15} />
-        <span className="flex justify-start">Edit</span>
       </Button>
       <Button
         variant="ghost"

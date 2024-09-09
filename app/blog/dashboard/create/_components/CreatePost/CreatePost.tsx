@@ -33,11 +33,17 @@ const CreatePost = () => {
 
     if (dbError) {
       setError(dbError.message);
+      setIsLoading(false);
       throw dbError;
     }
 
     const post_id = dbData?.post_id;
-    if (!post_id) throw new Error("No post_id retrieved from supabase");
+
+    if (!post_id) {
+      setError("No post_id retrieved from supabase");
+      setIsLoading(false);
+      throw new Error("No post_id retrieved from supabase");
+    }
 
     // server action to GET presigned URL from R2 bucket
     const [urlData, urlError] = await getPresignedUrl({
@@ -49,6 +55,7 @@ const CreatePost = () => {
 
     if (urlError) {
       setError(urlError.message);
+      setIsLoading(false);
       throw urlError;
     }
 
@@ -67,6 +74,7 @@ const CreatePost = () => {
 
     if (updateError) {
       setError(updateError.message);
+      setIsLoading(false);
       throw updateError;
     }
 
@@ -79,6 +87,7 @@ const CreatePost = () => {
 
     if (mdxError) {
       setError(mdxError.message);
+      setIsLoading(false);
       throw mdxError;
     }
 
