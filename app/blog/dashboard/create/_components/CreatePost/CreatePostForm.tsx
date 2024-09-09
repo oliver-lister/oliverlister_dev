@@ -2,7 +2,7 @@
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { IconLoader2, IconDeviceFloppy } from "@tabler/icons-react";
+import { IconLoader2, IconDeviceFloppy, IconLoader } from "@tabler/icons-react";
 import Button from "@/components/Button/Button";
 import FormField from "@/components/FormField/FormField";
 import Input from "@/components/Input/Input";
@@ -30,6 +30,7 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<CreatePostFormData>({
     mode: "onChange",
@@ -42,51 +43,64 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({
     },
   });
 
+  const handleSubmitAndReset = (values: CreatePostFormData) => {
+    onSubmit(values);
+    reset();
+  };
+
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(handleSubmitAndReset)}
       name="contact"
-      className="grid gap-2 mt-4"
+      className="grid gap-2 mt-2 relative"
     >
-      <FormField
-        label="Post Title"
-        htmlFor="title"
-        errorMessage={errors.title && errors.title.message}
-      >
-        <Input
-          id="title"
-          type="text"
-          isError={errors.title}
-          reactHookFormProps={register("title")}
-        />
-      </FormField>
-      <FormField
-        label="Description"
-        htmlFor="description"
-        errorMessage={errors.description && errors.description.message}
-      >
-        <Input
-          id="description"
-          rows={10}
-          isError={errors.description}
-          reactHookFormProps={register("description")}
-        />
-      </FormField>
-      <label
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        htmlFor="file_input"
-      >
-        Upload file
-      </label>
-      <input
-        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-        type="file"
-        {...register("files")}
-      ></input>
+      {isLoading ? (
+        <div className="absolute w-full h-full grid place-items-center z-10">
+          <IconLoader size={60} className="animate-spin" />
+        </div>
+      ) : null}
+      <div className={`${isLoading ? "blur-sm" : ""} grid gap-2`}>
+        <FormField
+          label="Post Title"
+          htmlFor="title"
+          errorMessage={errors.title && errors.title.message}
+        >
+          <Input
+            id="title"
+            type="text"
+            isError={errors.title}
+            reactHookFormProps={register("title")}
+          />
+        </FormField>
+        <FormField
+          label="Description"
+          htmlFor="description"
+          errorMessage={errors.description && errors.description.message}
+        >
+          <Input
+            id="description"
+            rows={10}
+            isError={errors.description}
+            reactHookFormProps={register("description")}
+          />
+        </FormField>
+        <label
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          htmlFor="file_input"
+        >
+          Upload file
+        </label>
+        <input
+          className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+          type="file"
+          {...register("files")}
+        ></input>
+      </div>
+
       <Button
         variant="accent"
         type="submit"
-        className="disabled:cursor-not-allowed"
+        className="disabled:cursor-not-allowed mt-2"
         disabled={!!Object.keys(errors).length}
       >
         {isLoading ? (
@@ -95,10 +109,7 @@ const CreatePostForm: React.FC<CreatePostFormProps> = ({
             Processing
           </>
         ) : (
-          <>
-            <IconDeviceFloppy />
-            Save
-          </>
+          <>Submit</>
         )}
       </Button>
     </form>

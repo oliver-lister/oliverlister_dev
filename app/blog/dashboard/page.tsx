@@ -12,7 +12,7 @@ const Dashboard = async () => {
             User <IconUser />
           </Button>
           <Button variant="accent" href="/blog/dashboard/create">
-            Create Post <IconPlus />
+            Create <IconPlus />
           </Button>
         </div>
       </div>

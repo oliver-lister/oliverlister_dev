@@ -9,10 +9,19 @@ import {
 import CreatePostForm, { CreatePostFormData } from "./CreatePostForm";
 import axios from "axios";
 import { useUser } from "@/libs/store/user";
+import { IconLayoutDashboard } from "@tabler/icons-react";
+import Button from "@/components/Button/Button";
+import { useState } from "react";
+import Link from "next/link";
 
 const CreatePost = () => {
   const user = useUser((state) => state.user);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+
   const handleSubmit = async (values: CreatePostFormData) => {
+    setIsLoading(true);
     const { title, description, files } = values;
     const file = files[0]; // select first file in file arr from input
 
@@ -22,7 +31,10 @@ const CreatePost = () => {
       description,
     });
 
-    if (dbError) throw dbError;
+    if (dbError) {
+      setError(dbError.message);
+      throw dbError;
+    }
 
     const post_id = dbData?.post_id;
     if (!post_id) throw new Error("No post_id retrieved from supabase");
@@ -34,7 +46,11 @@ const CreatePost = () => {
       fileType: file.type,
       post_id,
     });
-    if (urlError) throw urlError;
+
+    if (urlError) {
+      setError(urlError.message);
+      throw urlError;
+    }
 
     // upload file directly to R2 bucket using PUT request to presignedurl
     await axios.put(urlData.presignedUrl, file, {
@@ -49,6 +65,11 @@ const CreatePost = () => {
       image_url: urlData.imageUrl,
     });
 
+    if (updateError) {
+      setError(updateError.message);
+      throw updateError;
+    }
+
     // server action to create MDX file
     const slug = dbData.slug;
     const [mdxData, mdxError] = await createMDXFile({
@@ -56,17 +77,64 @@ const CreatePost = () => {
       post_id,
     });
 
-    if (updateError) throw updateError;
+    if (mdxError) {
+      setError(mdxError.message);
+      throw mdxError;
+    }
+
+    setIsLoading(false);
+    setIsSubmitted(true);
   };
 
   return (
-    <div className="grid gap-4">
-      <h2 className="text-3xl font-semibold">Create Post</h2>
-      <p>
-        You're logged in as{" "}
-        <span className="font-semibold">{user?.user_metadata.user_name}</span>.
-      </p>
-      <CreatePostForm onSubmit={handleSubmit} isLoading={false} />
+    <div className="grid gap-2">
+      <div className="flex justify-between">
+        <h2 className="text-3xl font-semibold">
+          {isSubmitted ? "Post Created" : "Create Post"}
+        </h2>
+        <Button variant="accent" href="/blog/dashboard">
+          Dashboard <IconLayoutDashboard />
+        </Button>
+      </div>
+      {isSubmitted ? null : (
+        <p>
+          You're logged in as{" "}
+          <span className="font-semibold">{user?.user_metadata.user_name}</span>
+          .
+        </p>
+      )}
+      {error ? (
+        <>
+          <div className="p-2 bg-red-200 border-2 border-red-500 text-red-500 rounded-lg">
+            <span className="font-bold">Error:</span> {error}
+          </div>
+        </>
+      ) : null}
+      {isSubmitted ? (
+        <>
+          <p>
+            You've successfully created a new blog post. To view it in the
+            Dashboard,{" "}
+            <Link href="/blog/dashboard" className="text-accent underline">
+              click here
+            </Link>
+            .
+          </p>
+          <p>
+            To create another new blog post,{" "}
+            <Link
+              href="/blog/dashboard/create"
+              onClick={() => window.location.reload()}
+              className="text-accent underline"
+            >
+              click here
+            </Link>
+            .
+          </p>
+        </>
+      ) : (
+        <CreatePostForm onSubmit={handleSubmit} isLoading={isLoading} />
+      )}
     </div>
   );
 };
