@@ -12,7 +12,7 @@ const TechnologyCard: React.FC<Technology> = ({
 
   return (
     <article
-      className="w-full h-full p-10 rounded-lg grid justify-items-center items-center gap-2 transition hover:scale-105 bg-zinc-200 dark:bg-zinc-600"
+      className="w-full h-full p-10 rounded-lg grid justify-items-center items-center gap-2 transition hover:scale-105 bg-secondary dark:bg-primary"
       style={boxShadowStyle}
     >
       {imageSrc ? (

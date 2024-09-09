@@ -131,7 +131,7 @@ export default function Technologies() {
             id="search-technologies"
             type="text"
             onChange={(e) => setSearchText(e.currentTarget.value)}
-            className="border-2 py-2 px-3 text-md rounded-lg border-primary bg-zinc-100 text-primary | dark:border-secondary dark:bg-zinc-400"
+            className="border-2 py-2 px-3 text-md rounded-lg border-primary bg-secondary text-primary | dark:border-secondary dark:bg-primary"
           />
         </div>
         <div className="grid grid-cols-1 justify-items-center items-center gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
