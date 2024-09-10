@@ -1,5 +1,6 @@
 "use client";
 
+import { BaseSyntheticEvent } from "react";
 import { ChangeHandler, RefCallBack } from "react-hook-form";
 
 type SwitchProps = {
