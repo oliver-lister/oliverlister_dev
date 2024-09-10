@@ -17,6 +17,10 @@ const nextConfig = {
         hostname: "avatars.githubusercontent.com",
         protocol: "https",
       },
+      {
+        hostname: "media.oliverlister.dev",
+        protocol: "https",
+      },
     ],
   },
   // Configure pageExtensions to include md and mdx
