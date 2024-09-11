@@ -4,7 +4,6 @@ import { Metadata, ResolvingMetadata } from "next";
 import axios from "axios";
 import PostHeader from "./_components/PostHeader/PostHeader";
 import MDXContent from "./_components/PostHeader/MDXContent";
-import MDXTest from "./MDXTest";
 
 type BlogPostProps = {
   params: { slug: string };
@@ -66,8 +65,7 @@ const BlogPost: React.FC<BlogPostProps> = async ({ params }) => {
   return (
     <article className="grid gap-6">
       <PostHeader postMetadata={postMetadata} />
-      <MDXTest slug={slug} />
-      {/* <MDXContent slug={slug} /> */}
+      <MDXContent slug={slug} />
     </article>
   );
 };
