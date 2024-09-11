@@ -17,16 +17,15 @@ export default function ProjectCard({
           <Image
             src={imageSrc}
             alt={title}
-            width={1000}
-            height={1000}
-            className="object-cover w-full h-full"
+            fill
+            className="object-cover object-center"
           />
         ) : null}
       </div>
       <div className="mt-auto border-t p-6 backdrop-blur-md bg-primary/40 text-secondary border-secondary/40">
         <div className="grid gap-2">
           <h3 className="font-bold text-xl">{title}</h3>
-          <p className="text-xs opacity-90">{description}</p>
+          <p className="text-xs opacity-90 leading-relaxed">{description}</p>
         </div>
         <div className="mt-4 flex gap-6 items-center">
           <Button
@@ -43,7 +42,7 @@ export default function ProjectCard({
             href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="border-secondary text-secondary bg-primary hover:bg-secondary hover:text-primary-400"
+            className="border-secondary text-secondary bg-primary hover:bg-secondary hover:text-primary"
           >
             <IconBrandGithub />
             Code

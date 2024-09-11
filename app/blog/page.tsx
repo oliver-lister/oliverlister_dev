@@ -1,5 +1,9 @@
-import GradientUnderline from "@/components/GradientUnderline";
+import BlogGrid from "./_components/BlogGrid";
 
 export default function Blog() {
-  return <div></div>;
+  return (
+    <div>
+      <BlogGrid />
+    </div>
+  );
 }

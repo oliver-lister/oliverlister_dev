@@ -29,7 +29,7 @@ const PostHeader: React.FC<PostHeaderProps> = async ({ postMetadata }) => {
     .single();
 
   return (
-    <>
+    <header className="grid gap-4">
       <div className="grid gap-2">
         <h2 className="text-6xl font-semibold">{postMetadata.title}</h2>
         <div className="flex justify-between items-center">
@@ -50,7 +50,7 @@ const PostHeader: React.FC<PostHeaderProps> = async ({ postMetadata }) => {
           className="object-center object-cover"
         />
       </div>
-    </>
+    </header>
   );
 };
 

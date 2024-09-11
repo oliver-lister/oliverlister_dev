@@ -15,7 +15,7 @@ function Hero() {
                 <h1 className="text-responsive font-bold text-clip-gradient">
                   Oliver Lister.
                 </h1>
-                <h2 className="text-sm md:text-md">
+                <h2 className="text-md">
                   I&apos;m a <strong>frontend developer</strong> crafting
                   seamless digital experiences with code.
                 </h2>

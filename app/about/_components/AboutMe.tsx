@@ -13,21 +13,21 @@ const AboutMe = () => {
             <h1 className="text-5xl font-bold">About Me</h1>
           </GradientUnderline>
           <div className="grid gap-4">
-            <p>
+            <p className="leading-relaxed">
               Hi there, I&apos;m <strong>Oliver Lister</strong>, a Sydney-based
               frontend web developer and music and sound professional. While
               I&apos;ve always had a passion for creativity, I love the
               technical challenges and problem solving that come with software
               development.
             </p>
-            <p>
+            <p className="leading-relaxed">
               With a plethora of knowledge in music and sound production and
               management, I bring a fresh perspective and a keen eye for detail
               to every project. From producing music compositions to overseeing
               projects end-to-end, I&apos;ve honed my skills in managing complex
               processes and delivering consistent results.
             </p>
-            <p>
+            <p className="leading-relaxed">
               Whether it&apos;s crafting sleek interfaces or building dynamic
               applications, I&apos;m eager to learn, grow, and make connections.
             </p>

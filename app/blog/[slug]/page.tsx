@@ -6,6 +6,9 @@ import Link from "next/link";
 import { Metadata, ResolvingMetadata } from "next";
 import axios from "axios";
 import PostHeader from "./_components/PostHeader/PostHeader";
+import { useMDXComponents } from "@/app/mdx-components";
+import { compile } from "@mdx-js/mdx";
+import rehypeStarryNight from "rehype-starry-night";
 
 type BlogPostProps = {
   params: { slug: string };
@@ -65,14 +68,27 @@ const BlogPost: React.FC<BlogPostProps> = async ({ params }) => {
     );
   }
 
+  // const compiled = await compile(
+  //   path.join(process.cwd(), "posts", `${slug}.mdx`)
+  // );
+
+  const code = `~~~js
+console.log(1)
+~~~`;
+
+  console.log(
+    String(await compile(code, { rehypePlugins: [rehypeStarryNight] }))
+  );
+
   // Load the corresponding MDX file
   const postFilePath = path.join(process.cwd(), "posts", `${slug}.mdx`);
   const fileContent = fs.readFileSync(postFilePath, "utf-8");
+  const components = useMDXComponents({});
 
   return (
-    <article className="grid gap-4">
+    <article className="grid gap-6">
       <PostHeader postMetadata={postMetadata} />
-      <MDXRemote source={fileContent} />
+      <MDXRemote source={fileContent} components={components} />
     </article>
   );
 };
