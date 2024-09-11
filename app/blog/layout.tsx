@@ -1,5 +1,4 @@
 import GradientUnderline from "@/components/GradientUnderline";
-import AuthState from "../_components/Layout/Header/AuthState/AuthState";
 
 const BlogLayout = ({ children }: { children: React.ReactNode }) => {
   return (
