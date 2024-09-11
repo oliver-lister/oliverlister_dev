@@ -1,18 +1,14 @@
-import { compile } from "@mdx-js/mdx";
-import rehypeStarryNight from "rehype-starry-night";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote/rsc";
+import path from "path";
+import fs from "fs";
+import { useMDXComponents } from "@/app/mdx-components";
 
 const MDXContent = async ({ slug }: { slug: string }) => {
-  const code = `~~~js
-console.log(1)
-~~~`;
+  const postFilePath = path.join(process.cwd(), "posts", `${slug}.mdx`);
+  const fileContent = fs.readFileSync(postFilePath, "utf-8");
+  const components = useMDXComponents({});
 
-  const compiledCode = await compile(code, {
-    rehypePlugins: [rehypeStarryNight],
-  });
-
-  console.log(String(compiledCode));
-
-  return <div>hi</div>;
+  return <MDXRemote source={fileContent} components={components} />;
 };
 
 export default MDXContent;

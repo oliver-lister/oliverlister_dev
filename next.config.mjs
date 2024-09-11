@@ -1,13 +1,4 @@
-const withMDX = require("@next/mdx")({
-  extension: /\.(md|mdx)/,
-  // Optionally provide remark and rehype plugins
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-    // If you use `MDXProvider`, uncomment the following line.
-    // providerImportSource: "@mdx-js/react",
-  },
-});
+import createMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -35,5 +26,16 @@ const nextConfig = {
   },
 };
 
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+  // Optionally provide remark and rehype plugins
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+    // If you use `MDXProvider`, uncomment the following line.
+    // providerImportSource: "@mdx-js/react",
+  },
+});
+
 // Merge MDX config with Next.js config
-module.exports = withMDX(nextConfig);
+export default withMDX(nextConfig);

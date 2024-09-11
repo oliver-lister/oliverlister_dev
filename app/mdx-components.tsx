@@ -1,3 +1,4 @@
+import SyntaxHighlight from "@/components/SyntaxHighlight/SyntaxHighlight";
 import type { MDXComponents } from "mdx/types";
 import Image, { ImageProps } from "next/image";
 import Link, { LinkProps } from "next/link";
@@ -29,6 +30,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {props.children}
       </Link>
     ),
+    code: SyntaxHighlight,
     img: (props) => (
       <Image
         sizes="100vw"
