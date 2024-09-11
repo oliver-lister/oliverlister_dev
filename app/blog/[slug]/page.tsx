@@ -1,21 +1,15 @@
-import fs from "fs";
-import path from "path";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { createClient } from "@/libs/utils/supabase/server";
 import Link from "next/link";
 import { Metadata, ResolvingMetadata } from "next";
 import axios from "axios";
 import PostHeader from "./_components/PostHeader/PostHeader";
-import { useMDXComponents } from "@/app/mdx-components";
-import { compile } from "@mdx-js/mdx";
-import rehypeStarryNight from "rehype-starry-night";
+import MDXContent from "./_components/PostHeader/MDXContent";
 
 type BlogPostProps = {
   params: { slug: string };
 };
 
 // Dynamic metadata
-
 export async function generateMetadata(
   { params }: BlogPostProps,
   parent: ResolvingMetadata
@@ -68,27 +62,10 @@ const BlogPost: React.FC<BlogPostProps> = async ({ params }) => {
     );
   }
 
-  // const compiled = await compile(
-  //   path.join(process.cwd(), "posts", `${slug}.mdx`)
-  // );
-
-  //   const code = `~~~js
-  // console.log(1)
-  // ~~~`;
-
-  //   console.log(
-  //     String(await compile(code, { rehypePlugins: [rehypeStarryNight] }))
-  //   );
-
-  // Load the corresponding MDX file
-  const postFilePath = path.join(process.cwd(), "posts", `${slug}.mdx`);
-  const fileContent = fs.readFileSync(postFilePath, "utf-8");
-  const components = useMDXComponents({});
-
   return (
     <article className="grid gap-6">
       <PostHeader postMetadata={postMetadata} />
-      <MDXRemote source={fileContent} components={components} />
+      <MDXContent slug={slug} />
     </article>
   );
 };

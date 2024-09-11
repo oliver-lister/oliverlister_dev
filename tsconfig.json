@@ -30,6 +30,6 @@
     ".next/types/**/*.ts",
     "jest.config.ts",
     "app/blog/[slug]/_components/PostHeader"
-  ],
+, "example.ts"  ],
   "exclude": ["node_modules"]
 }

@@ -45,6 +45,7 @@ const PostHeader: React.FC<PostHeaderProps> = async ({ postMetadata }) => {
         <Image
           src={postMetadata.image_url}
           fill
+          priority
           sizes="(max-width: 768px) 768px, (max-width: 1200px) 1200px, 1560px"
           alt="banner"
           className="object-center object-cover"
