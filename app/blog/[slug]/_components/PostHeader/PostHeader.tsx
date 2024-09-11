@@ -41,12 +41,13 @@ const PostHeader: React.FC<PostHeaderProps> = async ({ postMetadata }) => {
           <SocialShareIcons url={url} />
         </div>
       </div>
-      <div className="overflow-hidden w-full max-h-[60vh]">
+      <div className="overflow-hidden relative w-full min-h-[60vh] max-h-[80vh] object-center">
         <Image
           src={postMetadata.image_url}
-          width={1240}
-          height={1240}
+          fill
+          sizes="(max-width: 768px) 768px, (max-width: 1200px) 1200px, 1560px"
           alt="banner"
+          className="object-center object-cover"
         />
       </div>
     </>
