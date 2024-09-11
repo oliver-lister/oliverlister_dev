@@ -72,13 +72,13 @@ const BlogPost: React.FC<BlogPostProps> = async ({ params }) => {
   //   path.join(process.cwd(), "posts", `${slug}.mdx`)
   // );
 
-  const code = `~~~js
-console.log(1)
-~~~`;
+  //   const code = `~~~js
+  // console.log(1)
+  // ~~~`;
 
-  console.log(
-    String(await compile(code, { rehypePlugins: [rehypeStarryNight] }))
-  );
+  //   console.log(
+  //     String(await compile(code, { rehypePlugins: [rehypeStarryNight] }))
+  //   );
 
   // Load the corresponding MDX file
   const postFilePath = path.join(process.cwd(), "posts", `${slug}.mdx`);
