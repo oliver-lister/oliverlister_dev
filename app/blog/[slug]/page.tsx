@@ -3,28 +3,43 @@ import path from "path";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { createClient } from "@/libs/utils/supabase/server";
 import Link from "next/link";
-import Image from "next/image";
-import { format } from "date-fns";
-import {
-  IconBrandFacebook,
-  IconBrandLinkedin,
-  IconBrandX,
-} from "@tabler/icons-react";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
+import axios from "axios";
+import PostHeader from "./_components/PostHeader/PostHeader";
 
 type BlogPostProps = {
   params: { slug: string };
 };
 
+// Dynamic metadata
+
+export async function generateMetadata(
+  { params }: BlogPostProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const slug = params.slug;
+
+  // fetch title, description and image based on slug
+  const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/posts?slug=eq.${slug}&apikey=${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`;
+  const res = await axios.get(url);
+
+  const { title, description, image_url } = res.data[0];
+
+  return {
+    title: `${title} | Oliver Lister`,
+    description: `${description}`,
+    openGraph: {
+      title: title,
+      description: description,
+      siteName: "Oliver Lister Portfolio Website",
+      url: encodeURIComponent(process.env.BASE_URL + "/blog/" + slug),
+      images: [image_url],
+    },
+  };
+}
+
 const BlogPost: React.FC<BlogPostProps> = async ({ params }) => {
   const slug = params.slug;
-  const url = encodeURIComponent(process.env.BASE_URL + "/blog/" + slug);
-
-  const socialShareLinks = {
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-    x: `https://twitter.com/intent/tweet?url=${url}&text=`,
-    linkedin: `http://www.linkedin.com/shareArticle?mini=true&url=${url}&title=`,
-  };
 
   // Fetch metadata from Supabase
   const supabase = createClient();
@@ -50,76 +65,13 @@ const BlogPost: React.FC<BlogPostProps> = async ({ params }) => {
     );
   }
 
-  const { data: authorMetadata, error: authorError } = await supabase
-    .from("users")
-    .select("display_name, image_url")
-    .eq("id", postMetadata.author_id)
-    .single();
-
   // Load the corresponding MDX file
   const postFilePath = path.join(process.cwd(), "posts", `${slug}.mdx`);
   const fileContent = fs.readFileSync(postFilePath, "utf-8");
 
-  const date = format(new Date(postMetadata.created_at), "PPPP");
-
   return (
     <article className="grid gap-4">
-      <div className="grid gap-2">
-        <h2 className="text-6xl font-semibold">{postMetadata.title}</h2>
-        <div className="flex justify-between items-center">
-          <div className="flex gap-2 items-center">
-            <Link
-              href={`/blog/authors/${authorMetadata?.display_name}`}
-              className="rounded-full border-[2px] border-accent overflow-hidden hover:border-accent-400"
-            >
-              <Image
-                src={authorMetadata?.image_url}
-                alt="Author avatar"
-                width={50}
-                height={50}
-              />
-            </Link>
-            <div className="grid">
-              <Link
-                href={`/blog/authors/${authorMetadata?.display_name}`}
-                className="font-medium text-accent underline hover:text-accent-400"
-              >
-                {authorMetadata?.display_name}
-              </Link>
-              <p className="text-sm font-thin">{date}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <p className="font-thin text-sm">Share</p>
-            <a
-              href={socialShareLinks.facebook}
-              className="hover:scale-105 transition-all hover:text-accent"
-            >
-              <IconBrandFacebook stroke={1} />
-            </a>
-            <a
-              href={socialShareLinks.x}
-              className="hover:scale-105 transition-all hover:text-accent"
-            >
-              <IconBrandX stroke={1} />
-            </a>
-            <a
-              href={socialShareLinks.linkedin}
-              className="hover:scale-105 transition-all hover:text-accent"
-            >
-              <IconBrandLinkedin stroke={1} />
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="overflow-hidden w-full max-h-[60vh]">
-        <Image
-          src={postMetadata.image_url}
-          width={1240}
-          height={1240}
-          alt="banner"
-        />
-      </div>
+      <PostHeader postMetadata={postMetadata} />
       <MDXRemote source={fileContent} />
     </article>
   );

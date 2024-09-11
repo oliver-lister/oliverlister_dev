@@ -2,6 +2,7 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { createClient } from "@/libs/utils/supabase/server";
 import Image from "next/image";
+import Avatar from "../Avatar/Avatar";
 
 type BlogHorizontalCardProps = {
   author_id: number;
@@ -30,18 +31,9 @@ const BlogHorizontalCard: React.FC<BlogHorizontalCardProps> = async ({
 
   return (
     <Link href={`/blog/${slug}`} className="h-full">
-      <article className="h-full max-h-[150px] grid shadow-md rounded-lg p-4 bg-zinc-200 dark:bg-zinc-600 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors hover:cursor-pointer">
+      <article className="h-full grid shadow-md rounded-lg p-4 bg-zinc-200 dark:bg-zinc-600 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors hover:cursor-pointer">
         <div className="self-start gap-2 flex items-center">
-          <div className="w-8 h-8 rounded-full border-[2px] border-accent overflow-hidden">
-            {author ? (
-              <Image
-                src={author.image_url}
-                alt="Author avatar"
-                width={100}
-                height={100}
-              />
-            ) : null}
-          </div>
+          <Avatar src={author.image_url} size={30} />
           <p className="font-semibold">{title}</p>
         </div>
 

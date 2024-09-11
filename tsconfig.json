@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "jest.config.ts"
+    "jest.config.ts",
+    "app/blog/[slug]/_components/PostHeader"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,4 +1,4 @@
-import BlogHorizontalCard from "@/components/BlogHorizontalCard";
+import BlogHorizontalCard from "@/components/BlogHorizontalCard/BlogHorizontalCard";
 import MailingList from "./MailingList/MailingList";
 import { createClient } from "@/libs/utils/supabase/server";
 

@@ -5,6 +5,7 @@ import Button from "@/components/Button/Button";
 import Image from "next/image";
 import React, { useState } from "react";
 import { IconLayoutDashboard, IconLogout, IconUser } from "@tabler/icons-react";
+import Avatar from "@/components/Avatar/Avatar";
 
 type ProfileProps = {
   user: User;
@@ -60,12 +61,10 @@ const Profile: React.FC<ProfileProps> = ({ user, setUser }) => {
   return (
     <>
       <Popover content={popup} arrow={true}>
-        <Image
+        <Avatar
           src={user.user_metadata.avatar_url}
-          alt={user.user_metadata.user_name}
-          width={50}
-          height={50}
-          className="rounded-full border-2 border-primary dark:border-secondary hover:border-accent dark:hover:border-accent cursor-pointer"
+          size={50}
+          className="border-primary dark:border-secondary hover:border-accent dark:hover:border-accent cursor-pointer"
         />
       </Popover>
     </>
