@@ -1,5 +1,76 @@
 # Welcome to my MDX page!
 
+Whether you're using Redux Toolkit, Zustand, React's Context API, or any other
+global state management solution for your React.js e-commerce store, the
+fundamental approach to building a robust shopping cart remains consistent.
+
+# The Setup
+
+## Products
+
+Building a sensible shopping cart starts with your products themselves. Products
+need to have the following key features:
+
+1. **Unique Identifier (ID)** – Each product should have a unique identifier to
+   distinguish it from others in the catalog. This ID will help manage the
+   products in the cart, ensuring you can correctly reference and manipulate
+   each one.
+
+2. **Name and Description** – Every product should include a name and a short
+   description to help users identify what they’re purchasing. These details
+   make the shopping experience clearer and more user-friendly.
+
+3. **Price** – The product’s price must be easily accessible. This is essential
+   for calculating the total cost in the cart, applying discounts, and showing
+   users an accurate breakdown of their expenses. You may also wish to store
+   historical price data for features such as sales.
+
+4. **Stock** – Keeping track of stock levels is critical for ensuring the
+   availability of products. Managing stock effectively allows the cart to
+   display accurate product availability and prevents users from adding items
+   that are out of stock.
+
+5. **Image** – An image adds to the clarity and attractiveness of the product
+   page and cart. If you're storing multiple images per product, this will be an
+   array. The image is best stored as a URL.
+
+6. **Date of Creation** - Its usually good practice to store the date when the
+   product was created for use later on with filtering and sorting mechanisms.
+
+7. **Attributes (Optional)** – Products may have attributes such as available
+   sizes or colors. Allowing users to select and modify these attributes within
+   the cart ensures they get the exact product they need.
+
+In TypeScript you could type the Product object as follows:
+
+```js
+type size = "S" | "M" | "L" | "XL";
+type color = {
+  label: string,
+  hex: string,
+};
+
+type Product = {
+  id: number,
+  name: string,
+  description: string,
+  price: number,
+  stock: number,
+  image: string,
+  created_at: Date,
+  attributes: {
+    sizes: size[],
+    colors: color[],
+  },
+};
+```
+
+Once the products are well-defined, the next step is to create the cart
+functionality, which includes adding, updating, and removing items from the
+cart.
+
+# Giving Customers What They Expect
+
 This is some **bold** and _italics_ text.
 
 sd.
@@ -11,6 +82,7 @@ This is a list in markdown:
 - Three
 
 ```js
+// tip.js
 console.log(1);
 console.log(2);
 function yeboy() {

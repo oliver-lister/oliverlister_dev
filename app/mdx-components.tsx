@@ -22,6 +22,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {props.children}
       </a>
     ),
+    ol: ({ children }) => (
+      <ol className="list-decimal pl-6 grid gap-2">{children}</ol>
+    ),
     Link: (props) => (
       <Link
         className="text-accent font-medium hover:underline"
