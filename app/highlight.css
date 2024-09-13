@@ -13,10 +13,6 @@ span {
   Current colors taken from GitHub's CSS
 */
 
-.hljs {
-  color: #c9d1d9;
-  background: #0d1117;
-}
 .hljs-doctag,
 .hljs-keyword,
 .hljs-meta .hljs-keyword,
