@@ -23,7 +23,7 @@ export async function generateMetadata(
   const { title, description, image_url } = res.data[0];
 
   return {
-    title: `${title} | Oliver Lister`,
+    title: `${title} - Oliver Lister | Blog`,
     description: `${description}`,
     openGraph: {
       title: title,

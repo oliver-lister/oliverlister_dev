@@ -3,10 +3,8 @@
 import { IconCopy } from "@tabler/icons-react";
 import React, { DetailedHTMLProps, HTMLAttributes } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import atelierPlateauLight from "react-syntax-highlighter/dist/cjs/styles/hljs/atelier-plateau-light";
-import atelierPlateauDark from "react-syntax-highlighter/dist/cjs/styles/hljs/atelier-plateau-dark";
+import a11yDark from "react-syntax-highlighter/dist/cjs/styles/hljs/a11y-dark";
 import Button from "../Button/Button";
-import { useTheme } from "next-themes";
 
 interface SyntaxHighlightProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {}
@@ -16,7 +14,6 @@ export default function SyntaxHighlight({
   children,
 }: SyntaxHighlightProps) {
   const language = className?.replace("language-", "");
-  const { theme } = useTheme();
 
   // Handle children as an array or single node and convert to string
   const formattedChildren = Array.isArray(children)
@@ -39,13 +36,9 @@ export default function SyntaxHighlight({
       </Button>
       <SyntaxHighlighter
         language={language}
-        style={
-          theme
-            ? theme === "light"
-              ? atelierPlateauLight
-              : atelierPlateauDark
-            : atelierPlateauLight
-        }
+        style={a11yDark}
+        wrapLongLines
+        wrapLines
       >
         {formattedChildren}
       </SyntaxHighlighter>

@@ -1,5 +1,14 @@
+import { Metadata } from "next";
 import GradientUnderline from "../../components/GradientUnderline";
+import { defaultUrl } from "../layout";
 import ProjectsCarousel from "./_components/ProjectsCarousel/ProjectsCarousel";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(defaultUrl),
+  title: "Projects - Oliver Lister | Web Developer",
+  description:
+    "Check out my portfolio of web development projects. From interactive web applications to stunning designs, I showcase how I bring ideas to life.",
+};
 
 export type Project = {
   title: string;

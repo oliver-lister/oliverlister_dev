@@ -8,7 +8,7 @@ import ModalContextProvider from "../context/ModalContext";
 import ModalManager from "../components/Modal/ModalManager";
 import SessionProvider from "@/components/SessionProvider";
 
-const defaultUrl = process.env.NEXT_URL
+export const defaultUrl = process.env.NEXT_URL
   ? `https://${process.env.NEXT_URL}`
   : "http://localhost:3000";
 
@@ -16,8 +16,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Oliver Lister | Portfolio Website",
-  description: "A frontend web developer based in Sydney, Australia.",
+  title: "Oliver Lister | Portfolio & Blog - Web Developer",
+  description:
+    "Welcome to my portfolio and blog! I&apos;m Oliver Lister, a web developer and creative project manager. Explore my projects, read my latest blog posts, and learn more about my journey and expertise.",
 };
 
 export default function RootLayout({
