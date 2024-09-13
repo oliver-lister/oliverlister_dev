@@ -43,25 +43,25 @@ need to have the following key features:
 
 In TypeScript you could type the Product object as follows:
 
-```js
+```tsx
 type size = "S" | "M" | "L" | "XL";
 type color = {
-  label: string,
-  hex: string,
+  label: string;
+  hex: string;
 };
 
 type Product = {
-  id: number,
-  name: string,
-  description: string,
-  price: number,
-  stock: number,
-  image: string,
-  created_at: Date,
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  stock: number;
+  image: string;
+  created_at: Date;
   attributes: {
-    sizes: size[],
-    colors: color[],
-  },
+    sizes: size[];
+    colors: color[];
+  };
 };
 ```
 
