@@ -5,14 +5,11 @@ import axios from "axios";
 import PostHeader from "./_components/PostHeader/PostHeader";
 import MDXContent from "./_components/MDXContent";
 import PostFooter from "./_components/PostFooter/PostFooter";
+import { defaultUrl } from "@/app/layout";
 
 type BlogPostProps = {
   params: { slug: string };
 };
-
-export const defaultUrl = process.env.NEXT_URL
-  ? `https://${process.env.NEXT_URL}`
-  : "http://localhost:3000";
 
 // Dynamic metadata
 export async function generateMetadata(
