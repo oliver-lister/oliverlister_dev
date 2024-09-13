@@ -18,6 +18,7 @@ export default function ProjectCard({
             src={imageSrc}
             alt={title}
             fill
+            priority
             className="object-cover object-center"
           />
         ) : null}

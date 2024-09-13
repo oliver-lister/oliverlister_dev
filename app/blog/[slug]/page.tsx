@@ -4,6 +4,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import axios from "axios";
 import PostHeader from "./_components/PostHeader/PostHeader";
 import MDXContent from "./_components/PostHeader/MDXContent";
+import PostFooter from "./_components/PostFooter/PostFooter";
 
 type BlogPostProps = {
   params: { slug: string };
@@ -34,6 +35,15 @@ export async function generateMetadata(
     },
   };
 }
+
+export type postMetadata = {
+  title: string;
+  description: string;
+  created_at: string;
+  author_id: string;
+  image_url: string;
+  slug: string;
+};
 
 const BlogPost: React.FC<BlogPostProps> = async ({ params }) => {
   const slug = params.slug;
@@ -66,6 +76,7 @@ const BlogPost: React.FC<BlogPostProps> = async ({ params }) => {
     <article className="grid gap-6">
       <PostHeader postMetadata={postMetadata} />
       <MDXContent slug={slug} />
+      <PostFooter postMetadata={postMetadata} />
     </article>
   );
 };

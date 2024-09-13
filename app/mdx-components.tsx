@@ -3,6 +3,7 @@ import type { MDXComponents } from "mdx/types";
 import Image, { ImageProps } from "next/image";
 import Link, { LinkProps } from "next/link";
 import { AnchorHTMLAttributes } from "react";
+import AuthorInfo from "./blog/[slug]/_components/AuthorInfo";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -24,6 +25,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     ol: ({ children }) => (
       <ol className="list-decimal pl-6 grid gap-2">{children}</ol>
+    ),
+    blockquote: ({ children }) => (
+      <blockquote className="border-l-8 border-accent pl-4">
+        {children}
+      </blockquote>
     ),
     Link: (props) => (
       <Link

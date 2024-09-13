@@ -1,8 +1,9 @@
-# Welcome to my MDX page!
-
 Whether you're using Redux Toolkit, Zustand, React's Context API, or any other
 global state management solution for your React.js e-commerce store, the
-fundamental approach to building a robust shopping cart remains consistent.
+fundamental approach to building a robust shopping cart remains the same. Make
+it fool-proof, informative and **do what the user expects it to do**.
+
+---
 
 # The Setup
 
@@ -43,49 +44,271 @@ need to have the following key features:
 
 In TypeScript you could type the Product object as follows:
 
-```tsx
-type size = "S" | "M" | "L" | "XL";
-type color = {
-  label: string;
-  hex: string;
+```js
+// types.ts
+
+type Size = "S" | "M" | "L" | "XL";
+type Color = {
+  label: string,
+  hex: string,
 };
 
 type Product = {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  image: string;
-  created_at: Date;
+  id: number,
+  name: string,
+  description: string,
+  category: string,
+  price: number,
+  stock: number,
+  image: string,
+  created_at: Date,
   attributes: {
-    sizes: size[];
-    colors: color[];
-  };
+    sizes: Size[],
+    colors: Color[],
+  },
 };
 ```
 
-Once the products are well-defined, the next step is to create the cart
-functionality, which includes adding, updating, and removing items from the
-cart.
+---
 
-# Giving Customers What They Expect
+## Cart
 
-This is some **bold** and _italics_ text.
+Great, our Product object is now set up with all the essential fields. Next,
+let’s focus on the Cart. To minimise the amount of data stored locally in state,
+we'll reference the Product's ID and only retain the necessary fields:
 
-sd.
+1. **Unique Identifier (ID)** – Similar to products, cart items require a unique
+   identifier to differentiate between items that share the same product ID but
+   have different attributes, such as size or color.
 
-This is a list in markdown:
+2. **Selected Attributes** – It&apos;s essential to accurately track the user's
+   selected product attributes, such as color and size, to ensure a seamless
+   checkout.
 
-- One
-- Two
-- Three
+3. **Quantity** – The number of items the user wants to purchase must be
+   tracked. This allows the cart to accurately reflect the total cost and
+   inventory levels, ensuring the correct quantity is available for checkout.
+
+4. **Reference to the Product's ID** – Each cart item must reference the
+   original product ID to ensure it&apos;s connected to the correct product
+   details, such as name, description, and price.
 
 ```js
-// tip.js
-console.log(1);
-console.log(2);
-function yeboy() {
-  console.log(3);
+// types.ts
+
+type CartItem = {
+  id: number, // a new id to distinguish products with the same product id but different attributes
+  size: Size,
+  color: Color,
+  quantity: number,
+  product_id: number, // reference to the product's id for retrieving product data
+};
+
+type Cart = {
+  items: CartItem[],
+};
+```
+
+---
+
+# Manipulating The State
+
+Once the product and cart objects are properly set up, the next step is to
+handle cart operations like adding items, updating attributes, and removing
+items. Whether you're using Redux Toolkit, Zustand, or React's Context API, the
+logic follows the same fundamental principles.
+
+## Adding to Cart
+
+When adding an item to the cart, first check whether an item with the same
+product ID and attributes (like size and color) already exists. If it does,
+simply increase the quantity. If not, create a new CartItem and append it to the
+cart.
+
+**Steps**:
+
+1. Check if the product (with the selected attributes) is already in the cart.
+2. If it exists, update the quantity.
+3. If it doesn't exist, create a new cart item and add it to the state.
+
+```js
+// actions.ts
+
+function addToCart(state: Cart, newItem: CartItem): Cart {
+  const existingItem = state.items.find(
+    (item) =>
+      item.product_id === newItem.product_id &&
+      item.size === newItem.size &&
+      item.color.hex === newItem.color.hex
+  );
+
+  if (existingItem) {
+    return {
+      ...state,
+      items: state.items.map((item) =>
+        item.id === existingItem.id
+          ? { ...item, quantity: item.quantity + newItem.quantity }
+          : item
+      ),
+    };
+  } else {
+    return {
+      ...state,
+      items: [...state.items, { ...newItem, id: Date.now() }], // Generates a new unique ID
+    };
+  }
 }
 ```
+
+---
+
+## Updating the Cart
+
+Sometimes users may want to update the quantity or attributes of an item in the
+cart, such as changing the size or color. In this case, you'll need to find the
+item, update its attributes or quantity. It&apos;s also crucial to review the
+entire cart after making these changes to determine if any additional actions
+are needed.
+
+**Steps**:
+
+1. Find the item by its unique ID.
+2. Update the relevant attributes (size, color) or quantity.
+
+```js
+// actions.ts
+
+function updateCartItem(
+  state: Cart,
+  id: number,
+  newAttributes: { size?: Size, color?: Color, quantity?: number }
+): Cart {
+  return {
+    ...state,
+    items: state.items.map((item) =>
+      item.id === id ? { ...item, ...newAttributes } : item
+    ),
+  };
+}
+```
+
+**EDGE CASE**: Let's say a user has the following two cart items in their cart.
+
+```js
+const CartItem1 = {
+  id: 1,
+  size: "L",
+  color: "Violet",
+  quantity: 2,
+  product_id: 58,
+};
+
+const CartItem2 = {
+  id: 2,
+  size: "M",
+  color: "Violet",
+  quantity: 1,
+  product_id: 58,
+};
+```
+
+What would happen if we were to update the size of **CartItem1** to "M"?
+
+In the current implementation of the updateCartItem function, we would end up
+with two separate cart items that have exactly the same properties except for
+their id.
+
+> **SOLUTION**: We need to create a reusable function that iterates through the
+> cart items and checks for matches based on the product_id, size, and color
+> fields. If matching items are found, their quantities should be consolidated
+> into a single cart item. This function can be called at the end of the
+> updateCartItem function.
+
+```js
+// actions.ts
+
+function consolidateCartItems(state: Cart): Cart {
+  const consolidatedItems: CartItem[] = [];
+
+  // Iterate over each cart item
+  state.items.forEach((item) => {
+    // Check if item already exists in consolidatedItems
+    const existingItem = consolidatedItems.find(
+      (i) =>
+        i.product_id === item.product_id &&
+        i.size === item.size &&
+        i.color.hex === item.color.hex
+    );
+
+    if (existingItem) {
+      // If found, update the quantity
+      existingItem.quantity += item.quantity;
+    } else {
+      // If not found, add the new item to consolidatedItems
+      consolidatedItems.push({ ...item });
+    }
+  });
+
+  // Return the updated cart with consolidated items
+  return {
+    ...state,
+    items: consolidatedItems,
+  };
+}
+```
+
+---
+
+## Removing from the Cart
+
+To remove an item, simply filter it out of the cart by its unique ID.
+
+**Steps**:
+
+1. Find the item in the cart by its unique ID.
+2. Remove it from the cart state.
+
+```js
+// actions.ts
+
+function removeFromCart(state: Cart, itemId: number) {
+  return {
+    ...state,
+    items: state.items.filter((item) => item.id !== itemId),
+  };
+}
+```
+
+---
+
+## Calculating Total Price & Quantity
+
+It's important to provide users with real-time updates on their cart&apos;s
+total price and quantity. Whenever a change is made to the cart, call these
+functions.
+
+```js
+// actions.ts
+
+function calculateTotalPrice(state: Cart, products: Product[]) {
+  return state.items.reduce((total, item) => {
+    const product = products.find((p) => p.id === item.product_id);
+    return total + (product ? product.price * item.quantity : 0);
+  }, 0);
+}
+
+function calculateTotalQuantity(state: Cart) {
+  return state.items.reduce((total, item) => total + item.quantity, 0);
+}
+```
+
+---
+
+# Final Thoughts
+
+By following these principles, you can build a flexible and user-friendly
+shopping cart system for your e-commerce application. Remember to keep the user
+experience in mind, ensuring that the cart is easy to use, intuitive, and
+responsive to user actions. Whether you’re dealing with state management through
+Redux, Zustand, or Context API, the fundamentals remain the same: make it clear,
+concise, and reliable.

@@ -1,18 +1,12 @@
 import Image from "next/image";
-import AuthorInfo from "./_components/AuthorInfo";
+import AuthorInfo from "../AuthorInfo";
 import SocialShareIcons from "./_components/SocialShareIcons";
 import { format } from "date-fns";
 import { createClient } from "@/libs/utils/supabase/server";
+import { postMetadata } from "../../page";
 
 type PostHeaderProps = {
-  postMetadata: {
-    title: string;
-    description: string;
-    created_at: string;
-    author_id: string;
-    image_url: string;
-    slug: string;
-  };
+  postMetadata: postMetadata;
 };
 
 const PostHeader: React.FC<PostHeaderProps> = async ({ postMetadata }) => {

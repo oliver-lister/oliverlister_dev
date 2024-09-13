@@ -35,7 +35,7 @@ const projects: Project[] = [
     title: "MØDA-BEYOND Fullstack E-Commerce Platform",
     url: "https://oliver-lister.github.io/moda-beyond/",
     githubUrl: "https://github.com/oliver-lister/moda-beyond",
-    imageSrc: "/projects/moda-beyond.png",
+    imageSrc: "/projects/moda-beyond.webp",
     description:
       "A full-stack e-commerce store, where customers can browse a wide array of clothing products across mens, womens and kids categories. Users can easily create an account, assemble their shopping cart, and securely process payments through the Stripe API, collecting shipping information along the way.",
     tags: [
