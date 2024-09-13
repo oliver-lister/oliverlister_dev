@@ -1,4 +1,5 @@
 import createMDX from "@next/mdx";
+import rehypeStarryNight from "rehype-starry-night";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -31,7 +32,7 @@ const withMDX = createMDX({
   // Optionally provide remark and rehype plugins
   options: {
     remarkPlugins: [],
-    rehypePlugins: [],
+    rehypePlugins: [rehypeStarryNight],
     // If you use `MDXProvider`, uncomment the following line.
     // providerImportSource: "@mdx-js/react",
   },

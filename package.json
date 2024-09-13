@@ -32,7 +32,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.51.5",
     "react-popper": "^2.3.0",
-    "react-syntax-highlighter": "^15.5.0",
+    "rehype-starry-night": "^2.1.0",
     "resend": "^3.2.0",
     "tailwindcss": "3.4.1",
     "typescript": "5.3.3",

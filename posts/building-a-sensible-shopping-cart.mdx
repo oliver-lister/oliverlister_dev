@@ -1,5 +1,5 @@
 Whether you're using Redux Toolkit, Zustand, React's Context API, or any other
-global state management solution for your React.js e-commerce store, the
+global state management solution for your React.ts e-commerce store, the
 fundamental approach to building a robust shopping cart remains the same. Make
 it fool-proof, informative and **do what the user expects it to do**.
 
@@ -44,28 +44,28 @@ need to have the following key features:
 
 In TypeScript you could type the Product object as follows:
 
-```js
+```ts
 // types.ts
 
 type Size = "S" | "M" | "L" | "XL";
 type Color = {
-  label: string,
-  hex: string,
+  label: string;
+  hex: string;
 };
 
 type Product = {
-  id: number,
-  name: string,
-  description: string,
-  category: string,
-  price: number,
-  stock: number,
-  image: string,
-  created_at: Date,
+  id: number;
+  name: string;
+  description: string;
+  category: string;
+  price: number;
+  stock: number;
+  image: string;
+  created_at: Date;
   attributes: {
-    sizes: Size[],
-    colors: Color[],
-  },
+    sizes: Size[];
+    colors: Color[];
+  };
 };
 ```
 
@@ -93,19 +93,19 @@ we'll reference the Product's ID and only retain the necessary fields:
    original product ID to ensure it&apos;s connected to the correct product
    details, such as name, description, and price.
 
-```js
+```ts
 // types.ts
 
 type CartItem = {
-  id: number, // a new id to distinguish products with the same product id but different attributes
-  size: Size,
-  color: Color,
-  quantity: number,
-  product_id: number, // reference to the product's id for retrieving product data
+  id: number; // a new id to distinguish products with the same product id but different attributes
+  size: Size;
+  color: Color;
+  quantity: number;
+  product_id: number; // reference to the product's id for retrieving product data
 };
 
 type Cart = {
-  items: CartItem[],
+  items: CartItem[];
 };
 ```
 
@@ -131,7 +131,7 @@ cart.
 2. If it exists, update the quantity.
 3. If it doesn't exist, create a new cart item and add it to the state.
 
-```js
+```ts
 // actions.ts
 
 function addToCart(state: Cart, newItem: CartItem): Cart {
@@ -175,13 +175,13 @@ are needed.
 1. Find the item by its unique ID.
 2. Update the relevant attributes (size, color) or quantity.
 
-```js
+```ts
 // actions.ts
 
 function updateCartItem(
   state: Cart,
   id: number,
-  newAttributes: { size?: Size, color?: Color, quantity?: number }
+  newAttributes: { size?: Size; color?: Color; quantity?: number }
 ): Cart {
   return {
     ...state,
@@ -194,7 +194,7 @@ function updateCartItem(
 
 **EDGE CASE**: Let's say a user has the following two cart items in their cart.
 
-```js
+```ts
 const CartItem1 = {
   id: 1,
   size: "L",
@@ -224,7 +224,7 @@ their id.
 > into a single cart item. This function can be called at the end of the
 > updateCartItem function.
 
-```js
+```ts
 // actions.ts
 
 function consolidateCartItems(state: Cart): Cart {
@@ -268,7 +268,7 @@ To remove an item, simply filter it out of the cart by its unique ID.
 1. Find the item in the cart by its unique ID.
 2. Remove it from the cart state.
 
-```js
+```ts
 // actions.ts
 
 function removeFromCart(state: Cart, itemId: number) {
@@ -287,7 +287,7 @@ It's important to provide users with real-time updates on their cart&apos;s
 total price and quantity. Whenever a change is made to the cart, call these
 functions.
 
-```js
+```ts
 // actions.ts
 
 function calculateTotalPrice(state: Cart, products: Product[]) {
