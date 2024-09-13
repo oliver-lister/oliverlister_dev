@@ -7,6 +7,7 @@ import { ThemeProvider } from "next-themes";
 import ModalContextProvider from "../context/ModalContext";
 import ModalManager from "../components/Modal/ModalManager";
 import SessionProvider from "@/components/SessionProvider";
+import { MDXProvider } from "@mdx-js/react";
 
 export const defaultUrl = process.env.NEXT_URL
   ? `https://${process.env.NEXT_URL}`

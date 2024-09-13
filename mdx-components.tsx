@@ -3,7 +3,6 @@ import type { MDXComponents } from "mdx/types";
 import Image, { ImageProps } from "next/image";
 import Link, { LinkProps } from "next/link";
 import { AnchorHTMLAttributes } from "react";
-import AuthorInfo from "./blog/[slug]/_components/AuthorInfo";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {

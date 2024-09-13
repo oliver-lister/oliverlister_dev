@@ -24,8 +24,6 @@ export default function SyntaxHighlight({
     ? children.trim()
     : String(children);
 
-  console.log(children);
-
   return (
     <div className="relative border-2 border-accent-200 dark:border-accent-900 rounded-lg overflow-hidden">
       <Button
