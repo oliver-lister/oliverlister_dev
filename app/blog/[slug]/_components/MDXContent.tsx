@@ -3,8 +3,8 @@ import * as runtime from "react/jsx-runtime";
 import { run, compile } from "@mdx-js/mdx";
 import path from "path";
 import fs from "fs";
-import rehypeStarryNight from "rehype-starry-night";
-import "@/app/starry-night.css";
+import rehypeHighlight from "rehype-highlight";
+import "@/app/highlight.css";
 
 const MDXContent = async ({ slug }: { slug: string }) => {
   const components = useMDXComponents({});
@@ -16,7 +16,7 @@ const MDXContent = async ({ slug }: { slug: string }) => {
   const code = String(
     await compile(fileContent, {
       outputFormat: "function-body",
-      rehypePlugins: [rehypeStarryNight],
+      rehypePlugins: [rehypeHighlight],
     })
   );
   // @ts-expect-error
