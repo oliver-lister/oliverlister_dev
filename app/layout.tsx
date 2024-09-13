@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: title,
     description: description,
     siteName: title,
-    url: new URL(defaultUrl),
+    url: "/",
     images: ["/ol_headshot.webp"],
   },
 };
@@ -38,6 +38,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  console.log(defaultUrl);
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <head>

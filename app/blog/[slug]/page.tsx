@@ -30,6 +30,7 @@ export async function generateMetadata(
     openGraph: {
       title: title,
       description: description,
+      url: `/blog/${slug}`,
       siteName: "Oliver Lister | Portfolio & Blog - Web Developer",
       images: [image_url],
     },
