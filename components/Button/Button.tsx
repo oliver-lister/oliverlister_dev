@@ -6,7 +6,7 @@ const variantStyles = {
   primary:
     "flex items-center justify-center gap-2 py-2 px-3 rounded-lg select-none text-secondary bg-primary hover:bg-primary/80 transition active:scale-95 | dark:text-primary dark:bg-secondary-800 dark:hover:bg-secondary-800/80",
   outline:
-    "flex items-center justify-center gap-2 border-2 py-2 px-3 rounded-lg select-none border-primary text-primary hover:text-secondary hover:bg-primary transition active:scale-95 | dark:text-secondary dark:bg-primary dark:border-secondary dark:hover:text-primary dark:hover:bg-secondary",
+    "flex items-center justify-center gap-2 border-2 py-2 px-3 rounded-lg select-none border-primary text-primary hover:text-secondary hover:bg-primary transition active:scale-95 | dark:text-secondary dark:border-secondary dark:hover:text-primary dark:hover:bg-secondary",
   "gradient-outline":
     "relative inline-flex items-center p-0.5 font-bold justify-center overflow-hidden group rounded-lg select-none",
   accent:
