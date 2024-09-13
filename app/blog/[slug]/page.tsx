@@ -10,6 +10,10 @@ type BlogPostProps = {
   params: { slug: string };
 };
 
+export const defaultUrl = process.env.NEXT_URL
+  ? `https://${process.env.NEXT_URL}`
+  : "http://localhost:3000";
+
 // Dynamic metadata
 export async function generateMetadata(
   { params }: BlogPostProps,
@@ -30,7 +34,7 @@ export async function generateMetadata(
       title: title,
       description: description,
       siteName: "Oliver Lister | Portfolio & Blog - Web Developer",
-      url: encodeURIComponent(process.env.BASE_URL + "/blog/" + slug),
+      url: new URL(defaultUrl + "/blog/" + slug),
       images: [image_url],
     },
   };
