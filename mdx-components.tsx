@@ -4,6 +4,7 @@ import Link, { LinkProps } from "next/link";
 import { AnchorHTMLAttributes } from "react";
 import Button from "./components/Button/Button";
 import { IconCopy } from "@tabler/icons-react";
+import Pre from "./components/Pre/Pre";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -39,18 +40,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {props.children}
       </Link>
     ),
-    pre: ({ children }) => (
-      <pre className="bg-black text-secondary p-4 rounded-lg relative border-2 border-accent-200 dark:border-accent-900 overflow-hidden">
-        <Button
-          variant="accent"
-          aria-label="copy to clipboard"
-          className="absolute top-4 right-4 text-secondary flex items-center"
-        >
-          <IconCopy size={15} />
-        </Button>
-        {children}
-      </pre>
-    ),
+    pre: Pre,
     img: (props) => (
       <Image
         sizes="100vw"

@@ -34,6 +34,10 @@
   --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
 }
 
+span {
+  white-space: pre-wrap;
+}
+
 .pl-c {
   color: var(--color-prettylights-syntax-comment);
 }
