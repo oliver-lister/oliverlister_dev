@@ -3,11 +3,22 @@ import GradientUnderline from "../../components/GradientUnderline";
 import { defaultUrl } from "../layout";
 import ProjectsCarousel from "./_components/ProjectsCarousel/ProjectsCarousel";
 
+// Metadata
+const title = "Projects - Oliver Lister | Web Developer";
+const description =
+  "Check out my portfolio of web development projects. From interactive web applications to stunning designs, I showcase how I bring ideas to life.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Projects - Oliver Lister | Web Developer",
-  description:
-    "Check out my portfolio of web development projects. From interactive web applications to stunning designs, I showcase how I bring ideas to life.",
+  title: title,
+  description: description,
+  openGraph: {
+    title: title,
+    description: description,
+    siteName: "Oliver Lister | Portfolio & Blog - Web Developer",
+    url: new URL(defaultUrl),
+    images: ["/ol_headshot.webp"],
+  },
 };
 
 export type Project = {

@@ -28,7 +28,7 @@ export async function generateMetadata(
     openGraph: {
       title: title,
       description: description,
-      siteName: "Oliver Lister Portfolio Website",
+      siteName: "Oliver Lister | Portfolio & Blog - Web Developer",
       url: encodeURIComponent(process.env.BASE_URL + "/blog/" + slug),
       images: [image_url],
     },

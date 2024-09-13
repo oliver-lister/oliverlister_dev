@@ -12,13 +12,25 @@ export const defaultUrl = process.env.NEXT_URL
   ? `https://${process.env.NEXT_URL}`
   : "http://localhost:3000";
 
+// Font
 const inter = Inter({ subsets: ["latin"] });
+
+// Metadata
+const title = "Oliver Lister | Portfolio & Blog - Web Developer";
+const description =
+  "Welcome to my portfolio and blog! I&apos;m Oliver Lister, a web developer and creative project manager. Explore my projects, read my latest blog posts, and learn more about my journey and expertise.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Oliver Lister | Portfolio & Blog - Web Developer",
-  description:
-    "Welcome to my portfolio and blog! I&apos;m Oliver Lister, a web developer and creative project manager. Explore my projects, read my latest blog posts, and learn more about my journey and expertise.",
+  title: title,
+  description: description,
+  openGraph: {
+    title: title,
+    description: description,
+    siteName: title,
+    url: new URL(defaultUrl),
+    images: ["/ol_headshot.webp"],
+  },
 };
 
 export default function RootLayout({
