@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Technology } from "./Technologies";
+import { Technology } from "./technologiesArr";
 
 const TechnologyCard: React.FC<Technology> = ({
   imageSrc,
