@@ -31,7 +31,6 @@ export async function generateMetadata(
       title: title,
       description: description,
       siteName: "Oliver Lister | Portfolio & Blog - Web Developer",
-      url: new URL(defaultUrl + "/blog/" + slug),
       images: [image_url],
     },
   };
