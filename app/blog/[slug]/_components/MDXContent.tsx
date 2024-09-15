@@ -4,6 +4,7 @@ import { run, compile } from "@mdx-js/mdx";
 import path from "path";
 import fs from "fs";
 import rehypeHighlight from "rehype-highlight";
+import rehypeMdxCodeProps from "rehype-mdx-code-props";
 import "@/app/highlight.css";
 
 const MDXContent = async ({ slug }: { slug: string }) => {
@@ -16,7 +17,7 @@ const MDXContent = async ({ slug }: { slug: string }) => {
   const code = String(
     await compile(fileContent, {
       outputFormat: "function-body",
-      rehypePlugins: [rehypeHighlight],
+      rehypePlugins: [rehypeHighlight, rehypeMdxCodeProps],
     })
   );
   // @ts-expect-error

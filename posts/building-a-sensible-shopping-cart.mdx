@@ -44,9 +44,7 @@ need to have the following key features:
 
 In TypeScript you could type the Product object as follows:
 
-```ts
-// types.ts
-
+```ts filename="types.ts"
 type Size = "S" | "M" | "L" | "XL";
 type Color = {
   label: string;
@@ -93,9 +91,7 @@ we'll reference the Product's ID and only retain the necessary fields:
    original product ID to ensure it&apos;s connected to the correct product
    details, such as name, description, and price.
 
-```ts
-// types.ts
-
+```ts filename="types.ts"
 type CartItem = {
   id: number; // a new id to distinguish products with the same product id but different attributes
   size: Size;
@@ -131,9 +127,7 @@ cart.
 2. If it exists, update the quantity.
 3. If it doesn't exist, create a new cart item and add it to the state.
 
-```ts
-// actions.ts
-
+```ts filename="actions.ts"
 function addToCart(state: Cart, newItem: CartItem): Cart {
   const existingItem = state.items.find(
     (item) =>
@@ -175,9 +169,7 @@ are needed.
 1. Find the item by its unique ID.
 2. Update the relevant attributes (size, color) or quantity.
 
-```ts
-// actions.ts
-
+```ts filename="actions.ts"
 function updateCartItem(
   state: Cart,
   id: number,
@@ -194,7 +186,7 @@ function updateCartItem(
 
 **EDGE CASE**: Let's say a user has the following two cart items in their cart.
 
-```ts
+```ts filename="actions.test.ts"
 const CartItem1 = {
   id: 1,
   size: "L",
@@ -224,9 +216,7 @@ their id.
 > into a single cart item. This function can be called at the end of the
 > updateCartItem function.
 
-```ts
-// actions.ts
-
+```ts filename="actions.ts"
 function consolidateCartItems(state: Cart): Cart {
   const consolidatedItems: CartItem[] = [];
 
@@ -268,9 +258,7 @@ To remove an item, simply filter it out of the cart by its unique ID.
 1. Find the item in the cart by its unique ID.
 2. Remove it from the cart state.
 
-```ts
-// actions.ts
-
+```ts filename="actions.ts"
 function removeFromCart(state: Cart, itemId: number) {
   return {
     ...state,
@@ -287,9 +275,7 @@ It's important to provide users with real-time updates on their cart&apos;s
 total price and quantity. Whenever a change is made to the cart, call these
 functions.
 
-```ts
-// actions.ts
-
+```ts filename="actions.ts"
 function calculateTotalPrice(state: Cart, products: Product[]) {
   return state.items.reduce((total, item) => {
     const product = products.find((p) => p.id === item.product_id);
