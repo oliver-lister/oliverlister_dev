@@ -4,23 +4,21 @@ import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 interface PreProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement> {
-  raw?: string;
-  "data-language"?: string;
+  raw: string;
   filename?: string;
 }
 
 const Pre: React.FC<PreProps> = ({ children, raw, filename, ...props }) => {
-  const lang = props["data-language"];
   return (
     <pre
       {...props}
       className="bg-black text-secondary grid rounded-lg relative border-2 border-accent-200 dark:border-accent-900 overflow-hidden"
     >
-      <div className="flex p-2 px-4 border-b-2 border-accent-900 justify-between items-center bg-accent-900">
-        <p>{filename ? filename : "code"}</p>
+      <div className="flex py-2 px-4 justify-between items-center">
+        <p className="text-sm text-gray-400 ">{filename ? filename : "code"}</p>
         <CopyButton text={raw} />
       </div>
-      <div className="p-4">{children}</div>
+      <div className="px-4 pb-4">{children}</div>
     </pre>
   );
 };

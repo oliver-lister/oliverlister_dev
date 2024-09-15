@@ -7,23 +7,22 @@ import { IconCopy } from "@tabler/icons-react";
 export const CopyButton = ({ text }: { text: string | undefined }) => {
   const [isCopied, setIsCopied] = useState(false);
 
-  const copy = async () => {
+  const handleCopy = async () => {
     if (!text) return;
     await navigator.clipboard.writeText(text);
     setIsCopied(true);
 
     setTimeout(() => {
       setIsCopied(false);
-    }, 10000);
+    }, 1000);
   };
 
   return (
-    <Button disabled={isCopied} onClick={copy} className="relative">
-      <div className="absolute left-[-4rem]">
-        {" "}
-        {isCopied ? "Copied!" : "Copy"}
-      </div>
-      <IconCopy />
-    </Button>
+    <div className="flex gap-4 items-center">
+      <p className="text-sm font-inter">{isCopied ? "Copied!" : null}</p>
+      <Button disabled={isCopied} onClick={handleCopy} variant="accent">
+        <IconCopy size={15} />
+      </Button>
+    </div>
   );
 };
