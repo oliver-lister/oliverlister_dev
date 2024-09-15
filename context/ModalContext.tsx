@@ -5,8 +5,9 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 type ModalContextType = {
   modal: string | null;
-  openModal: (name: string) => void;
+  openModal: (name: string, f?: () => void) => void;
   closeModal: () => void;
+  func?: (() => void) | undefined;
 };
 
 const ModalContext = createContext<ModalContextType | null>(null);
@@ -18,9 +19,11 @@ const ModalContextProvider = ({
 }>) => {
   const { toggleAllowScroll } = useScroll();
   const [modal, setModal] = useState<string | null>(null);
+  const [func, setFunc] = useState<(() => void) | undefined>(undefined);
 
-  const openModal = (name: string) => {
+  const openModal = (name: string, f?: () => void) => {
     setModal(name);
+    setFunc(() => f);
     toggleAllowScroll();
   };
 
@@ -30,7 +33,7 @@ const ModalContextProvider = ({
   };
 
   return (
-    <ModalContext.Provider value={{ modal, openModal, closeModal }}>
+    <ModalContext.Provider value={{ modal, openModal, closeModal, func }}>
       {children}
     </ModalContext.Provider>
   );

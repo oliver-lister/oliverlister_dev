@@ -2,6 +2,7 @@ import ModalExitButton from "./components/ModalExitButton";
 
 type ModalProps = {
   closeModal: () => void;
+  func?: () => void;
   children: React.ReactNode;
 };
 

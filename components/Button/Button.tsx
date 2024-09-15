@@ -16,6 +16,8 @@ const variantStyles = {
   ghost:
     "flex items-center justify-center gap-2 py-2 px-3 rounded-lg select-none font-bold hover:bg-zinc-300",
   link: "flex items-center justify-center gap-2 select-none hover:underline py-2 px-3",
+  danger:
+    "flex items-center justify-center gap-2 py-2 px-3 rounded-lg select-none bg-red-400 text-secondary border-2 hover:bg-red-900 transition-colors active active:scale-95",
 };
 
 type ButtonProps = {

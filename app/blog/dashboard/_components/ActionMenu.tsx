@@ -1,17 +1,11 @@
 "use client";
 
-import {
-  IconEdit,
-  IconEye,
-  IconMenu,
-  IconTrash,
-  IconX,
-} from "@tabler/icons-react";
+import { IconEye, IconMenu, IconTrash, IconX } from "@tabler/icons-react";
 import Button from "@/components/Button/Button";
 import Popover from "@/components/Popover";
 import { useState } from "react";
-import { createClient } from "@/libs/utils/supabase/client";
 import { deletePost } from "@/server/actions/post.actions";
+import { useModal } from "@/context/ModalContext";
 
 type ActionMenuProps = {
   id: number;
@@ -19,11 +13,16 @@ type ActionMenuProps = {
 };
 
 const ActionMenu: React.FC<ActionMenuProps> = ({ id, slug }) => {
-  const supabase = createClient();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const { openModal } = useModal();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleOpen = () => {
+    openModal("confirmation", () => handleDelete());
+    toggleMenu();
   };
 
   const handleDelete = async () => {
@@ -31,8 +30,7 @@ const ActionMenu: React.FC<ActionMenuProps> = ({ id, slug }) => {
       post_id: id,
     });
 
-    // insert fs mdx file delete function
-    toggleMenu();
+    console.log("Post deleted: " + slug);
   };
 
   const actionMenu = (
@@ -49,7 +47,7 @@ const ActionMenu: React.FC<ActionMenuProps> = ({ id, slug }) => {
       <Button
         variant="ghost"
         className="w-full grid grid-cols-2 justify-start gap-0 text-red-500 hover:!bg-red-500 hover:text-secondary"
-        onClick={handleDelete}
+        onClick={() => handleOpen()}
       >
         <IconTrash size={15} />
         <span className="flex justify-start">Delete</span>

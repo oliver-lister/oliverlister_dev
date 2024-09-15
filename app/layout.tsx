@@ -48,7 +48,7 @@ export default function RootLayout({
           <ModalContextProvider>
             <ModalManager />
             <Header />
-            <main>{children}</main>
+            <main className="min-h-screen">{children}</main>
             <Footer />
           </ModalContextProvider>
         </ThemeProvider>
