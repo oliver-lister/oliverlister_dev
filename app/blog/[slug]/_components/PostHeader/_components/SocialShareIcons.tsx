@@ -20,21 +20,27 @@ const SocialShareIcons: React.FC<SocialShareIconsProps> = ({ url }) => {
       <a
         href={socialShareLinks.facebook}
         className="hover:scale-105 transition-all hover:text-accent"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <IconBrandFacebook stroke={1} />
       </a>
       <a
         href={socialShareLinks.x}
         className="hover:scale-105 transition-all hover:text-accent"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <IconBrandX stroke={1} />
       </a>
       <a
         href={socialShareLinks.linkedin}
         className="hover:scale-105 transition-all hover:text-accent"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <IconBrandLinkedin stroke={1} />
-      </a>{" "}
+      </a>
     </div>
   );
 };
