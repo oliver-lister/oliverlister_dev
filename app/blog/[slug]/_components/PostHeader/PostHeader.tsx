@@ -13,8 +13,10 @@ const PostHeader: React.FC<PostHeaderProps> = async ({ postMetadata }) => {
   const supabase = createClient();
   const date = format(new Date(postMetadata.created_at), "PPPP");
   const url = encodeURIComponent(
-    process.env.BASE_URL + "/blog/" + postMetadata.slug
+    process.env.NEXT_URL + "/blog/" + postMetadata.slug
   );
+
+  console.log(url);
 
   const { data: authorMetadata, error: authorError } = await supabase
     .from("users")
