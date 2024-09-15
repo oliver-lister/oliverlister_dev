@@ -9,7 +9,7 @@ import ModalManager from "../components/Modal/ModalManager";
 import SessionProvider from "@/components/SessionProvider";
 
 export const defaultUrl = process.env.NEXT_URL
-  ? `https://${process.env.NEXT_URL}`
+  ? `${process.env.NEXT_URL}`
   : "http://localhost:3000";
 
 // Font
@@ -38,7 +38,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  console.log(defaultUrl);
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <head>

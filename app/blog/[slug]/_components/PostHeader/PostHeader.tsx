@@ -12,11 +12,7 @@ type PostHeaderProps = {
 const PostHeader: React.FC<PostHeaderProps> = async ({ postMetadata }) => {
   const supabase = createClient();
   const date = format(new Date(postMetadata.created_at), "PPPP");
-  const url = encodeURIComponent(
-    process.env.NEXT_URL + "/blog/" + postMetadata.slug
-  );
-
-  console.log(url);
+  const url = process.env.NEXT_URL + "/blog/" + postMetadata.slug;
 
   const { data: authorMetadata, error: authorError } = await supabase
     .from("users")
