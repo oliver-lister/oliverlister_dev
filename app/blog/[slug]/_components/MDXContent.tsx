@@ -4,9 +4,13 @@ import { run, compile } from "@mdx-js/mdx";
 import path from "path";
 import fs from "fs";
 import rehypeHighlight from "rehype-highlight";
-import rehypeMdxCodeProps from "rehype-mdx-code-props";
 import "@/app/highlight.css";
+import rehypeMdxCodeProps from "rehype-mdx-code-props";
+import rehypeSlug from "rehype-slug";
+import withToc from "@stefanprobst/rehype-extract-toc";
+import withTocExport from "@stefanprobst/rehype-extract-toc/mdx";
 import { visit } from "unist-util-visit";
+import Link from "next/link";
 
 const MDXContent = async ({ slug }: { slug: string }) => {
   const components = useMDXComponents({});
@@ -15,30 +19,62 @@ const MDXContent = async ({ slug }: { slug: string }) => {
   const fileContent = fs.readFileSync(postFilePath, "utf-8");
 
   // Compile the MDX source code to a function body
-  const code = String(
-    await compile(fileContent, {
-      outputFormat: "function-body",
-      rehypePlugins: [
-        // Retrieve raw code from snippet before syntax hightlighting and pass to <pre> tag
-        () => (tree) => {
-          visit(tree, (node) => {
-            if (node.type === "element" && node.tagName === "pre") {
-              const [codeEl] = node.children;
+  const file = await compile(fileContent, {
+    outputFormat: "function-body",
+    rehypePlugins: [
+      rehypeSlug,
+      withToc,
+      withTocExport,
+      // Retrieve raw code from snippet before syntax hightlighting and pass to <pre> tag
+      () => (tree) => {
+        visit(tree, (node) => {
+          if (node.type === "element" && node.tagName === "pre") {
+            const [codeEl] = node.children;
 
-              if (codeEl.tagName !== "code") return;
-              node.properties["raw"] = codeEl.children?.[0].value;
-            }
-          });
-        },
-        rehypeHighlight,
-        rehypeMdxCodeProps,
-      ],
-    })
-  );
+            if (codeEl.tagName !== "code") return;
+            node.properties["raw"] = codeEl.children?.[0].value;
+          }
+        });
+      },
+      rehypeHighlight,
+      rehypeMdxCodeProps,
+    ],
+  });
+
+  // extract table of contents from file.data property
+  const toc = file.data.toc || [];
+
   // @ts-expect-error
-  const { default: MDXComponent } = await run(code, runtime);
+  const { default: MDXComponent } = await run(String(file), runtime);
 
-  return <MDXComponent components={components} />;
+  return (
+    <div className="grid lg:grid-cols-3">
+      <div className="grid gap-6 col-span-2">
+        <MDXComponent components={components} />
+      </div>
+      <aside className="px-4 hidden lg:block h-full">
+        <nav className="sticky top-0">
+          <h2 className="font-semibold text-2xl">Table of Contents</h2>
+          <ul>
+            {toc.map((item) => (
+              <li key={item.id} className="text-lg pl-2">
+                <Link href={`#${item.id}`}>{item.value}</Link>
+                {item.children && (
+                  <ul>
+                    {item.children.map((child) => (
+                      <li key={child.id} className="text-sm pl-4">
+                        <Link href={`#${child.id}`}>{child.value}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    </div>
+  );
 };
 
 export default MDXContent;

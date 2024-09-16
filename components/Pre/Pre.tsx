@@ -4,7 +4,7 @@ import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 interface PreProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement> {
-  raw?: string;
+  raw?: string; // needs 
   filename?: string;
 }
 
