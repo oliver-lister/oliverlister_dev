@@ -48,29 +48,31 @@ const MDXContent = async ({ slug }: { slug: string }) => {
   const { default: MDXComponent } = await run(String(file), runtime);
 
   return (
-    <div className="grid lg:grid-cols-3">
+    <div className="grid lg:grid-cols-3 gap-4">
       <div className="grid gap-6 col-span-2">
         <MDXComponent components={components} />
       </div>
-      <aside className="px-4 hidden lg:block h-full">
-        <nav className="sticky top-0">
-          <h2 className="font-semibold text-2xl">Table of Contents</h2>
-          <ul>
+      <aside className="hidden lg:block h-full">
+        <nav className="sticky top-0 bg-zinc-300 dark:bg-zinc-700 p-4 rounded-lg shadow-md">
+          <h2 className="font-semibold text-lg text-accent uppercase">
+            Table of Contents
+          </h2>
+          <ol className="list-decimal list-inside">
             {toc.map((item) => (
               <li key={item.id} className="text-lg pl-2">
                 <Link href={`#${item.id}`}>{item.value}</Link>
                 {item.children && (
-                  <ul>
+                  <ol className="list-decimal list-inside">
                     {item.children.map((child) => (
                       <li key={child.id} className="text-sm pl-4">
                         <Link href={`#${child.id}`}>{child.value}</Link>
                       </li>
                     ))}
-                  </ul>
+                  </ol>
                 )}
               </li>
             ))}
-          </ul>
+          </ol>
         </nav>
       </aside>
     </div>

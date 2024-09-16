@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 const BlogLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <section id="blog">
-      <div className="wrapper mt-header grid gap-6">
+      <div className="wrapper mt-header grid gap-6 ">
         <GradientUnderline>
           <h1 className="text-5xl font-bold">Blog</h1>
         </GradientUnderline>
