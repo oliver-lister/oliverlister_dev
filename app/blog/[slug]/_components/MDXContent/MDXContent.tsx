@@ -10,7 +10,7 @@ import rehypeSlug from "rehype-slug";
 import withToc from "@stefanprobst/rehype-extract-toc";
 import withTocExport from "@stefanprobst/rehype-extract-toc/mdx";
 import { visit } from "unist-util-visit";
-import Link from "next/link";
+import TableOfContents from "./TableOfContents";
 
 const MDXContent = async ({ slug }: { slug: string }) => {
   const components = useMDXComponents({});
@@ -53,27 +53,7 @@ const MDXContent = async ({ slug }: { slug: string }) => {
         <MDXComponent components={components} />
       </div>
       <aside className="hidden lg:block h-full">
-        <nav className="sticky top-0 bg-zinc-300 dark:bg-zinc-700 p-4 rounded-lg shadow-md">
-          <h2 className="font-semibold text-lg text-accent uppercase">
-            Table of Contents
-          </h2>
-          <ol className="list-decimal list-inside">
-            {toc.map((item) => (
-              <li key={item.id} className="text-lg pl-2">
-                <Link href={`#${item.id}`}>{item.value}</Link>
-                {item.children && (
-                  <ol className="list-decimal list-inside">
-                    {item.children.map((child) => (
-                      <li key={child.id} className="text-sm pl-4">
-                        <Link href={`#${child.id}`}>{child.value}</Link>
-                      </li>
-                    ))}
-                  </ol>
-                )}
-              </li>
-            ))}
-          </ol>
-        </nav>
+        <TableOfContents toc={toc} />
       </aside>
     </div>
   );

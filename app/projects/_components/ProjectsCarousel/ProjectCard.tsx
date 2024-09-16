@@ -43,6 +43,7 @@ export default function ProjectCard({
             href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
+            className="border-secondary text-secondary hover:text-primary hover:bg-secondary"
           >
             <IconBrandGithub />
             Code

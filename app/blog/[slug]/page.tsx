@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Metadata, ResolvingMetadata } from "next";
 import axios from "axios";
 import PostHeader from "./_components/PostHeader/PostHeader";
-import MDXContent from "./_components/MDXContent";
+import MDXContent from "./_components/MDXContent/MDXContent";
 import PostFooter from "./_components/PostFooter/PostFooter";
 import { defaultUrl } from "@/app/layout";
 
