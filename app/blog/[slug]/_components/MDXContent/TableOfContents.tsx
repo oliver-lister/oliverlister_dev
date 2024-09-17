@@ -1,5 +1,8 @@
-import Link from "next/link";
-import React from "react";
+"use client";
+
+import Button from "@/components/Button/Button";
+import useScroll from "@/hooks/useScroll";
+import { IconMap } from "@tabler/icons-react";
 
 interface TocEntry {
   value: string;
@@ -15,28 +18,45 @@ type TOCProps = {
 };
 
 const TableOfContents: React.FC<TOCProps> = ({ toc }) => {
-  console.log(toc);
+  const { scrollTo } = useScroll();
+
   return (
-    <nav className="sticky top-0 bg-zinc-300 dark:bg-zinc-700 p-4 rounded-lg shadow-md">
-      <h2 className="font-semibold text-lg text-accent uppercase">
-        Table of Contents
-      </h2>
-      <ol className="list-decimal list-inside">
-        {toc.map((item) => (
-          <li key={item.id} className="text-lg pl-2">
-            <Link href={`#${item.id}`}>{item.value}</Link>
-            {item.children && (
-              <ol className="list-decimal list-inside">
-                {item.children.map((child) => (
-                  <li key={child.id} className="text-sm pl-4">
-                    <Link href={`#${child.id}`}>{child.value}</Link>
-                  </li>
-                ))}
-              </ol>
-            )}
-          </li>
-        ))}
-      </ol>
+    <nav
+      id="toc"
+      className="border-accent border-2 rounded-lg shadow-md overflow-hidden"
+    >
+      <div className="bg-gradient flex items-center gap-2 px-4 py-2 border-b-2 border-accent text-secondary">
+        <IconMap />
+        <h2 className="font-semibold text-lg uppercase">Table of Contents</h2>
+      </div>
+      <div className="bg-accent-100 dark:bg-accent-900 px-4 py-2">
+        <ol className="list-none">
+          {toc.map((item) => (
+            <li key={item.id} className="text-lg">
+              <Button
+                onClick={() => scrollTo(String(item.id))}
+                className="relative hover:text-accent hover:underline"
+              >
+                {item.value}
+              </Button>
+              {item.children && (
+                <ol className="list-none">
+                  {item.children.map((child) => (
+                    <li key={child.id} className="text-sm pl-4">
+                      <Button
+                        onClick={() => scrollTo(String(child.id))}
+                        className="hover:text-accent hover:underline"
+                      >
+                        {child.value}
+                      </Button>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
     </nav>
   );
 };

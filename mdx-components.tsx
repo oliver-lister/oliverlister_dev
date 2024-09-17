@@ -31,7 +31,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     //   </a>
     // ),
     ol: ({ children }) => (
-      <ol className="list-decimal pl-6 grid gap-2">{children}</ol>
+      <ol className="list-decimal list-outside grid gap-2 pl-4">{children}</ol>
     ),
     blockquote: ({ children }) => (
       <blockquote className="border-l-8 border-accent pl-4">
