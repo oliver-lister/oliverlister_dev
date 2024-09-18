@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/Button/Button";
+import useElementHeight from "@/hooks/useElementHeight";
 import useScroll from "@/hooks/useScroll";
 import { IconMap } from "@tabler/icons-react";
 
@@ -19,11 +20,13 @@ type TOCProps = {
 
 const TableOfContents: React.FC<TOCProps> = ({ toc }) => {
   const { scrollTo } = useScroll();
+  const headerHeight = useElementHeight("header");
 
   return (
     <nav
       id="toc"
-      className="border-accent border-2 rounded-lg shadow-md overflow-hidden"
+      className="sticky border-accent border-2 rounded-lg shadow-md overflow-hidden"
+      style={{ top: headerHeight + 16 }}
     >
       <div className="bg-gradient flex items-center gap-2 px-4 py-2 border-b-2 border-accent text-secondary">
         <IconMap />
@@ -34,7 +37,7 @@ const TableOfContents: React.FC<TOCProps> = ({ toc }) => {
           {toc.map((item) => (
             <li key={item.id} className="text-lg">
               <Button
-                onClick={() => scrollTo(String(item.id))}
+                onClick={() => scrollTo(String(item.id), -headerHeight - 16)}
                 className="relative hover:text-accent hover:underline"
               >
                 {item.value}
@@ -44,7 +47,9 @@ const TableOfContents: React.FC<TOCProps> = ({ toc }) => {
                   {item.children.map((child) => (
                     <li key={child.id} className="text-sm pl-4">
                       <Button
-                        onClick={() => scrollTo(String(child.id))}
+                        onClick={() =>
+                          scrollTo(String(child.id), -headerHeight - 16)
+                        }
                         className="hover:text-accent hover:underline"
                       >
                         {child.value}

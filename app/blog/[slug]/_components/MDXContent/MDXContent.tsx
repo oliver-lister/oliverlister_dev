@@ -48,7 +48,7 @@ const MDXContent = async ({ slug }: { slug: string }) => {
   const { default: MDXComponent } = await run(String(file), runtime);
 
   return (
-    <div className="grid lg:grid-cols-3 gap-4">
+    <div className="grid lg:grid-cols-3 gap-12">
       <div className="grid gap-6 col-span-2">
         <MDXComponent components={components} />
       </div>

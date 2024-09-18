@@ -34,12 +34,16 @@ const useScroll = () => {
     };
   }, []);
 
-  const scrollTo = (sectionId: string) => {
+  const scrollTo = (sectionId: string, offset?: number) => {
     try {
       const element = document.getElementById(sectionId);
       if (!element)
         throw new Error("Could not find element with sectionId: " + sectionId);
-      const y = element.getBoundingClientRect().top + scroll.scrollYPosition;
+      let y = element.getBoundingClientRect().top + scroll.scrollYPosition;
+
+      if (offset) {
+        y = y + offset;
+      }
 
       if (element && !scroll.isScrolling) {
         window.scrollTo({ top: y, behavior: "smooth" });

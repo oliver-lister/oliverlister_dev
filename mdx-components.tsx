@@ -1,10 +1,8 @@
 import type { MDXComponents } from "mdx/types";
 import Image, { ImageProps } from "next/image";
 import Link, { LinkProps } from "next/link";
-import { AnchorHTMLAttributes } from "react";
-import Button from "./components/Button/Button";
-import { IconCopy } from "@tabler/icons-react";
 import Pre from "./components/Pre/Pre";
+import { AnchorHTMLAttributes } from "react";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -20,18 +18,23 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </h4>
     ),
     p: ({ children }) => <p className="leading-relaxed">{children}</p>,
-    // a: (props) => (
-    //   <a
-    //     className="text-accent font-medium hover:underline"
-    //     target="_blank"
-    //     rel="noopener noreferrer"
-    //     {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}
-    //   >
-    //     {props.children}
-    //   </a>
-    // ),
+    a: (props) => (
+      <a
+        className="text-accent font-medium hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
+        {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}
+      >
+        {props.children}
+      </a>
+    ),
     ol: ({ children }) => (
-      <ol className="list-decimal list-outside grid gap-2 pl-4">{children}</ol>
+      <ol
+        className="list-outside grid gap-2 pl-4"
+        style={{ listStyleType: "decimal" }}
+      >
+        {children}
+      </ol>
     ),
     blockquote: ({ children }) => (
       <blockquote className="border-l-8 border-accent pl-4">
