@@ -12,7 +12,7 @@ interface TocEntry {
   children?: Array<TocEntry>;
 }
 
-type Toc = Array<TocEntry>;
+export type Toc = Array<TocEntry>;
 
 type TOCProps = {
   toc: Toc;
@@ -25,8 +25,7 @@ const TableOfContents: React.FC<TOCProps> = ({ toc }) => {
   return (
     <nav
       id="toc"
-      className="sticky border-accent border-2 rounded-lg shadow-md overflow-hidden"
-      style={{ top: headerHeight + 16 }}
+      className="border-accent border-2 rounded-lg shadow-md overflow-hidden"
     >
       <div className="bg-gradient flex items-center gap-2 px-4 py-2 border-b-2 border-accent text-secondary">
         <IconMap />

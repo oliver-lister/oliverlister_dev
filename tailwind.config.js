@@ -45,12 +45,6 @@ module.exports = {
           900: "#733a9d",
         },
       },
-      backgroundImage: {
-        "gradient-dark":
-          "radial-gradient(76.33% 76.59% at 50.15% 6.06%, #343531 0%, rgba(26, 26, 26, 0.38) 100%)",
-        "gradient-light":
-          "radial-gradient(76.33% 76.59% at 50.15% 6.06%, #f5f5f5 0%, rgba(26, 26, 26, 0.38) 100%)",
-      },
       keyframes: {
         appear: {
           "0%": {
@@ -65,5 +59,4 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
 };

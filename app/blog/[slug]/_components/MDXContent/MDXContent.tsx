@@ -10,7 +10,7 @@ import rehypeSlug from "rehype-slug";
 import withToc from "@stefanprobst/rehype-extract-toc";
 import withTocExport from "@stefanprobst/rehype-extract-toc/mdx";
 import { visit } from "unist-util-visit";
-import TableOfContents from "./TableOfContents";
+import PostSidebar from "./PostSidebar/PostSidebar";
 
 const MDXContent = async ({ slug }: { slug: string }) => {
   const components = useMDXComponents({});
@@ -52,9 +52,7 @@ const MDXContent = async ({ slug }: { slug: string }) => {
       <div className="grid gap-6 col-span-2">
         <MDXComponent components={components} />
       </div>
-      <aside className="hidden lg:block h-full">
-        <TableOfContents toc={toc} />
-      </aside>
+      <PostSidebar toc={toc} />
     </div>
   );
 };
