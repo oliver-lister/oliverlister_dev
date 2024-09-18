@@ -15,12 +15,12 @@ const AuthorInfo: React.FC<AuthorInfoProps> = ({
 }) => {
   return (
     <div className="flex gap-2 items-center">
-      <Link href={`/blog/authors/${display_name}`}>
+      <Link href={`/blog?author=${display_name}`}>
         <Avatar src={image_url} size={50} />
       </Link>
       <div className="grid">
         <Link
-          href={`/blog/authors/${display_name}`}
+          href={`/blog?author=${display_name}`}
           className="font-medium text-accent underline hover:text-accent-400"
         >
           {display_name}
