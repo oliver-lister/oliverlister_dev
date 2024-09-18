@@ -11,7 +11,7 @@ My Next.js, Supabase and MDX powered blog.
   <a href="#features"><strong>Features</strong></a> ·
   <a href="#dependencies"><strong>Dependencies</strong></a> ·
   <a href="#acknowledgements"><strong>Acknowledgements</strong></a> ·
-  <a href="#to-dos"><strong>To-dos</strong></a> ·
+  <a href="#to-dos"><strong>To-dos</strong></a>
 </p>
 <br/>
 
