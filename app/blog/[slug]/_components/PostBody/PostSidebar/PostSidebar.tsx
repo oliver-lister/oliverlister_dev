@@ -3,7 +3,7 @@
 import React from "react";
 import TableOfContents, { Toc } from "./_components/TableOfContents";
 import SimilarPosts from "./_components/SimilarPosts";
-import useElementHeight from "@/hooks/useElementHeight";
+import useElementHeight from "../../../../../../hooks/useElementHeight";
 
 type PostSidebarProps = {
   toc: Toc;

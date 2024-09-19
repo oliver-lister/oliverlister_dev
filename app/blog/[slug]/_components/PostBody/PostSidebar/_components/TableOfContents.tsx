@@ -1,8 +1,8 @@
 "use client";
 
-import Button from "@/components/Button/Button";
-import useElementHeight from "@/hooks/useElementHeight";
-import useScroll from "@/hooks/useScroll";
+import Button from "../../../../../../../components/Button/Button";
+import useElementHeight from "../../../../../../../hooks/useElementHeight";
+import useScroll from "../../../../../../../hooks/useScroll";
 import { IconMap } from "@tabler/icons-react";
 
 interface TocEntry {

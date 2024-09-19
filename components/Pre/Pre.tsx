@@ -1,4 +1,4 @@
-import { CopyButton } from "@/components/Button/CopyButton";
+import { CopyButton } from "../../components/Button/CopyButton";
 
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 

@@ -1,8 +1,8 @@
-import { useMDXComponents } from "@/mdx-components";
+import { useMDXComponents } from "../../../../..//mdx-components";
 import * as runtime from "react/jsx-runtime";
 import { run, compile } from "@mdx-js/mdx";
 import rehypeHighlight from "rehype-highlight";
-import "@/app/highlight.css";
+import "../../../../highlight.css";
 import rehypeMdxCodeProps from "rehype-mdx-code-props";
 import rehypeSlug from "rehype-slug";
 import withToc from "@stefanprobst/rehype-extract-toc";
