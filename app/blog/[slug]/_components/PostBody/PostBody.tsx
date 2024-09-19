@@ -1,8 +1,6 @@
 import { useMDXComponents } from "@/mdx-components";
 import * as runtime from "react/jsx-runtime";
 import { run, compile } from "@mdx-js/mdx";
-import path from "path";
-import fs from "fs";
 import rehypeHighlight from "rehype-highlight";
 import "@/app/highlight.css";
 import rehypeMdxCodeProps from "rehype-mdx-code-props";
@@ -12,14 +10,9 @@ import withTocExport from "@stefanprobst/rehype-extract-toc/mdx";
 import { visit } from "unist-util-visit";
 import PostSidebar from "./PostSidebar/PostSidebar";
 
-const MDXContent = async ({ slug }: { slug: string }) => {
-  const components = useMDXComponents({});
-
-  const postFilePath = path.join(process.cwd(), "posts", `${slug}.mdx`);
-  const fileContent = fs.readFileSync(postFilePath, "utf-8");
-
+const PostBody = async ({ fileContent }: { fileContent: string }) => {
   // Compile the MDX source code to a function body
-  const file = await compile(fileContent, {
+  const parsedFile = await compile(fileContent, {
     outputFormat: "function-body",
     rehypePlugins: [
       rehypeSlug,
@@ -42,10 +35,12 @@ const MDXContent = async ({ slug }: { slug: string }) => {
   });
 
   // extract table of contents from file.data property
-  const toc = file.data.toc || [];
+  const toc = parsedFile.data.toc || [];
 
   // @ts-expect-error
-  const { default: MDXComponent } = await run(String(file), runtime);
+  const { default: MDXComponent } = await run(String(parsedFile), runtime);
+
+  const components = useMDXComponents({});
 
   return (
     <div className="grid lg:grid-cols-3 gap-12">
@@ -57,4 +52,4 @@ const MDXContent = async ({ slug }: { slug: string }) => {
   );
 };
 
-export default MDXContent;
+export default PostBody;

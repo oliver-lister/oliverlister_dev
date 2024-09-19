@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom";
+import { describe, it, beforeEach, afterEach, expect, vi } from "vitest";
 import {
   act,
   fireEvent,
@@ -9,18 +9,20 @@ import {
 import ContactForm from "./ContactForm";
 
 describe("Contact Form component", () => {
-  let mockSubmit: jest.Mock;
+  let mockSubmit: ReturnType<typeof vi.fn>;
   let loadingState: boolean;
   let submitButton: HTMLElement;
 
   beforeEach(() => {
-    mockSubmit = jest.fn();
+    mockSubmit = vi.fn();
     loadingState = false;
     render(<ContactForm onSubmit={mockSubmit} isLoading={loadingState} />);
     submitButton = screen.getByRole("button", { name: /submit/i });
   });
 
-  afterEach(cleanup);
+  afterEach(() => {
+    cleanup();
+  });
 
   it("displays correct form labels", () => {
     const nameLabel = screen.getByLabelText(/Name/i);
@@ -59,7 +61,7 @@ describe("Contact Form component", () => {
       });
       fireEvent.change(screen.getByLabelText(/Message/i), {
         target: {
-          value: "This is a test message, that is atleast 25 characters.",
+          value: "This is a test message, that is at least 25 characters.",
         },
       });
       fireEvent.click(submitButton);
@@ -73,6 +75,7 @@ describe("Contact Form component", () => {
     // Check if mockSubmit was called
     expect(mockSubmit).toHaveBeenCalled();
   });
+
   it("does not call mockSubmit when invalid entries are provided", async () => {
     await act(async () => {
       // Fill out the form fields with invalid data

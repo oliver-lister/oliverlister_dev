@@ -58,7 +58,7 @@ My Next.js, Supabase and MDX powered portfolio and blog.
 
 - **Languages:** Typescript
 - **Frameworks:** React, Next.js
-- **Libraries:** TailwindCSS, Supabase (PostgreSQL), MDX, Jest, React Testing
+- **Libraries:** TailwindCSS, Supabase (PostgreSQL), MDX, Vitest, React Testing
   Library, Zustand, ZSA, Axios, Zod.
 - **Other Tools:** Cloudflare R2, Resend
 

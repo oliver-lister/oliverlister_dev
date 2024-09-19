@@ -3,11 +3,12 @@ import Link from "next/link";
 import { Metadata, ResolvingMetadata } from "next";
 import axios from "axios";
 import PostHeader from "./_components/PostHeader/PostHeader";
-import MDXContent from "./_components/MDXContent/MDXContent";
+import PostBody from "./_components/PostBody/PostBody";
 import PostFooter from "./_components/PostFooter/PostFooter";
-import { defaultUrl } from "@/app/layout";
+import path from "path";
+import fs from "fs";
 
-type BlogPostProps = {
+export type BlogPostProps = {
   params: { slug: string };
 };
 
@@ -73,10 +74,13 @@ const BlogPost: React.FC<BlogPostProps> = async ({ params }) => {
     );
   }
 
+  const postFilePath = path.join(process.cwd(), "posts", `${slug}.mdx`);
+  const fileContent = fs.readFileSync(postFilePath, "utf-8");
+
   return (
     <article className="grid gap-6">
       <PostHeader postMetadata={postMetadata} />
-      <MDXContent slug={slug} />
+      <PostBody fileContent={fileContent} />
       <PostFooter postMetadata={postMetadata} />
     </article>
   );

@@ -4,9 +4,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { IconLoader2 } from "@tabler/icons-react";
-import Button from "@/components/Button/Button";
+import Button from "../../../../components/Button/Button";
 import FormField from "../../../FormField/FormField";
-import Input from "@/components/Input/Input";
+import Input from "../../../../components/Input/Input";
 import { z } from "zod";
 
 export type ContactFormData = {
