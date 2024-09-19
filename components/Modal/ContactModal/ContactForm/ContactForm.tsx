@@ -1,13 +1,13 @@
 "use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { IconLoader2 } from "@tabler/icons-react";
 import Button from "@/components/Button/Button";
 import FormField from "../../../FormField/FormField";
 import Input from "@/components/Input/Input";
+import { z } from "zod";
 
 export type ContactFormData = {
   name: string;
@@ -16,20 +16,23 @@ export type ContactFormData = {
   mailingList: boolean;
 };
 
-// yup schema
-const schema = yup.object().shape({
-  name: yup.string().trim().required("Name is a required field"),
-  email: yup
+// zod schema
+const schema = z.object({
+  name: z.string().trim().min(1, "Name is a required field"),
+  email: z
     .string()
     .trim()
-    .email("Please enter a valid email address")
-    .required("Email is a required field"),
-  message: yup
+    .min(1, "Email is a required field")
+    .email("Please enter a valid email address"),
+
+  message: z
     .string()
     .trim()
-    .required("Message is a required field")
+    .min(1, "Message is a required field")
     .min(25, "Please enter at least 25 characters"),
-  mailingList: yup.boolean().required("mailingList is a required field"),
+  mailingList: z.boolean().refine((val) => val !== undefined, {
+    message: "mailingList is a required field",
+  }),
 });
 
 type ContactFormProps = {
@@ -44,7 +47,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
     setFocus,
     formState: { errors },
   } = useForm<ContactFormData>({
-    resolver: yupResolver(schema),
+    resolver: zodResolver(schema),
   });
 
   // set focus on component mount
@@ -116,7 +119,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, isLoading }) => {
         <Button
           variant="accent"
           type="submit"
-          className="disabled:cursor-not-allowed mt-4"
+          className="disabled:cursor-not-allowed mt-4 disabled:active:scale-100 disabled:bg-accent-800"
           disabled={!!Object.keys(errors).length || isLoading}
         >
           {isLoading ? (

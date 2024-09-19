@@ -1,24 +1,24 @@
 "use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
-import * as yup from "yup";
 import Button from "@/components/Button/Button";
 import { IconLoader2 } from "@tabler/icons-react";
 import Input from "@/components/Input/Input";
+import { z } from "zod";
 
 export type MailingListFormData = {
   email: string;
 };
 
-// yup schema
-const schema = yup.object().shape({
-  email: yup
+// zod schema
+const schema = z.object({
+  email: z
     .string()
     .email("Email must be a valid email")
     .trim()
-    .required("Email is required"),
+    .nonempty("Email is required"),
 });
 
 type MailingListFormProps = {
@@ -37,7 +37,7 @@ const MailingListForm: React.FC<MailingListFormProps> = ({
     handleSubmit,
     formState: { errors },
   } = useForm<MailingListFormData>({
-    resolver: yupResolver(schema),
+    resolver: zodResolver(schema),
   });
 
   const inputStyle = `${defaultInputStyle} ${
