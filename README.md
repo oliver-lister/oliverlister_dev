@@ -75,5 +75,7 @@ My Next.js, Supabase and MDX powered portfolio and blog.
 - Write more blog posts.
 - Integrate keyword tags into blog post metadata.
 - Filtering and search functionality for blog posts in main route (/blog) and
-  dashboard.
+  dashboard using URL search queries.
 - Automate an email send out to mailing list when a new blog post is published.
+- Add in likes and comment section to blog posts.
+- Add in similar posts section to blog posts.
