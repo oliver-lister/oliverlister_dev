@@ -49,13 +49,13 @@
 }
 
 .hero {
-  min-height: calc(100dvh - var(--layout-padding-y) * 2);
+  min-height: calc(100vh - var(--layout-padding-y) * 2);
   width: 100%;
 }
 
 @media (min-width: 640px) {
   .hero {
-    min-height: calc(100dvh - var(--layout-padding-y) * 2);
+    min-height: calc(100vh - var(--layout-padding-y) * 2);
   }
 }
 
