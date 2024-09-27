@@ -37,7 +37,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </ol>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="border-l-8 border-accent pl-4">
+      <blockquote
+        className="border-l-8 border-accent ml-4"
+        style={{ borderLeft: "0.5rem", marginLeft: "0.25rem" }}
+      >
         {children}
       </blockquote>
     ),
