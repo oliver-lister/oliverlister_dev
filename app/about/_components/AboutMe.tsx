@@ -15,7 +15,7 @@ const AboutMe = () => {
           <div className="grid gap-4">
             <p className="leading-relaxed">
               Hi there, I&apos;m <strong>Oliver Lister</strong>, a Sydney-based
-              frontend web developer and music and sound professional. While
+              software engineer and music and sound professional. While
               I&apos;ve always had a passion for creativity, I love the
               technical challenges and problem solving that come with software
               development.

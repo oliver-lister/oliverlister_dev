@@ -39,7 +39,7 @@ const BlogTeaser: React.FC = async () => {
               <p className="text-xs leading-relaxed">
                 Hey, I&apos;m{" "}
                 <span className="font-semibold">Oliver Lister</span>, a{" "}
-                <span className="font-semibold">frontend web developer </span>
+                <span className="font-semibold">software engineer </span>
                 and <span className="font-semibold">music</span> and{" "}
                 <span className="font-semibold">sound professional</span> from
                 Sydney. I love mixing creativity with problem-solving, whether

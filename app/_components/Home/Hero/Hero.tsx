@@ -16,7 +16,7 @@ function Hero() {
                   Oliver Lister.
                 </h1>
                 <h2 className="text-md">
-                  I&apos;m a <strong>frontend developer</strong> crafting
+                  I&apos;m a <strong>software engineer</strong> crafting
                   seamless digital experiences with code.
                 </h2>
               </div>
